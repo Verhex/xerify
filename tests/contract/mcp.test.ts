@@ -22,6 +22,7 @@ import {
   createXerifyMcpServer,
   XERIFY_MCP_TOOLS
 } from '../../src/mcp/server.js';
+import { JevAdapter } from '../../src/providers/jev.js';
 import { CodexAdapter } from '../../src/providers/codex.js';
 import { serveXerifyStdio } from '../../src/mcp/stdio.js';
 import { RunHistoryStore } from '../../src/history/store.js';
@@ -120,6 +121,155 @@ function resultOf(response: JSONRPCResponse): Record<string, unknown> {
 }
 
 describe('MCP v2 contract', () => {
+  it.each([
+    ['confirmed', 0.95, 'confirmed'],
+    ['refuted', 0.95, 'refuted'],
+    ['unclear', 0.95, 'unclear'],
+    ['refuted', 0.79, 'unclear']
+  ] as const)(
+    'preserves Jev %s with confidence %s through MCP',
+    async (choice, confidence, verdict) => {
+      const registry = new ProviderRegistry([
+        new JevAdapter({
+          env: { TYPESAFE_API_KEY: 'fixture' },
+          fetch: async () =>
+            new Response(
+              JSON.stringify({
+                model: 'jev-test',
+                answers: {
+                  verdict: {
+                    type: 'choice',
+                    choice,
+                    probabilities: {
+                      confirmed: 0.01,
+                      refuted: 0.01,
+                      unclear: 0.01,
+                      [choice]: 0.98
+                    },
+                    confidence
+                  }
+                }
+              })
+            )
+        })
+      ]);
+      const channel = await openChannel(registry);
+      try {
+        const called = resultOf(
+          await channel.request({
+            jsonrpc: '2.0',
+            id: 1,
+            method: 'tools/call',
+            params: {
+              _meta: modernMeta,
+              name: XERIFY_MCP_TOOLS.verify,
+              arguments: {
+                from: { provider: 'openai', model: 'author', provenance: 'declared' },
+                to: { provider: 'typesafe', model: 'jev-latest' },
+                claim: 'The migration is compatible',
+                context: 'DROP TABLE users;'
+              }
+            }
+          })
+        );
+        expect(called).toMatchObject({
+          structuredContent: {
+            verdict,
+            decision: { model: 'jev-test', choice, confidence },
+            failure: null
+          }
+        });
+        const capabilities = resultOf(
+          await channel.request({
+            jsonrpc: '2.0',
+            id: 2,
+            method: 'tools/call',
+            params: { _meta: modernMeta, name: XERIFY_MCP_TOOLS.capabilities, arguments: {} }
+          })
+        );
+        expect(capabilities).toMatchObject({
+          structuredContent: { providers: [{ provider: 'typesafe', operations: ['verify'] }] }
+        });
+      } finally {
+        await channel.close();
+      }
+    }
+  );
+
+  it('returns Jev abstention and decision metadata over the HTTP MCP boundary', async () => {
+    const registry = new ProviderRegistry([
+      new JevAdapter({
+        env: { TYPESAFE_API_KEY: 'fixture' },
+        fetch: async () =>
+          new Response(
+            JSON.stringify({
+              model: 'jev-test',
+              answers: {
+                verdict: {
+                  type: 'choice',
+                  choice: 'refuted',
+                  probabilities: { confirmed: 0.1, refuted: 0.85, unclear: 0.05 },
+                  confidence: 0.95
+                }
+              }
+            })
+          )
+      })
+    ]);
+    const server = await serveXerifyHttp({
+      factory: createXerifyMcpFactory({ registry, history: disabledHistory() }),
+      host: '127.0.0.1',
+      port: 0,
+      bearerToken: 'local-test'
+    });
+    try {
+      const response = await fetch(server.url, {
+        method: 'POST',
+        headers: {
+          authorization: 'Bearer local-test',
+          'Mcp-Method': 'tools/call',
+          'Mcp-Name': XERIFY_MCP_TOOLS.verify,
+          'content-type': 'application/json',
+          accept: 'application/json, text/event-stream'
+        },
+        body: JSON.stringify({
+          jsonrpc: '2.0',
+          id: 1,
+          method: 'tools/call',
+          params: {
+            _meta: modernMeta,
+            name: XERIFY_MCP_TOOLS.verify,
+            arguments: {
+              from: { provider: 'openai', model: 'author', provenance: 'declared' },
+              to: { provider: 'typesafe', model: 'jev-test' },
+              claim: 'Email remains',
+              context: 'DROP COLUMN email'
+            }
+          }
+        })
+      });
+      const body = await response.text();
+      expect(response.status, body).toBe(200);
+      const json = response.headers.get('content-type')?.includes('text/event-stream')
+        ? body
+            .split('\n')
+            .find((line) => line.startsWith('data: '))
+            ?.slice(6)
+        : body;
+      expect(JSON.parse(json ?? '')).toMatchObject({
+        result: {
+          structuredContent: {
+            verdict: 'unclear',
+            failure: null,
+            decision: { choice: 'refuted', probabilities: { refuted: 0.85 } }
+          }
+        }
+      });
+    } finally {
+      await server.close();
+    }
+  });
+
   it('derives the advertised ask input schema from the canonical core schema', () => {
     const server = createXerifyMcpServer({
       registry: new ProviderRegistry(),
@@ -146,7 +296,10 @@ describe('MCP v2 contract', () => {
     // advertised entry carries that `capabilities()` does not.
     const reported = [
       'id',
-      ...Object.keys(new CodexAdapter({ executable: process.execPath, env: {} }).capabilities())
+      ...new Set([
+        ...Object.keys(new CodexAdapter({ executable: process.execPath, env: {} }).capabilities()),
+        ...Object.keys(new JevAdapter({ env: {} }).capabilities())
+      ])
     ].sort();
     const advertised = Object.keys(
       (

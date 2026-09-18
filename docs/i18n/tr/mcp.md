@@ -44,7 +44,7 @@ Genel bir kurulum olmadan, bir MCP host'u genel npm paketini doğrudan çözüml
   "mcpServers": {
     "xerify": {
       "command": "npx",
-      "args": ["-y", "--package=xverify-cli@0.2.0", "xerify", "mcp", "stdio"]
+      "args": ["-y", "--package=xverify-cli@0.3.0", "xerify", "mcp", "stdio"]
     }
   }
 }
@@ -91,3 +91,7 @@ Hem onay hem de kimlik doğrulama olmadan genel bağlama reddedilir. Bu sınır;
 Yerleşik bearer modu, kontrollü dağıtımlar için uygundur. İnternete açık çok kullanıcılı hizmet, TLS sonlandırması, yetkilendirme politikası, OAuth yaşam döngüsü, hız sınırlama ve kalıcı çok kiracılılık, Xerify'in önünde bir dağıtım sınırına aittir; yerel sunucu tarafından ima edilmez.
 
 Kanal seçimi, abonelik/API davranışı, sıfır maliyetli yerel çalıştırma ve değerlendirilen Cloudflare Workers uzak yolu için [sağlayıcı ve erişim kanalları](channels.md) sayfasına bakın. Barındırmanın ücretsiz olması, sağlayıcı çıkarımını ücretsiz yapmaz ve yerel abonelik kimlik bilgilerinin merkezi olarak saklanmasına izin vermez.
+
+Jev, varsayılan `jev` adaptörüyle (`typesafe` sağlayıcısı) gelir. `--to jev`, `typesafe:jev-latest` seçer; `--to jev:MODEL_ID` belirli modeli seçer. Jev yalnızca `verify` destekler. Olasılıklar, confidence, dönen model ve politika isteğe bağlı `decision` alanında bulunur. Eşiklerin altında Xerify `unclear` döndürür. Jev açıklama veya kanıt atfı üretmez.
+
+[Jev / 0.3.0](jev.md)

@@ -7,6 +7,7 @@ import { CodexAdapter } from './codex.js';
 import { CursorAdapter } from './cursor.js';
 import { OpenAiApiAdapter } from './openai-api.js';
 import { OpenAiCompatibleAdapter } from './openai-compatible.js';
+import { JevAdapter } from './jev.js';
 import { ProviderRegistry } from './registry.js';
 
 export interface ProviderFactoryOptions {
@@ -40,6 +41,16 @@ export function adaptersFromConfig(
         return new CursorAdapter({
           id,
           executable: provider.executable,
+          ...environment
+        });
+      case 'jev':
+        return new JevAdapter({
+          id,
+          endpoint: provider.endpoint,
+          apiKeyEnvironment: provider.apiKeyEnvironment,
+          minProbability: provider.minProbability,
+          minConfidence: provider.minConfidence,
+          ...(provider.apiKey === undefined ? {} : { apiKey: provider.apiKey }),
           ...environment
         });
       case 'openai-api':

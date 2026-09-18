@@ -172,7 +172,7 @@ describe('CLI contract', () => {
         project: { initialized: true },
         providers: {
           identityBasis: 'invocation-provider',
-          configured: 3,
+          configured: 4,
           linked: 1,
           identities: ['fixture'],
           adapters: expect.arrayContaining([
@@ -307,7 +307,8 @@ describe('CLI contract', () => {
       data: {
         providers: [
           { adapterId: 'codex', provider: 'openai', available: false },
-          { adapterId: 'claude', provider: 'anthropic', available: false }
+          { adapterId: 'claude', provider: 'anthropic', available: false },
+          { adapterId: 'jev', provider: 'typesafe', available: false }
         ],
         mcp: { sdkMajor: 2, stdioSafe: true }
       }

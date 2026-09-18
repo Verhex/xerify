@@ -58,7 +58,7 @@ La commande `xerify init` génère un fichier de départ valide :
 
 ```json
 {
-  "$schema": "https://raw.githubusercontent.com/VerhexIO/xerify/main/schemas/config.schema.json",
+  "$schema": "https://raw.githubusercontent.com/Verhex/xerify/main/schemas/config.schema.json",
   "providers": {},
   "limits": {
     "timeoutMs": 120000,
@@ -86,12 +86,12 @@ disjoints : ils ne peuvent ni être identiques ni être imbriqués l'un dans l
 l'autre chemin démarre un nouvel espace de séquence. Voir [l'historique local des
 exécutions](run-history.md) pour le détail des fichiers et des commandes de cycle de vie.
 
-Un objet `providers` vide conserve les adaptateurs intégrés `codex` et `claude`. N'ajoutez que les
+Un objet `providers` vide conserve les adaptateurs intégrés `codex`, `claude` et `jev`. N'ajoutez que les
 transports que vous utilisez réellement. Par exemple :
 
 ```json
 {
-  "$schema": "https://raw.githubusercontent.com/VerhexIO/xerify/main/schemas/config.schema.json",
+  "$schema": "https://raw.githubusercontent.com/Verhex/xerify/main/schemas/config.schema.json",
   "providers": {
     "cursor": {
       "kind": "cursor",
@@ -125,7 +125,7 @@ ligne.
 
 La configuration est stricte. Les champs génériques `token`, `secret`, `defaultModel` silencieux,
 ainsi que tout champ d'identifiant sur les adaptateurs de commande ou de CLI, sont rejetés. Seuls
-les adaptateurs directs `openai-api`, `anthropic-api` et `openai-compatible` acceptent le champ
+les adaptateurs directs `jev`, `openai-api`, `anthropic-api` et `openai-compatible` acceptent le champ
 optionnel exact `apiKey`.
 
 L'ordre recommandé est le suivant :
@@ -236,3 +236,11 @@ contexte, les réponses, les résultats détaillés, les réponses brutes du fou
 d'autorisation et les chemins d'identifiants. Sous POSIX, les nouveaux fichiers sont créés en mode
 `0600` ; les liens symboliques et toute cible non régulière sont rejetés. Ce journal reste une
 métadonnée opérationnelle : ni une transcription, ni une preuve qu'un verdict est correct.
+
+Jev est inclus comme adaptateur par défaut `jev`, avec l’identité `typesafe`. `--to jev` sélectionne `typesafe:jev-latest` ; `--to jev:MODEL_ID` sélectionne un modèle précis. Jev prend uniquement en charge `verify`. Probabilités, confidence, modèle retourné et politique figurent dans le champ facultatif `decision`. Sous les seuils, Xerify renvoie `unclear`. Jev ne génère ni explications ni citations.
+
+[Jev / 0.3.0](jev.md)
+
+`--timeout 0` ou `limits.timeoutMs: 0` désactive explicitement le délai maximal. Annulation et limites en octets restent actives ; défaut : 120000 ms.
+
+Équivalent environnement : `XERIFY_TIMEOUT_MS=0` ; une valeur vide est refusée. Les limites en octets restent positives.

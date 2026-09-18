@@ -8,20 +8,26 @@
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/VerhexIO/xerify/main/assets/logos/full-horizontal/xerify-horizontal-light.svg" alt="Xerify" width="360">
+  <img src="https://raw.githubusercontent.com/Verhex/xerify/main/assets/logos/full-horizontal/xerify-horizontal-light.svg" alt="Xerify" width="360">
 </p>
 
-<p align="center"><strong>向另一家提供方提问，获得清晰的第二意见。</strong></p>
+<p align="center"><strong>信任之前，先验证。</strong></p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/VerhexIO/xerify/main/assets/readme/xerify-verification-flow.gif" alt="Xerify 流程：来自提供方 A 的既有声明经过有边界的证据和不同提供方门禁，提供方 B 尝试证伪，Xerify 返回 confirmed、refuted 或 unclear 结果" width="960">
+  <img src="https://raw.githubusercontent.com/Verhex/xerify/main/assets/readme/xerify-verification-flow.gif?v=0.3.0" alt="Xerify 0.3.0：LLM 验证或 Jev 类型化决策。每次只调用一个目标，概率与结论为示意值。" width="960">
 </p>
 
 Xerify 是一个面向 shell 的开源工具，用于有边界的跨提供方提问和验证。它可以使用本机已登录的官方提供方 CLI、直接 API，或显式配置的可执行程序。CLI、JavaScript/TypeScript 库、本地 STDIO MCP 与 Streamable HTTP MCP 共用同一套核心逻辑和 Schema。
 
 Xerify 由 **Verhex** 开发和维护，并接受社区贡献，以 MIT 许可证发布。它是 **Deckent**（Verhex 的智能体操作系统）的跨提供方验证层，在本仓库中作为独立工具发布——Xerify 可以独立运行，不依赖 Deckent。它提供的是第二意见，而不是形式化证明、安全认证或真相保证。提供方输出始终被视为不可信数据，绝不会被直接执行。
 
-> **发布状态：** `0.2.0` 是一个早期公开发布版本，以 `xverify-cli` 的包名发布到 npm。公开 CI 在 Ubuntu、macOS、Windows 上针对 Node 20/24 均为绿色，涵盖外部安装和 MCP Inspector 冒烟测试；同一套检查、干净安装冒烟测试和发布审计，在 WSL2 + Node 24 环境下同样通过。调用提供方身份约定已经有 Cursor/OpenAI 双向的实测验证。已发布的 `0.1.0` tarball 是在发布工作流之外抵达 registry 的，因此不带 npm 来源认证（provenance attestation）；`0.1.1` 及后续版本由工作流发布，并主动申请这项认证。公开的 schema、JSON envelope 和退出码是稳定的；提供方接入面目前还比较小，API 仍可能扩展。
+> Xerify 0.3.0 在 LLM 验证之外新增 Jev 类型化决策。经所有者批准，一次宣传文案检查和另外十个 Jev 实时场景均符合预期。请参阅[测试结果](docs/i18n/zh-CN/jev-testing.md)。这些是集成验证，不是模型通用准确率基准。
+
+Xerify 是面向 AI 系统、独立于模型的验证层：有界证据、不同的调用提供方以及类型化结果。LLM 验证器和 Jev 决策共用 CLI、库和 MCP 合约。
+
+Jev 已作为默认 `jev` 适配器集成，提供方身份为 `typesafe`。`--to jev` 选择 `typesafe:jev-latest`；`--to jev:MODEL_ID` 选择具体模型。Jev 仅支持 `verify`。概率、confidence、返回的模型和策略保存在可选的 `decision` 字段中。低于配置阈值时，Xerify 返回 `unclear`。Jev 不生成解释或证据引用。
+
+[Jev setup / 0.3.0](docs/i18n/zh-CN/jev.md)
 
 ## 安装
 
@@ -37,7 +43,7 @@ xerify init
 固定为项目开发依赖：
 
 ```sh
-npm install --save-dev --save-exact xverify-cli@0.2.0
+npm install --save-dev --save-exact xverify-cli@0.3.0
 npx xerify --version
 ```
 
@@ -127,7 +133,7 @@ command 适配器运行在一个私有的空目录中，而不是在你的项目
   "mcpServers": {
     "xerify": {
       "command": "npx",
-      "args": ["-y", "--package=xverify-cli@0.2.0", "xerify", "mcp", "stdio"]
+      "args": ["-y", "--package=xverify-cli@0.3.0", "xerify", "mcp", "stdio"]
     }
   }
 }
@@ -150,7 +156,7 @@ command 适配器运行在一个私有的空目录中，而不是在你的项目
 
 ## Xerify 由谁打造
 
-Xerify 由 **[Verhex](https://github.com/VerhexIO)** 设计、开发和维护。
+Xerify 由 **[Verhex](https://github.com/Verhex)** 设计、开发和维护。
 
 它起源于 **Deckent**——Verhex 的智能体操作系统。在 Deckent 中，请第二个提供方核查一条主张，是编排器所依赖的能力之一。Xerify 就是这项能力的独立开源形态：它可以单独安装，不需要 Deckent，也不依赖它。
 
@@ -165,3 +171,5 @@ Xerify 由 **[Verhex](https://github.com/VerhexIO)** 设计、开发和维护。
 - [MIT 许可证](LICENSE)
 
 若翻译与测试过的英文契约冲突，以规范英文 Schema 和文档为准。
+
+[Benchmark](docs/i18n/zh-CN/benchmark.md) · [0.3.0](docs/i18n/zh-CN/launch-0.3.0.md)

@@ -54,6 +54,9 @@ try {
   const packedFilename = packResult[0]?.filename;
   if (typeof packedFilename !== 'string') throw new Error('npm pack did not return a filename');
   const packedPaths = (packResult[0]?.files ?? []).map((entry) => entry.path);
+  if (packedPaths.some((name) => name.split('/').some((part) => /^\.env(?:$|[.~])/i.test(part)))) {
+    throw new Error('npm package contains a forbidden environment file');
+  }
   for (const forbiddenPrefix of [
     '.agents/',
     '.codex/',

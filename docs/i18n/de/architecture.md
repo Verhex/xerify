@@ -90,3 +90,7 @@ Bearer-Authentifizierung.
 Die Entscheidung zu den Befehlsergebnissen und ihre Begründung stehen in
 [ADR 0001](../../decisions/0001-command-outcomes.md). Die Aufruf-Provider-Identität wird in
 [ADR 0002](../../decisions/0002-invocation-provider-identity.md) festgelegt.
+
+Jev ist als Standardadapter `jev` mit Anbieteridentität `typesafe` enthalten. `--to jev` wählt `typesafe:jev-latest`; `--to jev:MODEL_ID` wählt ein bestimmtes Modell. Jev unterstützt nur `verify`. Wahrscheinlichkeiten, Confidence, zurückgegebenes Modell und Richtlinie stehen im optionalen Feld `decision`. Unterhalb der Schwellenwerte liefert Xerify `unclear`. Jev erzeugt keine Erklärungen oder Quellenangaben.
+
+[Jev / 0.3.0](jev.md)

@@ -49,7 +49,7 @@
       "default": { "timeoutMs": 120000, "maxInputBytes": 1048576, "maxOutputBytes": 1048576 },
       "type": "object",
       "properties": {
-        "timeoutMs": { "type": "integer", "exclusiveMinimum": 0, "maximum": 3600000 },
+        "timeoutMs": { "type": "integer", "minimum": 0, "maximum": 3600000 },
         "maxInputBytes": { "type": "integer", "exclusiveMinimum": 0, "maximum": 104857600 },
         "maxOutputBytes": { "type": "integer", "exclusiveMinimum": 0, "maximum": 104857600 }
       },

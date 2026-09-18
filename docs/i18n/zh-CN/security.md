@@ -7,7 +7,7 @@
 ## 报告
 
 如果怀疑存在安全漏洞，或者不小心泄露了凭据，请不要开公开 issue，改用
-[GitHub 私密漏洞报告](https://github.com/VerhexIO/xerify/security/advisories/new)。
+[GitHub 私密漏洞报告](https://github.com/Verhex/xerify/security/advisories/new)。
 请附上受影响的版本、影响范围、复现步骤，以及你能想到的缓解方案；不要附上真实凭据或敏感的生产环境数据。
 
 在第一个签名发布版本之前，没有任何版本处于公开支持状态。正式发布之后，最新的次版本发布线会持续获得安全修复；支持情况表会更新在这里。

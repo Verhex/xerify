@@ -88,3 +88,7 @@ bearer.
 La decisión sobre los resultados de comando, y su justificación, están registradas en
 [ADR 0001](../../decisions/0001-command-outcomes.md). La identidad de proveedor de invocación queda fijada
 por [ADR 0002](../../decisions/0002-invocation-provider-identity.md).
+
+Jev viene como adaptador predeterminado `jev`, con identidad `typesafe`. `--to jev` selecciona `typesafe:jev-latest`; `--to jev:MODEL_ID` selecciona un modelo concreto. Jev solo admite `verify`. Las probabilidades, confidence, el modelo devuelto y la política se conservan en el campo opcional `decision`. Bajo los umbrales, Xerify devuelve `unclear`. Jev no genera explicaciones ni citas.
+
+[Jev / 0.3.0](jev.md)

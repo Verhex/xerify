@@ -8,13 +8,13 @@
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/VerhexIO/xerify/main/assets/logos/full-horizontal/xerify-horizontal-light.svg" alt="Xerify" width="360">
+  <img src="https://raw.githubusercontent.com/Verhex/xerify/main/assets/logos/full-horizontal/xerify-horizontal-light.svg" alt="Xerify" width="360">
 </p>
 
-<p align="center"><strong>Başka bir sağlayıcıya sor. Net bir ikinci görüş al.</strong></p>
+<p align="center"><strong>Güvenmeden önce doğrula.</strong></p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/VerhexIO/xerify/main/assets/readme/xerify-verification-flow.gif" alt="Xerify akışı: A sağlayıcısındaki mevcut iddia sınırlandırılmış kanıt ve farklı sağlayıcı kapısından geçer, B sağlayıcısı iddiayı çürütmeye çalışır ve Xerify confirmed, refuted veya unclear sonucu döndürür" width="960">
+  <img src="https://raw.githubusercontent.com/Verhex/xerify/main/assets/readme/xerify-verification-flow.gif?v=0.3.0" alt="Xerify 0.3.0: LLM doğrulaması veya Jev tipli kararları. Her çalıştırmada tek hedef; olasılıklar ve sonuçlar temsilidir." width="960">
 </p>
 
 Xerify; sınırlandırılmış, sağlayıcılar arası soru sorma ve doğrulama için shell odaklı, açık kaynaklı
@@ -28,13 +28,13 @@ katmanıdır; burada bağımsız, kendi başına çalışan bir araç olarak sun
 bağımlılığı yoktur. Sonuç bir ikinci görüştür; matematiksel ispat, güvenlik sertifikası veya garanti
 edilmiş gerçek değildir. Sağlayıcı çıktısı güvenilmeyen veridir ve hiçbir zaman çalıştırılmaz.
 
-> **Yayın durumu:** `0.2.0`, npm üzerinde `xverify-cli` olarak dağıtılan erken bir genel sürümdür.
-> Genel CI, Node 20/24 ile Ubuntu, macOS ve Windows'ta yeşil — harici kurulum ve MCP Inspector duman
-> testi dahil; aynı kontrol, temiz kurulum duman testi ve sürüm denetimi Node 24 ile WSL2'de de geçer.
-> Çağrı sağlayıcısı kimlik sözleşmesinin her iki yönde de canlı Cursor/OpenAI kanıtı var. Yayımlanan
-> `0.1.0` tarball'ı, yayın iş akışının dışında registry'ye ulaştı ve bu yüzden hiçbir npm provenance
-> onayı taşımıyor; `0.1.1` ve sonraki sürümler bunu isteyen iş akışı tarafından yayımlanıyor. Genel şemalar, JSON
-> zarfları ve çıkış kodları kararlı; sağlayıcı yüzeyi ise hâlâ küçük ve API büyüyebilir.
+> Xerify 0.3.0, LLM doğrulamasının yanına Jev tipli kararlarını ekliyor. Sahibinin onayıyla yapılan tanıtım kontrolü ve 10 ek canlı Jev senaryosu beklentilerle eşleşti. [Sonuç tablosu](docs/i18n/tr/jev-testing.md) ve [Türkçe kullanım rehberi](docs/i18n/tr/jev.md). Bu bir entegrasyon denemesidir, model doğruluğu ölçümü değildir.
+
+Xerify, AI sistemleri için modelden bağımsız bir doğrulama katmanıdır: sınırlandırılmış kanıt, farklı bir çağrı sağlayıcısı ve tipli sonuç. LLM doğrulayıcıları ve Jev kararları aynı CLI, kütüphane ve MCP sözleşmelerini kullanır.
+
+Jev, varsayılan `jev` adaptörüyle (`typesafe` sağlayıcısı) gelir. `--to jev`, `typesafe:jev-latest` seçer; `--to jev:MODEL_ID` belirli modeli seçer. Jev yalnızca `verify` destekler. Olasılıklar, confidence, dönen model ve politika isteğe bağlı `decision` alanında bulunur. Eşiklerin altında Xerify `unclear` döndürür. Jev açıklama veya kanıt atfı üretmez.
+
+[Jev setup / 0.3.0](docs/i18n/tr/jev.md)
 
 ## Kurulum
 
@@ -50,7 +50,7 @@ xerify init
 Projeye sabitlenmiş geliştirme bağımlılığı:
 
 ```sh
-npm install --save-dev --save-exact xverify-cli@0.2.0
+npm install --save-dev --save-exact xverify-cli@0.3.0
 npx xerify --version
 ```
 
@@ -196,7 +196,7 @@ Sabit npm sürümüyle:
   "mcpServers": {
     "xerify": {
       "command": "npx",
-      "args": ["-y", "--package=xverify-cli@0.2.0", "xerify", "mcp", "stdio"]
+      "args": ["-y", "--package=xverify-cli@0.3.0", "xerify", "mcp", "stdio"]
     }
   }
 }
@@ -209,7 +209,7 @@ ortam değişkeninden bearer token gerektirir. Uç nokta `http://127.0.0.1:8787/
 
 ## Xerify'i kim geliştiriyor
 
-Xerify, **[Verhex](https://github.com/VerhexIO)** tarafından tasarlanır, geliştirilir ve sürdürülür.
+Xerify, **[Verhex](https://github.com/Verhex)** tarafından tasarlanır, geliştirilir ve sürdürülür.
 
 Kökeni **Deckent**'e dayanır — Verhex'in ajan tabanlı işletim sistemine; orkestratörün dayandığı
 yeteneklerden biri de bir iddiayı kontrol etmesi için ikinci bir sağlayıcıya sormaktır. Xerify, bu
@@ -228,3 +228,5 @@ burada lisanslanmamıştır.
 - [MIT Lisansı](LICENSE)
 
 Çeviriyle kanonik İngilizce sözleşme çelişirse test edilmiş İngilizce şema ve belgeler geçerlidir.
+
+[Benchmark](docs/i18n/tr/benchmark.md) · [0.3.0](docs/i18n/tr/launch-0.3.0.md)

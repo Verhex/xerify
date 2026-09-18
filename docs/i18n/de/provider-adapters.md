@@ -28,6 +28,7 @@ verlässlich wie diese Konfiguration.
 | `codex`             | `openai`           | offizielle `codex`-CLI            | bestehender CLI-Login oder `CODEX_API_KEY`                                | `codex exec --output-schema`                            |
 | `claude`            | `anthropic`        | offizielle `claude`-CLI           | bestehender CLI-Login, `ANTHROPIC_API_KEY` oder `CLAUDE_CODE_OAUTH_TOKEN` | `claude -p --json-schema`                               |
 | `cursor`            | `cursor`           | offizielle Cursor-`agent`-CLI     | bestehender Cursor-Login oder `CURSOR_API_KEY`                            | Prompt-Vertrag; Validierung durch den Core              |
+| `jev`               | `typesafe`         | TypeSafe HTTP API                 | `TYPESAFE_API_KEY`                                                        | Choice → `confirmed` / `refuted` / `unclear`            |
 | `openai-api`        | `openai`           | Responses API                     | zuerst Umgebungsvariable; optional literaler Fallback                     | `text.format.type=json_schema`, strict                  |
 | `anthropic-api`     | `anthropic`        | Messages API                      | zuerst Umgebungsvariable; optional literaler Fallback                     | `output_config.format.type=json_schema`                 |
 | `openai-compatible` | konfiguriert       | chat-completions-kompatibles HTTP | optional Umgebungsvariable oder literaler Key                             | `response_format.type=json_schema`                      |
@@ -190,3 +191,17 @@ POSIX-Signalweiterleitung an Kindprozesse.
 Normale Tests verwenden nie ein Provider-Konto. Ein Live-Smoke-Test muss explizit aktiviert und
 stets als potenziell abrechnungspflichtig behandelt werden. Die anwenderseitige Einordnung dieser
 Prüfungen steht unter [Kompatibilitäts- und Support-Grenzen](compatibility.md).
+
+Jev ist als Standardadapter `jev` mit Anbieteridentität `typesafe` enthalten. `--to jev` wählt `typesafe:jev-latest`; `--to jev:MODEL_ID` wählt ein bestimmtes Modell. Jev unterstützt nur `verify`. Wahrscheinlichkeiten, Confidence, zurückgegebenes Modell und Richtlinie stehen im optionalen Feld `decision`. Unterhalb der Schwellenwerte liefert Xerify `unclear`. Jev erzeugt keine Erklärungen oder Quellenangaben.
+
+[Jev / 0.3.0](jev.md)
+
+## Cursor-Verifikationsformat
+
+Xerify startet das separat installierte Cursor Agent CLI `agent`; es installiert Cursor nicht und ruft keine direkte Cursor-Modell-API auf. Der Adapter nutzt `-p --mode ask --sandbox enabled --output-format json` in einem temporären Verzeichnis. Das JSON-Format betrifft die CLI-Hülle; `result` bleibt freier Assistententext, kein schemaerzwungenes Urteil. Erfolgreicher Prozess und Token-Nutzung können daher trotzdem `INVALID_PROVIDER_RESPONSE` ergeben. [Offizieller Ausgabevertrag](https://cursor.com/docs/cli/reference/output-format).
+
+Eine synthetische Diagnose vom 2026-09-18 reproduzierte eine gültige Hülle mit Prosa im Inneren. CLI-Version `2026.09.15-d2fe57e` unterschied sich vom historischen Benchmark. Nur für `verify` ergänzt der Adapter nun ein konkretes JSON-Beispiel und eine Erinnerung an Maschinenausgabe. Der gesamte Prompt bleibt auf stdin; `ask`/`request` bleiben unverändert. Keine Urteilsextraktion aus Prosa und kein Entfernen von Codezäunen. Dies ist Prompt-Steuerung, keine native Schemaerzwingung; `structuredOutput` bleibt false. Bei positionalem Prompt ignoriert die CLI stdin, daher funktioniert eine generische argv-Anweisung mit Evidenz auf stdin nicht.
+
+Cursor ist vom aktiven OpenAI/Anthropic/Jev-Vergleich ausgeschlossen. Kleine Diagnosen nach einer Prompt-Änderung bleiben getrennt von historischen Messungen. Strenge Schema-Prüfung und Adapter-Regressionstests bleiben erhalten.
+
+Nach der Änderung bestanden vier feste Live-Prüfungen über Xerify-Kern und echten Cursor-Adapter: `indirection` → confirmed (22.452 ms), `sql` → refuted (8.026 ms), `missing` → unclear (14.592 ms), `injection` → refuted (11.183 ms), jeweils failure null. Zuvor verglichen drei Diagnoseaufrufe den alten Prompt (Prosa), argv plus stdin (Evidenz fehlte; verworfen) und das JSON-Beispiel (gültige SQL-Widerlegung). Diese Aufrufe zählen nicht zum Benchmark. Vier Erfolge bestätigen nur die geprüften Pfade, keine allgemeine Formatgarantie; native Schemaerzwingung fehlt weiterhin.

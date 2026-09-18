@@ -2,6 +2,7 @@ import type { ProviderRegistry } from '../providers/registry.js';
 import {
   AskRequestSchema,
   VerifyRequestSchema,
+  VerificationDecisionSchema,
   type AskRequest,
   type AskResult,
   type VerificationFailure,
@@ -89,6 +90,7 @@ export async function executeVerify(
         operation: 'verify',
         model: request.to.model,
         prompt: buildVerifyPrompt(request),
+        verification: { claim: request.claim, context: request.context },
         limits: request.limits
       },
       options.signal ?? new AbortController().signal
@@ -119,6 +121,9 @@ export async function executeVerify(
         from: request.from,
         to: request.to,
         ...payload,
+        ...(invoked.decision === undefined
+          ? {}
+          : { decision: VerificationDecisionSchema.parse(invoked.decision) }),
         usage: invoked.usage,
         durationMs: Math.max(invoked.durationMs, Date.now() - startedAt),
         truncation: {
@@ -147,6 +152,14 @@ export async function executeVerify(
     const typed = toXerifyError(error);
     const failure = operationalFailure(typed);
     if (!failure) throw typed;
-    return unclearResult({ id, from: request.from, to: request.to, startedAt, failure });
+    return unclearResult({
+      id,
+      from: request.from,
+      to: request.to,
+      startedAt,
+      failure,
+      inputTruncated: typed.details.inputTruncated === true,
+      outputTruncated: typed.details.outputTruncated === true
+    });
   }
 }

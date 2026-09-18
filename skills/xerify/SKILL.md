@@ -76,8 +76,8 @@ judgement happened at all — the call timed out, the provider failed, or its re
 the schema. Fix the transport and re-run; never report it as an epistemic result.
 
 Every typed failure, its exact output, and the change that yields a usable result are catalogued at
-<https://github.com/VerhexIO/xerify/blob/main/docs/examples/failure-modes.md>, and
-<https://github.com/VerhexIO/xerify/blob/main/docs/examples/no-account-walkthrough.md> reproduces
+<https://github.com/Verhex/xerify/blob/main/docs/examples/failure-modes.md>, and
+<https://github.com/Verhex/xerify/blob/main/docs/examples/no-account-walkthrough.md> reproduces
 every verdict and every typed failure with zero provider quota. Documentation is served from the
 repository and is not installed with the package. The deterministic mock provider those pages use
 does ship, at `tools/mock-provider.mjs` inside the installed package; use it to exercise an

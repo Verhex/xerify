@@ -8,7 +8,7 @@
 
 Für eine vermutete Schwachstelle oder ein versehentlich offengelegtes Credential kein öffentliches
 Issue eröffnen. Stattdessen [GitHubs private
-Sicherheitslücken-Meldung](https://github.com/VerhexIO/xerify/security/advisories/new) verwenden.
+Sicherheitslücken-Meldung](https://github.com/Verhex/xerify/security/advisories/new) verwenden.
 Betroffene Version, Auswirkung, Reproduktion und einen möglichen Fix-Vorschlag angeben; aktive
 Credentials und sensible Produktionsdaten dabei weglassen.
 

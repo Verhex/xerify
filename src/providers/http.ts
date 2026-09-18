@@ -35,15 +35,20 @@ export async function postJson(
   const startedAt = Date.now();
   const controller = new AbortController();
   let timedOut = false;
-  const timeout = setTimeout(() => {
-    timedOut = true;
-    controller.abort();
-  }, options.timeoutMs);
-  timeout.unref();
+  const timeout =
+    options.timeoutMs === 0
+      ? undefined
+      : setTimeout(() => {
+          timedOut = true;
+          controller.abort();
+        }, options.timeoutMs);
+  timeout?.unref();
   const abort = () => controller.abort();
   signal.addEventListener('abort', abort, { once: true });
 
   try {
+    if (signal.aborted)
+      throw new XerifyError('CANCELLED', 'Provider invocation was cancelled', { retryable: true });
     const response = await options.fetch(options.endpoint, {
       method: 'POST',
       headers: { 'content-type': 'application/json', ...options.headers },
@@ -105,8 +110,8 @@ export async function probeHttpEndpoint(
   fetchFunction: FetchLike
 ): Promise<boolean> {
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), timeoutMs);
-  timeout.unref();
+  const timeout = timeoutMs === 0 ? undefined : setTimeout(() => controller.abort(), timeoutMs);
+  timeout?.unref();
   try {
     const response = await fetchFunction(endpoint, {
       method: 'HEAD',

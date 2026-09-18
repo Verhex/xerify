@@ -1,7 +1,7 @@
 <title>Xerify</title>
 <meta
   name="description"
-  content="Ask another provider. Get a clear second opinion. A cross-provider verification CLI for the shell and MCP."
+  content="Verify before you trust. Verify AI claims with LLMs or Jev, bounded evidence, and typed verdicts. CLI, library, and MCP."
 />
 <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -630,42 +630,71 @@
       <a href="#verdicts">Verdicts</a>
       <a href="#proof">Proof</a>
       <a href="#docs">Docs</a>
-      <a href="https://github.com/VerhexIO/xerify">GitHub</a>
+      <a href="https://github.com/Verhex/xerify">GitHub</a>
     </nav>
   </header>
 
   <div class="hero">
-    <h1>Ask another provider. Get a <em>clear second opinion.</em></h1>
+    <h1>Verify before <em>you trust.</em></h1>
     <p class="lede">
-      Xerify takes a claim one model already made and puts it through an independent check by a
-      different provider. What comes back is a typed verdict and an exit code your shell can branch
-      on — not a second opinion buried in prose.
+      Xerify checks AI claims against bounded evidence through a different invocation provider. Use
+      LLM verifiers or Jev typed decisions and receive a consistent verdict your software can act
+      on. Born inside Deckent, available as a standalone CLI, library, and MCP server.
     </p>
     <div class="install">
       <code>npm install --global xverify-cli</code>
-      <span class="ver">v0.2.0 &middot; MIT &middot; Node 20 or 24</span>
+      <span class="ver">v0.3.0 &middot; MIT &middot; Node 20 or 24</span>
     </div>
     <figure class="flow">
       <img
-        src="./xerify-verification-flow.gif"
-        alt="A claim from provider A passes through bounded evidence and a different-provider gate; provider B checks it independently; Xerify returns a typed confirmed, refuted, or unclear result."
+        src="./xerify-verification-flow.gif?v=0.3.0"
+        alt="Two illustrative routes: an LLM verifier returns refuted; a Jev decision below the configured thresholds returns unclear. One target per run."
         width="960"
         height="540"
       />
-      <figcaption>One claim, one independent check, one typed result.</figcaption>
+      <figcaption>LLM review or Jev decision. One target per run. Illustrative values.</figcaption>
     </figure>
   </div>
 </div>
 
 <div class="wrap">
+  <section id="jev">
+    <div class="col">
+      <p class="eyebrow">New in 0.3.0</p>
+      <h2>Jev decisions. Xerify boundaries.</h2>
+      <p>
+        TypeSafe’s Jev joins the verification backends. Keep the same bounded evidence,
+        different-provider rule, and confirmed / refuted / unclear contract. Inspect the returned
+        probabilities, confidence, model, and decision policy in JSON.
+      </p>
+      <p>
+        Below the configured thresholds, Xerify returns unclear. Jev does not generate an
+        explanation or citations. An owner-approved campaign check and ten additional live scenarios
+        matched expectations. These are integration checks, not an accuracy or speed benchmark.
+      </p>
+      <a href="https://github.com/Verhex/xerify/blob/main/docs/jev.md">Set up Jev →</a>
+    </div>
+    <div class="commands">
+      <div class="cmd">
+        <header><span>verify with Jev</span><span>xverify-cli@0.3.0</span></header>
+        <pre>
+git diff --cached | xerify --json verify \
+  --from openai:AUTHOR_MODEL \
+  --to jev \
+  --claim "This migration preserves existing data"</pre>
+        <p>Set TYPESAFE_API_KEY in the process environment before invoking.</p>
+      </div>
+    </div>
+  </section>
   <section id="how">
     <div class="col">
       <p class="eyebrow"><b>ask</b> &amp; <b>verify</b></p>
-      <h2>Two commands, and a rule that no model checks its own work.</h2>
+      <h2>One verification contract across different providers.</h2>
       <p>
         <code>ask</code> puts a question to a model. <code>verify</code> takes a claim that already
         exists and checks it against the evidence you supply. The provider that wrote the claim is
-        refused as its own checker, so a second opinion is genuinely second.
+        refused as its own checker. Provider separation measures the invocation service, not
+        model-lineage independence.
       </p>
     </div>
 
@@ -810,7 +839,8 @@
       <p>
         Xerify shells out to the CLIs you have logged into, or calls an API with your key. It stores
         no credentials of its own. Codex CLI, Claude CLI, Cursor Agent, the OpenAI and Anthropic
-        APIs, any OpenAI-compatible endpoint, and an explicitly configured command.
+        APIs, TypeSafe’s Jev decision API, any OpenAI-compatible endpoint, and an explicitly
+        configured command.
       </p>
       <p>
         It also runs as an MCP server over stdio and Streamable HTTP, so an agent can call
@@ -850,52 +880,52 @@
         <h3>Guides</h3>
         <ul>
           <li>
-            <a href="https://github.com/VerhexIO/xerify/blob/main/docs/installation.md"
+            <a href="https://github.com/Verhex/xerify/blob/main/docs/installation.md"
               >Installation<span>install</span></a
             >
           </li>
           <li>
-            <a href="https://github.com/VerhexIO/xerify/blob/main/docs/cli-reference.md"
+            <a href="https://github.com/Verhex/xerify/blob/main/docs/cli-reference.md"
               >CLI reference<span>commands</span></a
             >
           </li>
           <li>
-            <a href="https://github.com/VerhexIO/xerify/blob/main/docs/configuration.md"
+            <a href="https://github.com/Verhex/xerify/blob/main/docs/configuration.md"
               >Configuration<span>config</span></a
             >
           </li>
           <li>
-            <a href="https://github.com/VerhexIO/xerify/blob/main/docs/provider-adapters.md"
+            <a href="https://github.com/Verhex/xerify/blob/main/docs/provider-adapters.md"
               >Provider adapters<span>adapters</span></a
             >
           </li>
           <li>
-            <a href="https://github.com/VerhexIO/xerify/blob/main/docs/channels.md"
+            <a href="https://github.com/Verhex/xerify/blob/main/docs/channels.md"
               >Channels<span>identity</span></a
             >
           </li>
           <li>
-            <a href="https://github.com/VerhexIO/xerify/blob/main/docs/json-contract.md"
+            <a href="https://github.com/Verhex/xerify/blob/main/docs/json-contract.md"
               >JSON contract<span>schema</span></a
             >
           </li>
           <li>
-            <a href="https://github.com/VerhexIO/xerify/blob/main/docs/run-history.md"
+            <a href="https://github.com/Verhex/xerify/blob/main/docs/run-history.md"
               >Run history<span>records</span></a
             >
           </li>
           <li>
-            <a href="https://github.com/VerhexIO/xerify/blob/main/docs/mcp.md"
+            <a href="https://github.com/Verhex/xerify/blob/main/docs/mcp.md"
               >MCP operation<span>server</span></a
             >
           </li>
           <li>
-            <a href="https://github.com/VerhexIO/xerify/blob/main/docs/architecture.md"
+            <a href="https://github.com/Verhex/xerify/blob/main/docs/architecture.md"
               >Architecture<span>internals</span></a
             >
           </li>
           <li>
-            <a href="https://github.com/VerhexIO/xerify/blob/main/SECURITY.md"
+            <a href="https://github.com/Verhex/xerify/blob/main/SECURITY.md"
               >Security policy<span>security</span></a
             >
           </li>
@@ -905,55 +935,55 @@
         <h3>Worked examples</h3>
         <ul>
           <li>
-            <a href="https://github.com/VerhexIO/xerify/blob/main/docs/examples/dogfooding.md"
+            <a href="https://github.com/Verhex/xerify/blob/main/docs/examples/dogfooding.md"
               >Dogfooding log<span>26 rounds</span></a
             >
           </li>
           <li>
-            <a href="https://github.com/VerhexIO/xerify/blob/main/docs/examples/failure-modes.md"
+            <a href="https://github.com/Verhex/xerify/blob/main/docs/examples/failure-modes.md"
               >Failure catalogue<span>every non-confirmed</span></a
             >
           </li>
           <li>
             <a
-              href="https://github.com/VerhexIO/xerify/blob/main/docs/examples/no-account-walkthrough.md"
+              href="https://github.com/Verhex/xerify/blob/main/docs/examples/no-account-walkthrough.md"
               >Zero-quota walkthrough<span>no account</span></a
             >
           </li>
           <li>
-            <a href="https://github.com/VerhexIO/xerify/blob/main/docs/examples/research-paper.md"
+            <a href="https://github.com/Verhex/xerify/blob/main/docs/examples/research-paper.md"
               >Research paper<span>claim</span></a
             >
           </li>
           <li>
-            <a href="https://github.com/VerhexIO/xerify/blob/main/docs/examples/game-design.md"
+            <a href="https://github.com/Verhex/xerify/blob/main/docs/examples/game-design.md"
               >Game production<span>claim</span></a
             >
           </li>
           <li>
-            <a href="https://github.com/VerhexIO/xerify/blob/main/docs/examples/website-decision.md"
+            <a href="https://github.com/Verhex/xerify/blob/main/docs/examples/website-decision.md"
               >Website selection<span>claim</span></a
             >
           </li>
           <li>
-            <a href="https://github.com/VerhexIO/xerify/blob/main/docs/examples/data-analysis.md"
+            <a href="https://github.com/Verhex/xerify/blob/main/docs/examples/data-analysis.md"
               >Analytics<span>claim</span></a
             >
           </li>
           <li>
             <a
-              href="https://github.com/VerhexIO/xerify/blob/main/docs/examples/outbound-data-policy.md"
+              href="https://github.com/Verhex/xerify/blob/main/docs/examples/outbound-data-policy.md"
               >Outbound-data policy<span>claim</span></a
             >
           </li>
         </ul>
         <div class="langs">
-          <a href="https://github.com/VerhexIO/xerify/blob/main/README.md">EN</a>
-          <a href="https://github.com/VerhexIO/xerify/blob/main/README.tr.md">TR</a>
-          <a href="https://github.com/VerhexIO/xerify/blob/main/README.de.md">DE</a>
-          <a href="https://github.com/VerhexIO/xerify/blob/main/README.zh-CN.md">ZH</a>
-          <a href="https://github.com/VerhexIO/xerify/blob/main/README.es.md">ES</a>
-          <a href="https://github.com/VerhexIO/xerify/blob/main/README.fr.md">FR</a>
+          <a href="https://github.com/Verhex/xerify/blob/main/README.md">EN</a>
+          <a href="https://github.com/Verhex/xerify/blob/main/README.tr.md">TR</a>
+          <a href="https://github.com/Verhex/xerify/blob/main/README.de.md">DE</a>
+          <a href="https://github.com/Verhex/xerify/blob/main/README.zh-CN.md">ZH</a>
+          <a href="https://github.com/Verhex/xerify/blob/main/README.es.md">ES</a>
+          <a href="https://github.com/Verhex/xerify/blob/main/README.fr.md">FR</a>
         </div>
       </div>
     </div>
@@ -963,13 +993,13 @@
     <div class="foot-row">
       <div class="foot-links">
         <a href="https://www.npmjs.com/package/xverify-cli">npm</a>
-        <a href="https://github.com/VerhexIO/xerify">GitHub</a>
-        <a href="https://github.com/VerhexIO/xerify/releases/tag/v0.2.0">Releases</a>
-        <a href="https://github.com/VerhexIO/xerify/blob/main/CHANGELOG.md">Changelog</a>
-        <a href="https://github.com/VerhexIO/xerify/blob/main/LICENSE">MIT</a>
+        <a href="https://github.com/Verhex/xerify">GitHub</a>
+        <a href="https://github.com/Verhex/xerify/releases">Releases</a>
+        <a href="https://github.com/Verhex/xerify/blob/main/CHANGELOG.md">Changelog</a>
+        <a href="https://github.com/Verhex/xerify/blob/main/LICENSE">MIT</a>
       </div>
       <div class="foot-meta">
-        xverify-cli v0.2.0 &middot; published with SLSA provenance<br />
+        xverify-cli v0.3.0 &middot; MIT licensed<br />
         Built by Verhex &middot; Xerify is a bounded second opinion, not a proof.
       </div>
     </div>

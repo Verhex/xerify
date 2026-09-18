@@ -19,6 +19,7 @@ Resmi adaptörler, çağrı sağlayıcısı kimliğini kod içinde sabitler. `co
 | `codex`             | `openai`          | resmi `codex` CLI                          | var olan CLI girişi veya `CODEX_API_KEY`                                | `codex exec --output-schema`                                    |
 | `claude`            | `anthropic`       | resmi `claude` CLI                         | var olan CLI girişi, `ANTHROPIC_API_KEY` veya `CLAUDE_CODE_OAUTH_TOKEN` | `claude -p --json-schema`                                       |
 | `cursor`            | `cursor`          | resmi Cursor `agent` CLI'ı                 | var olan Cursor girişi veya `CURSOR_API_KEY`                            | prompt sözleşmesi; çekirdek doğrulama                           |
+| `jev`               | `typesafe`        | TypeSafe HTTP API                          | `TYPESAFE_API_KEY`                                                      | Choice → `confirmed` / `refuted` / `unclear`                    |
 | `openai-api`        | `openai`          | Responses API                              | önce ortam değişkeni; isteğe bağlı sabit yedek                          | `text.format.type=json_schema`, strict                          |
 | `anthropic-api`     | `anthropic`       | Messages API                               | önce ortam değişkeni; isteğe bağlı sabit yedek                          | `output_config.format.type=json_schema`                         |
 | `openai-compatible` | yapılandırılan    | chat-completions uyumlu HTTP               | isteğe bağlı ortam değişkeni veya sabit anahtar                         | `response_format.type=json_schema`                              |
@@ -105,3 +106,17 @@ Genel adaptör hiçbir zaman bir shell dizesini değerlendirmez. Yapılandırma,
 | WSL, Node 20/24     | hedef host üzerinde doğrulanır | host/hesaba özgü            | yalnızca isteğe bağlı katılım |
 
 Normal testler hiçbir zaman bir sağlayıcı hesabı kullanmaz. Canlı bir duman testi açıkça etkinleştirilmeli ve olası ücretlendirmeye tabi olduğu net biçimde göz önünde bulundurulmalıdır. Bu kontrollerin tüketici tarafından nasıl yorumlanması gerektiği için [uyumluluk ve destek sınırları](compatibility.md) sayfasına bakın.
+
+Jev, varsayılan `jev` adaptörüyle (`typesafe` sağlayıcısı) gelir. `--to jev`, `typesafe:jev-latest` seçer; `--to jev:MODEL_ID` belirli modeli seçer. Jev yalnızca `verify` destekler. Olasılıklar, confidence, dönen model ve politika isteğe bağlı `decision` alanında bulunur. Eşiklerin altında Xerify `unclear` döndürür. Jev açıklama veya kanıt atfı üretmez.
+
+[Jev / 0.3.0](jev.md)
+
+## Cursor doğrulama biçimi
+
+Xerify, ayrıca kurulu Cursor Agent CLI’nin `agent` dosyasını çalıştırır; Cursor kurmaz ve doğrudan bir Cursor model API’sine bağlanmaz. Adaptör geçici dizinde `-p --mode ask --sandbox enabled --output-format json` kullanır. Bu seçenek dış CLI zarfını JSON yapar; `result` içindeki model cevabı şemaya zorlanmış karar değil, serbest metindir. Süreç başarılı ve token kullanımı mevcutken bile `INVALID_PROVIDER_RESPONSE` oluşabilir. [Resmî çıktı sözleşmesi](https://cursor.com/docs/cli/reference/output-format).
+
+2026-09-18 tarihli sentetik tanıda dış zarf geçerli, iç cevap düz metindi. Kurulu CLI `2026.09.15-d2fe57e`, eski benchmark sürümünden farklıydı. Adaptör artık yalnızca `verify` için somut JSON örneği ve makine çıktısı hatırlatması ekliyor. Tam prompt stdin’de kalıyor; `ask`/`request` değişmiyor. Düz metinden karar ayıklanmıyor, kod çitleri kaldırılmıyor. Bu prompt yönlendirmesidir, yerel şema zorlaması değildir; `structuredOutput` false kalır. CLI’ye konumsal prompt verilirse stdin okunmaz; argv’ye genel talimat, stdin’e kanıt vermek geçerli bir çözüm değildir.
+
+Cursor aktif OpenAI/Anthropic/Jev kıyasından çıkarıldı. Prompt değişikliği sonrası küçük entegrasyon tanıları ayrı raporlanır, eski ölçümlerin yerine yazılmaz. Ürün kıyasından çıkarırken katı şema kontrolü ve Cursor adaptörünün regresyon testleri korunur.
+
+Değişiklikten sonra Xerify çekirdeği ve gerçek Cursor adaptörüyle dört sabit canlı kontrol geçti: `indirection` → confirmed (22.452 ms), `sql` → refuted (8.026 ms), `missing` → unclear (14.592 ms), `injection` → refuted (11.183 ms). Hepsinde failure null. Öncesindeki üç tanı çağrısı eski prompt’u (düz metin), argv+stdin denemesini (kanıt ulaşmadı; uygulanmadı) ve JSON örnekli adayı (geçerli SQL çürütmesi) karşılaştırdı. Bunlar benchmark’a katılmaz. Dört başarılı kontrol test edilen yolları doğrular; her zaman doğru biçim garantisi değildir, yerel şema zorlaması hâlâ yoktur.

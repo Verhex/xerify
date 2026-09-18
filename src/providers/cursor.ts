@@ -33,6 +33,18 @@ const CursorOutputSchema = z.looseObject({
     .optional()
 });
 
+// Cursor's --output-format json wraps free-form assistant text; it does not enforce
+// the verifier schema. Keep this reminder on stdin, after the bounded evidence.
+// This is prompt guidance only: core validation must still reject prose/malformed JSON.
+const verificationFormatReminder = [
+  'This is a machine-consumed verification request, not a conversational explanation.',
+  'Do not use tools or inspect the workspace.',
+  'Your entire final response must be one JSON object matching the schema above.',
+  'Do not emit progress messages, Markdown, or text before or after it.',
+  'Output shape (replace the values with your judgment; populate arrays only with schema-valid items):',
+  '{"verdict":"unclear","summary":"Explain your judgment here.","findings":[],"evidence":[],"assumptions":[],"limitations":[],"unverifiedClaims":[]}'
+].join('\n');
+
 export interface CursorAdapterOptions {
   id?: string;
   executable?: string;
@@ -182,7 +194,10 @@ export class CursorAdapter implements ProviderAdapter {
             '--output-format',
             'json'
           ],
-          stdin: input.prompt,
+          stdin:
+            input.operation === 'verify'
+              ? `${input.prompt}\n\n${verificationFormatReminder}`
+              : input.prompt,
           env: buildChildEnvironment(this.#options.env ?? process.env, [
             'CURSOR_API_KEY',
             'CURSOR_API_ENDPOINT'

@@ -61,3 +61,7 @@ STDIO'nun stdout'u MCP çerçeveleri için ayrılmıştır. Streamable HTTP vars
 - Var olan genel alanlar, uyumluluğu bozan bir sürüm olmadan kaldırılamaz veya yeniden yorumlanamaz. Ekleyici, isteğe bağlı alanlara izin verilir.
 
 Komut sonucu kararı ve gerekçesi [ADR 0001](../../decisions/0001-command-outcomes.md) belgesinde kayıtlıdır. Çağrı sağlayıcısı kimliği [ADR 0002](../../decisions/0002-invocation-provider-identity.md) tarafından sabitlenir.
+
+Jev, varsayılan `jev` adaptörüyle (`typesafe` sağlayıcısı) gelir. `--to jev`, `typesafe:jev-latest` seçer; `--to jev:MODEL_ID` belirli modeli seçer. Jev yalnızca `verify` destekler. Olasılıklar, confidence, dönen model ve politika isteğe bağlı `decision` alanında bulunur. Eşiklerin altında Xerify `unclear` döndürür. Jev açıklama veya kanıt atfı üretmez.
+
+[Jev / 0.3.0](jev.md)

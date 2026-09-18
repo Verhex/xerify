@@ -71,6 +71,21 @@ export const AnthropicApiProviderConfigSchema = z
   })
   .strict();
 
+export const JevProviderConfigSchema = z
+  .object({
+    kind: z.literal('jev'),
+    provider: z.literal('typesafe').default('typesafe'),
+    endpoint: z.url().default('https://api.typesafe.ai/v1/systemone'),
+    apiKeyEnvironment: z
+      .string()
+      .regex(/^[A-Z_][A-Z0-9_]*$/)
+      .default('TYPESAFE_API_KEY'),
+    apiKey: z.string().min(1).max(16_384).optional(),
+    minProbability: z.number().min(0).max(1).default(0.9),
+    minConfidence: z.number().min(0).max(1).default(0.8)
+  })
+  .strict();
+
 export const OpenAiCompatibleProviderConfigSchema = z
   .object({
     kind: z.literal('openai-compatible'),
@@ -90,6 +105,7 @@ export const ProviderConfigSchema = z.discriminatedUnion('kind', [
   ClaudeProviderConfigSchema,
   CursorProviderConfigSchema,
   OpenAiApiProviderConfigSchema,
+  JevProviderConfigSchema,
   AnthropicApiProviderConfigSchema,
   OpenAiCompatibleProviderConfigSchema
 ]);
@@ -111,7 +127,8 @@ export const DEFAULT_HISTORY_CONFIG: HistoryConfig = HistoryConfigSchema.parse({
 
 export const DEFAULT_PROVIDER_CONFIGS: Record<string, ProviderConfig> = {
   codex: CodexProviderConfigSchema.parse({ kind: 'codex' }),
-  claude: ClaudeProviderConfigSchema.parse({ kind: 'claude' })
+  claude: ClaudeProviderConfigSchema.parse({ kind: 'claude' }),
+  jev: JevProviderConfigSchema.parse({ kind: 'jev' })
 };
 
 export const XerifyConfigSchema = z

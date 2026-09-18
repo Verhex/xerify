@@ -64,3 +64,9 @@ Arşiv listelemesi, sıkıştırılmış bir katalog olarak `.xerify/archive/ind
 | `xerify mcp http --host 0.0.0.0 --port 8787 --token-env NAME --allow-public` | Açıkça kimlik doğrulamalı genel bağlama      |
 
 STDIO, stdout'u protokol çerçeveleri için ayırır. Loopback dışı HTTP, hem `--allow-public` hem de adlandırılmış bir ortam değişkeni üzerinden sağlanan bir bearer token gerektirir.
+
+Jev, varsayılan `jev` adaptörüyle (`typesafe` sağlayıcısı) gelir. `--to jev`, `typesafe:jev-latest` seçer; `--to jev:MODEL_ID` belirli modeli seçer. Jev yalnızca `verify` destekler. Olasılıklar, confidence, dönen model ve politika isteğe bağlı `decision` alanında bulunur. Eşiklerin altında Xerify `unclear` döndürür. Jev açıklama veya kanıt atfı üretmez.
+
+[Jev / 0.3.0](jev.md)
+
+`--timeout 0` veya `limits.timeoutMs: 0` sağlayıcı süre sınırını açıkça kapatır. İptal ve bayt sınırları korunur; varsayılan 120000 ms kalır.

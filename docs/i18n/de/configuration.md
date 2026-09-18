@@ -59,7 +59,7 @@ Der `xerify init`-Befehl erzeugt eine gültige Startdatei:
 
 ```json
 {
-  "$schema": "https://raw.githubusercontent.com/VerhexIO/xerify/main/schemas/config.schema.json",
+  "$schema": "https://raw.githubusercontent.com/Verhex/xerify/main/schemas/config.schema.json",
   "providers": {},
   "limits": {
     "timeoutMs": 120000,
@@ -87,12 +87,12 @@ disjunkt sein: Sie dürfen weder identisch sein noch ineinander verschachtelt li
 einem der beiden Pfade startet einen neuen Sequenz-Namespace. Die genauen Dateien und
 Lifecycle-Befehle stehen unter [Lokale Run-Historie](run-history.md).
 
-Ein leeres `providers` behält die eingebauten Adapter `codex` und `claude` bei. Nur die tatsächlich
+Ein leeres `providers` behält die eingebauten Adapter `codex`, `claude` und `jev` bei. Nur die tatsächlich
 genutzten Transporte ergänzen, zum Beispiel:
 
 ```json
 {
-  "$schema": "https://raw.githubusercontent.com/VerhexIO/xerify/main/schemas/config.schema.json",
+  "$schema": "https://raw.githubusercontent.com/Verhex/xerify/main/schemas/config.schema.json",
   "providers": {
     "cursor": {
       "kind": "cursor",
@@ -125,7 +125,7 @@ aus. Eine projektlokale Installation kann ihn für Offline-Autovervollständigun
 
 Die Konfiguration ist strikt. Generische Felder wie `token`, `secret`, ein stilles `defaultModel`
 sowie Credential-Felder auf Command- oder CLI-Adaptern werden abgelehnt. Direkte Adapter vom Typ
-`openai-api`, `anthropic-api` und `openai-compatible` akzeptieren genau das optionale Feld `apiKey`.
+`jev`, `openai-api`, `anthropic-api` und `openai-compatible` akzeptieren genau das optionale Feld `apiKey`.
 
 Die empfohlene Reihenfolge lautet:
 
@@ -232,3 +232,11 @@ bleiben Prompts, Behauptungen, Kontext, Antworten, Findings, rohe Provider-Antwo
 Autorisierungsdaten und Credential-Pfade. Neue Dateien erhalten unter POSIX den Modus `0600`;
 Symlinks und andere Nicht-Regular-Files werden abgelehnt. Die Logs sind Betriebsmetadaten – kein
 Transkript und kein Beweis dafür, dass ein Urteil korrekt ist.
+
+Jev ist als Standardadapter `jev` mit Anbieteridentität `typesafe` enthalten. `--to jev` wählt `typesafe:jev-latest`; `--to jev:MODEL_ID` wählt ein bestimmtes Modell. Jev unterstützt nur `verify`. Wahrscheinlichkeiten, Confidence, zurückgegebenes Modell und Richtlinie stehen im optionalen Feld `decision`. Unterhalb der Schwellenwerte liefert Xerify `unclear`. Jev erzeugt keine Erklärungen oder Quellenangaben.
+
+[Jev / 0.3.0](jev.md)
+
+`--timeout 0` oder `limits.timeoutMs: 0` deaktiviert ausdrücklich die Laufzeitgrenze. Abbruch und Bytegrenzen bleiben aktiv; Standard bleibt 120000 ms.
+
+Die Umgebungsvariante ist `XERIFY_TIMEOUT_MS=0`; leere Werte werden abgelehnt. Bytegrenzen bleiben positiv.

@@ -48,7 +48,7 @@ MCP 的 `ask` 和 `verify` 调用，会经过与 CLI、library 相同的项目�
   "mcpServers": {
     "xerify": {
       "command": "npx",
-      "args": ["-y", "--package=xverify-cli@0.2.0", "xerify", "mcp", "stdio"]
+      "args": ["-y", "--package=xverify-cli@0.3.0", "xerify", "mcp", "stdio"]
     }
   }
 }
@@ -103,3 +103,7 @@ XERIFY_MCP_TOKEN='replace-me' xerify mcp http \
 
 关于渠道选择、订阅/API 行为、零成本的本地运行方式，以及已评估过的
 Cloudflare Workers 远程路径，参见[提供方与访问渠道](channels.md)。托管免费不代表提供方的推理调用也免费，也不意味着可以集中托管本地订阅凭据。
+
+Jev 已作为默认 `jev` 适配器集成，提供方身份为 `typesafe`。`--to jev` 选择 `typesafe:jev-latest`；`--to jev:MODEL_ID` 选择具体模型。Jev 仅支持 `verify`。概率、confidence、返回的模型和策略保存在可选的 `decision` 字段中。低于配置阈值时，Xerify 返回 `unclear`。Jev 不生成解释或证据引用。
+
+[Jev / 0.3.0](jev.md)

@@ -8,13 +8,13 @@
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/VerhexIO/xerify/main/assets/logos/full-horizontal/xerify-horizontal-light.svg" alt="Xerify" width="360">
+  <img src="https://raw.githubusercontent.com/Verhex/xerify/main/assets/logos/full-horizontal/xerify-horizontal-light.svg" alt="Xerify" width="360">
 </p>
 
-<p align="center"><strong>Interrogez un autre fournisseur. Obtenez un second avis clair.</strong></p>
+<p align="center"><strong>Vérifiez avant de faire confiance.</strong></p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/VerhexIO/xerify/main/assets/readme/xerify-verification-flow.gif" alt="Flux Xerify animé : une affirmation existante du fournisseur A passe par une preuve bornée puis une porte de fournisseur différent, le fournisseur B tente de la réfuter, et Xerify renvoie un résultat typé confirmed, refuted ou unclear" width="960">
+  <img src="https://raw.githubusercontent.com/Verhex/xerify/main/assets/readme/xerify-verification-flow.gif?v=0.3.0" alt="Xerify 0.3.0 : vérification LLM ou décisions typées Jev. Une cible par exécution ; valeurs illustratives." width="960">
 </p>
 
 Xerify est un outil open source orienté shell pour des questions et vérifications inter-fournisseurs
@@ -32,16 +32,13 @@ Son résultat est un second avis, pas une preuve formelle, une certification de
 sécurité ou une garantie de vérité. La sortie du fournisseur est une donnée non fiable et n'est
 jamais exécutée.
 
-> **État de publication :** `0.2.0` est une première version publique, distribuée sur npm sous
-> le nom `xverify-cli`. La CI publique est au vert sur Ubuntu, macOS et Windows avec Node
-> 20/24, y compris l'installation externe et le test de fumée de MCP Inspector ; la même
-> vérification, le test de fumée d'installation propre et l'audit de publication passent aussi
-> sous WSL2 avec Node 24. Le contrat d'identité de fournisseur d'invocation dispose d'une preuve
-> réelle Cursor/OpenAI dans les deux sens. Le tarball `0.1.0` publié a atteint le registre en
-> dehors du flux de publication, et ne porte donc aucune attestation de provenance npm ;
-> `0.1.1` et les versions ultérieures sont publiés par ce flux, qui en demande une. Les schémas publics, les enveloppes JSON et
-> les codes de sortie sont stables ; la surface de fournisseurs reste encore restreinte, et
-> l'API est susceptible de s'étoffer.
+> Xerify 0.3.0 ajoute les décisions typées Jev à la vérification LLM. Une vérification de campagne et dix scénarios Jev supplémentaires, autorisés par le propriétaire, ont donné les résultats attendus. Voir les [résultats](docs/i18n/fr/jev-testing.md). Il s’agit de preuves d’intégration, pas d’une mesure de précision générale.
+
+Xerify est une couche de vérification indépendante du modèle pour les systèmes d’IA : preuves bornées, autre fournisseur d’invocation et résultat typé. Les vérificateurs LLM et les décisions Jev partagent les contrats CLI, bibliothèque et MCP.
+
+Jev est inclus comme adaptateur par défaut `jev`, avec l’identité `typesafe`. `--to jev` sélectionne `typesafe:jev-latest` ; `--to jev:MODEL_ID` sélectionne un modèle précis. Jev prend uniquement en charge `verify`. Probabilités, confidence, modèle retourné et politique figurent dans le champ facultatif `decision`. Sous les seuils, Xerify renvoie `unclear`. Jev ne génère ni explications ni citations.
+
+[Jev setup / 0.3.0](docs/i18n/fr/jev.md)
 
 ## Installation
 
@@ -57,7 +54,7 @@ xerify init
 Comme dépendance de développement épinglée :
 
 ```sh
-npm install --save-dev --save-exact xverify-cli@0.2.0
+npm install --save-dev --save-exact xverify-cli@0.3.0
 npx xerify --version
 ```
 
@@ -165,7 +162,7 @@ MCP STDIO local avec version épinglée :
   "mcpServers": {
     "xerify": {
       "command": "npx",
-      "args": ["-y", "--package=xverify-cli@0.2.0", "xerify", "mcp", "stdio"]
+      "args": ["-y", "--package=xverify-cli@0.3.0", "xerify", "mcp", "stdio"]
     }
   }
 }
@@ -193,7 +190,7 @@ d'environnement nommée.
 
 ## Qui développe Xerify
 
-Xerify est conçu, développé et maintenu par **[Verhex](https://github.com/VerhexIO)**.
+Xerify est conçu, développé et maintenu par **[Verhex](https://github.com/Verhex)**.
 
 Il trouve son origine dans **Deckent**, le système d'exploitation agentique de Verhex, où demander à
 un second fournisseur de vérifier une affirmation fait partie des capacités dont dépend
@@ -212,3 +209,5 @@ distinct, qui n'est pas concédé sous licence ici.
 - [Licence MIT](LICENSE)
 
 En cas de contradiction, les schémas et documents canoniques testés en anglais prévalent.
+
+[Benchmark](docs/i18n/fr/benchmark.md) · [0.3.0](docs/i18n/fr/launch-0.3.0.md)

@@ -196,6 +196,22 @@ switch (scenario) {
       })
     );
     break;
+  case 'cursor-prose':
+  case 'cursor-fenced':
+    await write(
+      1,
+      JSON.stringify({
+        type: 'result',
+        subtype: 'success',
+        is_error: false,
+        result:
+          scenario === 'cursor-prose'
+            ? 'The claim is refuted. {"verdict":"refuted","summary":"Fixture","findings":[]}'
+            : '```json\n{"verdict":"refuted","summary":"Fixture","findings":[]}\n```',
+        usage: { inputTokens: 16, outputTokens: 11 }
+      })
+    );
+    break;
   case 'cursor-json':
     await write(
       1,

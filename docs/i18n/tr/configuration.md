@@ -40,7 +40,7 @@ Kanonik proje dosya adı `.xerify/xverify-config.json`'dır. Oluşturulan `.giti
 
 ```json
 {
-  "$schema": "https://raw.githubusercontent.com/VerhexIO/xerify/main/schemas/config.schema.json",
+  "$schema": "https://raw.githubusercontent.com/Verhex/xerify/main/schemas/config.schema.json",
   "providers": {},
   "limits": {
     "timeoutMs": 120000,
@@ -61,11 +61,11 @@ Kanonik proje dosya adı `.xerify/xverify-config.json`'dır. Oluşturulan `.giti
 
 Geçmiş yolları, bulunan proje kökünden çözümlenir. `captureInput` için `full`, `metadata` veya `none` değerleri; `captureOutput` için `normalized`, `metadata` veya `none` değerleri kabul edilir. Şeffaf varsayılanlar, yerel çalışmayı anlaşılır kılmak için seçilmiştir. Müşteri verisi, tescilli kaynak kodu veya kalıcı olarak saklanmaması gereken başka bir materyalle çalışmadan önce yalnızca metadata modlarını kullanın. Etkin ve arşiv yolları ayrık olmalıdır: birbirine eşit olamaz veya iç içe yerleştirilemezler. Yollardan birini değiştirmek farklı bir sıra ad alanı başlatır. Tam dosya listesi ve yaşam döngüsü komutları için [yerel çalıştırma geçmişi](run-history.md) sayfasına bakın.
 
-Boş bir `providers` alanı, yerleşik `codex` ve `claude` adaptörlerini korur. Yalnızca kullandığınız iletişim kanallarını ekleyin. Örneğin:
+Boş bir `providers` alanı, yerleşik `codex`, `claude` ve `jev` adaptörlerini korur. Yalnızca kullandığınız iletişim kanallarını ekleyin. Örneğin:
 
 ```json
 {
-  "$schema": "https://raw.githubusercontent.com/VerhexIO/xerify/main/schemas/config.schema.json",
+  "$schema": "https://raw.githubusercontent.com/Verhex/xerify/main/schemas/config.schema.json",
   "providers": {
     "cursor": {
       "kind": "cursor",
@@ -94,7 +94,7 @@ Boş bir `providers` alanı, yerleşik `codex` ve `claude` adaptörlerini korur.
 
 `$schema`, yalnızca editör için bir ipucudur; Xerify onu ne indirir ne de çalıştırır. Projeye özel bir kurulumda, çevrimdışı tamamlama için bu değer `../node_modules/xverify-cli/schemas/config.schema.json` ile değiştirilebilir.
 
-Yapılandırma katıdır. command veya CLI adaptörleri üzerinde genel `token`, `secret`, sessiz `defaultModel` ve kimlik bilgisi alanları reddedilir. Doğrudan `openai-api`, `anthropic-api` ve `openai-compatible` adaptörleri yalnızca tam olarak `apiKey` isteğe bağlı alanını kabul eder.
+Yapılandırma katıdır. command veya CLI adaptörleri üzerinde genel `token`, `secret`, sessiz `defaultModel` ve kimlik bilgisi alanları reddedilir. Doğrudan `jev`, `openai-api`, `anthropic-api` ve `openai-compatible` adaptörleri yalnızca tam olarak `apiKey` isteğe bağlı alanını kabul eder.
 
 Önerilen sıralama:
 
@@ -157,3 +157,11 @@ xerify --json health --network
 ## Denetim kaydı sözleşmesi
 
 JSONL denetim kaydı; zaman damgası, command, exit, sağlayıcı/model kökeni, karar, süre, sağlayıcının bildirdiği usage, kırpılma ve türü belirlenmiş hata kategorisini içerir. Promptları, iddiaları, bağlamı, yanıtları, findings'i, ham sağlayıcı yanıtlarını, yetkilendirme verilerini ve kimlik bilgisi yollarını ise bilerek dışarıda bırakır. Yeni POSIX dosyaları `0600` modundadır; symlink veya normal olmayan hedefler reddedilir. Günlükler operasyonel meta veridir — ne bir dökümdür ne de bir kararın doğru olduğunun kanıtıdır.
+
+Jev, varsayılan `jev` adaptörüyle (`typesafe` sağlayıcısı) gelir. `--to jev`, `typesafe:jev-latest` seçer; `--to jev:MODEL_ID` belirli modeli seçer. Jev yalnızca `verify` destekler. Olasılıklar, confidence, dönen model ve politika isteğe bağlı `decision` alanında bulunur. Eşiklerin altında Xerify `unclear` döndürür. Jev açıklama veya kanıt atfı üretmez.
+
+[Jev / 0.3.0](jev.md)
+
+`--timeout 0` veya `limits.timeoutMs: 0` sağlayıcı süre sınırını açıkça kapatır. İptal ve bayt sınırları korunur; varsayılan 120000 ms kalır.
+
+Ortam değişkeni karşılığı `XERIFY_TIMEOUT_MS=0` olur; boş değer reddedilir. Bayt sınırları pozitif kalmalıdır.

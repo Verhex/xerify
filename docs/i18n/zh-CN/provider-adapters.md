@@ -20,15 +20,16 @@ Agent 发起调用，一律记为 `cursor`；直连 Codex/OpenAI 记为 `openai`
 
 ## 内置矩阵
 
-| 适配器类型          | 提供方身份  | 传输方式                      | 鉴权方式                                                        | 结构化验证                                  |
-| ------------------- | ----------- | ----------------------------- | --------------------------------------------------------------- | ------------------------------------------- |
-| `codex`             | `openai`    | 官方 `codex` CLI              | 已登录的 CLI 或 `CODEX_API_KEY`                                 | `codex exec --output-schema`                |
-| `claude`            | `anthropic` | 官方 `claude` CLI             | 已登录的 CLI、`ANTHROPIC_API_KEY`，或 `CLAUDE_CODE_OAUTH_TOKEN` | `claude -p --json-schema`                   |
-| `cursor`            | `cursor`    | 官方 Cursor `agent` CLI       | 已登录的 Cursor 或 `CURSOR_API_KEY`                             | prompt 约定；核心校验                       |
-| `openai-api`        | `openai`    | Responses API                 | 优先读环境变量；可选字面量兜底                                  | `text.format.type=json_schema`，strict 模式 |
-| `anthropic-api`     | `anthropic` | Messages API                  | 优先读环境变量；可选字面量兜底                                  | `output_config.format.type=json_schema`     |
-| `openai-compatible` | 由配置决定  | 兼容 chat-completions 的 HTTP | 可选的环境变量或字面量密钥                                      | `response_format.type=json_schema`          |
-| `command`           | 由配置决定  | 可执行文件 + 参数数组         | 配置好的环境变量白名单                                          | prompt 约定；响应仍由核心校验               |
+| 适配器类型          | 提供方身份  | 传输方式                      | 鉴权方式                                                        | 结构化验证                                   |
+| ------------------- | ----------- | ----------------------------- | --------------------------------------------------------------- | -------------------------------------------- |
+| `codex`             | `openai`    | 官方 `codex` CLI              | 已登录的 CLI 或 `CODEX_API_KEY`                                 | `codex exec --output-schema`                 |
+| `claude`            | `anthropic` | 官方 `claude` CLI             | 已登录的 CLI、`ANTHROPIC_API_KEY`，或 `CLAUDE_CODE_OAUTH_TOKEN` | `claude -p --json-schema`                    |
+| `cursor`            | `cursor`    | 官方 Cursor `agent` CLI       | 已登录的 Cursor 或 `CURSOR_API_KEY`                             | prompt 约定；核心校验                        |
+| `jev`               | `typesafe`  | TypeSafe HTTP API             | `TYPESAFE_API_KEY`                                              | Choice → `confirmed` / `refuted` / `unclear` |
+| `openai-api`        | `openai`    | Responses API                 | 优先读环境变量；可选字面量兜底                                  | `text.format.type=json_schema`，strict 模式  |
+| `anthropic-api`     | `anthropic` | Messages API                  | 优先读环境变量；可选字面量兜底                                  | `output_config.format.type=json_schema`      |
+| `openai-compatible` | 由配置决定  | 兼容 chat-completions 的 HTTP | 可选的环境变量或字面量密钥                                      | `response_format.type=json_schema`           |
+| `command`           | 由配置决定  | 可执行文件 + 参数数组         | 配置好的环境变量白名单                                          | prompt 约定；响应仍由核心校验                |
 
 这些适配器所依据的官方文档分别是 [Codex 非交互模式指南](https://learn.chatgpt.com/docs/non-interactive-mode)、
 [Claude Code CLI 参考](https://code.claude.com/docs/en/cli-reference)、[OpenAI 结构化输出指南](https://developers.openai.com/api/docs/guides/structured-outputs)，
@@ -158,3 +159,17 @@ endpoint 才会被判定为 `local`／`not-required`；一旦 URL 带有 userinf
 
 常规测试从不使用真实的提供方账号。真实调用的 smoke 测试必须显式开启，并且要清楚地当作可能产生费用
 的操作来对待。这些检查对最终用户意味着什么，参见[兼容性与支持边界](compatibility.md)。
+
+Jev 已作为默认 `jev` 适配器集成，提供方身份为 `typesafe`。`--to jev` 选择 `typesafe:jev-latest`；`--to jev:MODEL_ID` 选择具体模型。Jev 仅支持 `verify`。概率、confidence、返回的模型和策略保存在可选的 `decision` 字段中。低于配置阈值时，Xerify 返回 `unclear`。Jev 不生成解释或证据引用。
+
+[Jev / 0.3.0](jev.md)
+
+## Cursor 验证格式
+
+Xerify 调用单独安装的 Cursor Agent CLI `agent`，不会安装 Cursor，也不直接调用 Cursor 模型 API。适配器在临时目录使用 `-p --mode ask --sandbox enabled --output-format json`。JSON 选项只控制 CLI 外层，`result` 仍是自由文本，并非受 schema 约束的判断。即使进程成功且报告 token，也可能得到 `INVALID_PROVIDER_RESPONSE`。[官方输出契约](https://cursor.com/docs/cli/reference/output-format)。
+
+2026-09-18 的合成诊断复现了外层有效、内部为自然语言的情况。CLI 为 `2026.09.15-d2fe57e`，与历史 benchmark 版本不同。现在仅对 `verify` 添加具体 JSON 示例和机器输出提醒。完整 prompt 仍通过 stdin，`ask`/`request` 不变。不从自然语言中提取结论，也不移除 Markdown 围栏。这是提示引导而非原生 schema 强制，`structuredOutput` 仍为 false。提供位置参数 prompt 时 CLI 忽略 stdin，所以 argv 通用指令加 stdin 证据并不可行。
+
+Cursor 已从当前 OpenAI/Anthropic/Jev 比较中排除。改动 prompt 后的小规模诊断独立记录，不替换历史测量。保留严格 schema 验证和适配器回归测试。
+
+改动后，经 Xerify 核心和真实 Cursor 适配器的四项固定在线检查通过：`indirection` → confirmed（22,452 ms）、`sql` → refuted（8,026 ms）、`missing` → unclear（14,592 ms）、`injection` → refuted（11,183 ms），全部 failure null。此前三次诊断分别测试旧 prompt（自然语言）、argv 加 stdin（证据缺失，已放弃）和 JSON 示例候选（有效 SQL 反驳）。这些调用不计入 benchmark。四次成功只验证测试路径，不保证所有输出格式；仍无原生 schema 强制。

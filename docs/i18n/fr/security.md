@@ -8,7 +8,7 @@
 
 N'ouvrez pas de ticket public pour une vulnérabilité suspectée ou un identifiant exposé par accident.
 Utilisez le [signalement privé de vulnérabilités de
-GitHub](https://github.com/VerhexIO/xerify/security/advisories/new). Indiquez la version concernée,
+GitHub](https://github.com/Verhex/xerify/security/advisories/new). Indiquez la version concernée,
 l'impact, les étapes de reproduction et toute mesure d'atténuation suggérée ; omettez les identifiants
 actifs et les charges utiles sensibles issues de production.
 

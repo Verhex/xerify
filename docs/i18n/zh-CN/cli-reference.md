@@ -71,3 +71,9 @@
 
 STDIO 模式下，stdout 专门用于承载协议帧，不能挪作他用。非回环地址的 HTTP 服务，必须同时提供
 `--allow-public` 和一个通过指定环境变量传入的 bearer token。
+
+Jev 已作为默认 `jev` 适配器集成，提供方身份为 `typesafe`。`--to jev` 选择 `typesafe:jev-latest`；`--to jev:MODEL_ID` 选择具体模型。Jev 仅支持 `verify`。概率、confidence、返回的模型和策略保存在可选的 `decision` 字段中。低于配置阈值时，Xerify 返回 `unclear`。Jev 不生成解释或证据引用。
+
+[Jev / 0.3.0](jev.md)
+
+`--timeout 0` 或 `limits.timeoutMs: 0` 显式关闭提供方生命周期时限。取消和字节边界仍有效；默认值保持 120000 ms。

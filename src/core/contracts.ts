@@ -42,7 +42,8 @@ export type DeclaredProviderReference = z.infer<typeof DeclaredProviderReference
 
 export const RequestLimitsSchema = z
   .object({
-    timeoutMs: z.number().int().positive().max(3_600_000),
+    // Zero explicitly disables the lifecycle deadline; cancellation remains supported.
+    timeoutMs: z.number().int().nonnegative().max(3_600_000),
     maxInputBytes: z
       .number()
       .int()
@@ -113,6 +114,40 @@ const EpistemicListSchema = z.array(EpistemicListItemSchema).max(100);
 
 export const VerdictSchema = z.enum(['confirmed', 'refuted', 'unclear']);
 export type Verdict = z.infer<typeof VerdictSchema>;
+
+// Provider-reported probabilities are decision signals, not a guarantee of correctness.
+export const VerdictProbabilitiesSchema = z
+  .object({
+    confirmed: z.number().min(0).max(1),
+    refuted: z.number().min(0).max(1),
+    unclear: z.number().min(0).max(1)
+  })
+  .strict()
+  .refine(
+    (p) => Math.abs(p.confirmed + p.refuted + p.unclear - 1) <= 0.000001,
+    'probabilities must sum to one'
+  );
+
+export const VerificationDecisionSchema = z
+  .object({
+    kind: z.literal('choice'),
+    model: identifierPart,
+    choice: VerdictSchema,
+    probabilities: VerdictProbabilitiesSchema,
+    confidence: z.number().min(0).max(1),
+    policy: z
+      .object({
+        minProbability: z.number().min(0).max(1),
+        minConfidence: z.number().min(0).max(1)
+      })
+      .strict()
+  })
+  .strict()
+  .refine(
+    (d) => d.probabilities[d.choice] === Math.max(...Object.values(d.probabilities)),
+    'choice must have the highest probability'
+  );
+export type VerificationDecision = z.infer<typeof VerificationDecisionSchema>;
 
 export const VerifierPayloadSchema = z
   .object({
@@ -186,7 +221,8 @@ export const VerifyResultSchema = z
     usage: UsageSchema.nullable(),
     durationMs: z.number().int().nonnegative(),
     truncation: TruncationSchema,
-    failure: FailureSchema.nullable()
+    failure: FailureSchema.nullable(),
+    decision: VerificationDecisionSchema.optional()
   })
   .strict();
 export type VerifyResult = z.infer<typeof VerifyResultSchema>;

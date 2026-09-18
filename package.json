@@ -1,19 +1,19 @@
 {
   "name": "xverify-cli",
-  "version": "0.2.0",
-  "description": "Lightweight cross-provider verification for the shell and MCP.",
+  "version": "0.3.0",
+  "description": "Verify before you trust. Cross-provider verification with LLMs and Jev. CLI, library, MCP.",
   "mcpName": "io.github.verhexio/xerify",
   "author": {
     "name": "Verhex",
-    "url": "https://github.com/VerhexIO"
+    "url": "https://github.com/Verhex"
   },
-  "homepage": "https://github.com/VerhexIO/xerify#readme",
+  "homepage": "https://github.com/Verhex/xerify#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/VerhexIO/xerify.git"
+    "url": "git+https://github.com/Verhex/xerify.git"
   },
   "bugs": {
-    "url": "https://github.com/VerhexIO/xerify/issues"
+    "url": "https://github.com/Verhex/xerify/issues"
   },
   "license": "MIT",
   "type": "module",
@@ -45,7 +45,10 @@
     "SECURITY.md",
     "THIRD_PARTY_NOTICES.md",
     "!dist/**/*.js.map",
-    "!dist/**/*.d.ts.map"
+    "!dist/**/*.d.ts.map",
+    "!**/.env",
+    "!**/.env.*",
+    "!**/.env~"
   ],
   "engines": {
     "node": ">=20"
@@ -53,21 +56,23 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "assets:logo": "node scripts/export-logo.mjs",
-    "check": "npm run format:check && npm run docs:links && npm run lint && npm run typecheck && npm test && npm run build",
+    "assets:flow": "node assets/readme/render-verification-flow.mjs",
+    "check": "npm run format:check && npm run secrets:check && npm run docs:links && npm run lint && npm run typecheck && npm test && npm run build",
     "docs:links": "node scripts/verify-doc-links.mjs",
     "generate:schemas": "npm run build && node scripts/export-schemas.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint .",
     "postinstall": "node ./scripts/postinstall.mjs",
-    "prepack": "npm run generate:schemas",
+    "prepack": "npm run generate:schemas && npm run secrets:check",
     "release:audit": "npm run generate:schemas && npm run assets:logo && node scripts/release-audit.mjs",
     "smoke:mcp": "npm run build && node scripts/verify-mcp-inspector.mjs",
     "smoke:live": "npm run build && node scripts/live-provider-smoke.mjs",
     "smoke:install": "node scripts/verify-install.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "secrets:check": "node scripts/check-env-boundaries.mjs"
   },
   "publishConfig": {
     "access": "public",
@@ -92,6 +97,8 @@
   },
   "keywords": [
     "verification",
+    "jev",
+    "typesafe",
     "xverify",
     "ai",
     "cli",

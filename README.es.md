@@ -8,13 +8,13 @@
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/VerhexIO/xerify/main/assets/logos/full-horizontal/xerify-horizontal-light.svg" alt="Xerify" width="360">
+  <img src="https://raw.githubusercontent.com/Verhex/xerify/main/assets/logos/full-horizontal/xerify-horizontal-light.svg" alt="Xerify" width="360">
 </p>
 
-<p align="center"><strong>Pregunta a otro proveedor. Obtén una segunda opinión clara.</strong></p>
+<p align="center"><strong>Verifica antes de confiar.</strong></p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/VerhexIO/xerify/main/assets/readme/xerify-verification-flow.gif" alt="Flujo de Xerify: una afirmación existente del proveedor A pasa por evidencia acotada y la puerta de proveedor diferente, el proveedor B intenta refutarla y Xerify devuelve confirmed, refuted o unclear" width="960">
+  <img src="https://raw.githubusercontent.com/Verhex/xerify/main/assets/readme/xerify-verification-flow.gif?v=0.3.0" alt="Xerify 0.3.0: verificación LLM o decisiones tipadas Jev. Un destino por ejecución; valores ilustrativos." width="960">
 </p>
 
 Xerify es una herramienta de código abierto, orientada al shell, para preguntas y verificaciones
@@ -29,16 +29,13 @@ sí solo y no depende de Deckent. El resultado es una segunda opinión, no una p
 certificación de seguridad ni una garantía de verdad. La salida del proveedor es un dato no
 confiable y nunca se ejecuta.
 
-> **Estado de publicación:** `0.2.0` es una versión pública temprana, distribuida en npm como
-> `xverify-cli`. La CI pública está en verde en Ubuntu, macOS y Windows con Node 20/24, incluyendo
-> la instalación externa y la prueba de humo de MCP Inspector; la misma verificación, la prueba de
-> humo de instalación limpia y la auditoría de release también pasan en WSL2 con Node 24. El
-> contrato de identidad de proveedor de invocación tiene prueba en vivo entre Cursor y OpenAI en
-> ambas direcciones. El tarball publicado de `0.1.0` llegó al registro por fuera del flujo de
-> trabajo de release, así que no lleva ninguna atestación de procedencia de npm; `0.1.1` y las
-> versiones posteriores se publican mediante ese flujo de trabajo, que sí la solicita. Los esquemas públicos, los sobres JSON y los
-> códigos de salida son estables; la superficie de proveedores todavía es pequeña, y la API puede
-> crecer.
+> Xerify 0.3.0 añade decisiones tipadas Jev a la verificación LLM. Una comprobación de campaña y diez escenarios adicionales de Jev en vivo, autorizados por el propietario, coincidieron con lo esperado. Véanse los [resultados](docs/i18n/es/jev-testing.md). Son pruebas de integración, no una medida de precisión general.
+
+Xerify es una capa de verificación independiente del modelo para sistemas de IA: evidencia acotada, otro proveedor de invocación y un resultado tipado. Los verificadores LLM y las decisiones de Jev comparten los contratos de CLI, biblioteca y MCP.
+
+Jev viene como adaptador predeterminado `jev`, con identidad `typesafe`. `--to jev` selecciona `typesafe:jev-latest`; `--to jev:MODEL_ID` selecciona un modelo concreto. Jev solo admite `verify`. Las probabilidades, confidence, el modelo devuelto y la política se conservan en el campo opcional `decision`. Bajo los umbrales, Xerify devuelve `unclear`. Jev no genera explicaciones ni citas.
+
+[Jev setup / 0.3.0](docs/i18n/es/jev.md)
 
 ## Instalación
 
@@ -54,7 +51,7 @@ xerify init
 Como dependencia de desarrollo fijada:
 
 ```sh
-npm install --save-dev --save-exact xverify-cli@0.2.0
+npm install --save-dev --save-exact xverify-cli@0.3.0
 npx xerify --version
 ```
 
@@ -158,7 +155,7 @@ MCP STDIO local con versión fija:
   "mcpServers": {
     "xerify": {
       "command": "npx",
-      "args": ["-y", "--package=xverify-cli@0.2.0", "xerify", "mcp", "stdio"]
+      "args": ["-y", "--package=xverify-cli@0.3.0", "xerify", "mcp", "stdio"]
     }
   }
 }
@@ -187,7 +184,7 @@ nombre.
 
 ## Quién hace Xerify
 
-Xerify está diseñado, creado y mantenido por **[Verhex](https://github.com/VerhexIO)**.
+Xerify está diseñado, creado y mantenido por **[Verhex](https://github.com/Verhex)**.
 
 Xerify se origina en **Deckent**, el sistema operativo agéntico de Verhex, donde pedirle a un
 segundo proveedor que revise una afirmación es una de las capacidades de las que depende el
@@ -206,3 +203,5 @@ producto distinto de Verhex, y no queda cubierto por ella.
 - [Licencia MIT](LICENSE)
 
 Si una traducción contradice el contrato, prevalecen los esquemas y documentos canónicos en inglés.
+
+[Benchmark](docs/i18n/es/benchmark.md) · [0.3.0](docs/i18n/es/launch-0.3.0.md)

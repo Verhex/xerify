@@ -69,7 +69,7 @@ export async function initializeProject(cwd: string): Promise<InitializeProjectR
     await mkdir(paths.archive, { recursive: true, mode: 0o700 });
 
     const config = {
-      $schema: 'https://raw.githubusercontent.com/VerhexIO/xerify/main/schemas/config.schema.json',
+      $schema: 'https://raw.githubusercontent.com/Verhex/xerify/main/schemas/config.schema.json',
       providers: {},
       limits: DEFAULT_LIMITS,
       history: {

@@ -28,6 +28,7 @@ fournisseurs ne vaut donc que ce que vaut cette configuration.
 | `codex`             | `openai`                | CLI `codex` officielle            | connexion CLI existante ou `CODEX_API_KEY`                                 | `codex exec --output-schema`                             |
 | `claude`            | `anthropic`             | CLI `claude` officielle           | connexion CLI existante, `ANTHROPIC_API_KEY`, ou `CLAUDE_CODE_OAUTH_TOKEN` | `claude -p --json-schema`                                |
 | `cursor`            | `cursor`                | CLI `agent` Cursor officielle     | connexion Cursor existante ou `CURSOR_API_KEY`                             | contrat de prompt ; validation par le cœur               |
+| `jev`               | `typesafe`              | TypeSafe HTTP API                 | `TYPESAFE_API_KEY`                                                         | Choice → `confirmed` / `refuted` / `unclear`             |
 | `openai-api`        | `openai`                | API Responses                     | variable d'environnement en priorité ; repli littéral optionnel            | `text.format.type=json_schema`, strict                   |
 | `anthropic-api`     | `anthropic`             | API Messages                      | variable d'environnement en priorité ; repli littéral optionnel            | `output_config.format.type=json_schema`                  |
 | `openai-compatible` | configurée              | HTTP compatible chat-completions  | variable d'environnement ou clé littérale, optionnelles                    | `response_format.type=json_schema`                       |
@@ -194,3 +195,17 @@ signaux aux processus descendants sous POSIX.
 Les tests normaux n'utilisent jamais de compte fournisseur. Un test réel doit être explicitement
 activé et clairement considéré comme potentiellement facturable. Voir [limites de compatibilité et de
 support](compatibility.md) pour l'interprétation de ces vérifications côté utilisateur.
+
+Jev est inclus comme adaptateur par défaut `jev`, avec l’identité `typesafe`. `--to jev` sélectionne `typesafe:jev-latest` ; `--to jev:MODEL_ID` sélectionne un modèle précis. Jev prend uniquement en charge `verify`. Probabilités, confidence, modèle retourné et politique figurent dans le champ facultatif `decision`. Sous les seuils, Xerify renvoie `unclear`. Jev ne génère ni explications ni citations.
+
+[Jev / 0.3.0](jev.md)
+
+## Format de vérification Cursor
+
+Xerify lance le CLI Cursor Agent `agent`, installé séparément ; il n’installe pas Cursor et n’appelle pas directement une API de modèle Cursor. L’adaptateur utilise `-p --mode ask --sandbox enabled --output-format json` dans un répertoire temporaire. JSON concerne l’enveloppe CLI ; `result` reste un texte libre, sans verdict imposé par schéma. Un processus réussi avec usage de tokens peut donc produire `INVALID_PROVIDER_RESPONSE`. [Contrat officiel](https://cursor.com/docs/cli/reference/output-format).
+
+Le diagnostic synthétique du 2026-09-18 a reproduit une enveloppe valide contenant de la prose. La version CLI `2026.09.15-d2fe57e` différait du benchmark historique. L’adaptateur ajoute désormais un exemple JSON concret et un rappel de sortie machine uniquement pour `verify`. Le prompt complet reste sur stdin ; `ask`/`request` sont inchangés. Aucune extraction de verdict depuis la prose ni suppression de clôtures Markdown. C’est un guidage de prompt, pas une contrainte native ; `structuredOutput` reste false. Un prompt positionnel fait ignorer stdin au CLI : une instruction argv générique avec preuve sur stdin ne convient pas.
+
+Cursor est exclu du comparatif actif OpenAI/Anthropic/Jev. Les petits diagnostics après changement de prompt restent séparés des mesures historiques. La validation stricte et les tests de régression de l’adaptateur sont conservés.
+
+Après modification, quatre contrôles réels via le noyau Xerify et l’adaptateur Cursor ont réussi : `indirection` → confirmed (22 452 ms), `sql` → refuted (8 026 ms), `missing` → unclear (14 592 ms), `injection` → refuted (11 183 ms), tous avec failure null. Trois diagnostics préalables comparaient l’ancien prompt (prose), argv plus stdin (preuve absente ; abandonné) et l’exemple JSON (réfutation SQL valide). Aucun ne compte dans le benchmark. Quatre succès valident les chemins testés, pas une garantie générale de format ; la contrainte native manque toujours.

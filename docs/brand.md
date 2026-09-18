@@ -4,11 +4,11 @@ The Xerify mark is a custom composite. Its ink upper `V` begins the `Verify` rea
 emerald mirrored check meets it at the center. Together they form the `X` in `Xerify`. The primary
 line is:
 
-> Ask another provider. Get a clear second opinion.
+> Verify before you trust.
 
 The descriptor is:
 
-> Lightweight cross-provider verification for the shell and MCP.
+> A model-independent verification layer for AI systems.
 
 ## Assets
 
@@ -49,3 +49,29 @@ allowlist and `.npmignore` exclude every brand asset from published tarballs.
 
 The attached-center asymmetric geometry, custom wordmark, and ink/emerald direction were approved by
 the owner on 2026-08-19. Deterministic asset checks remain a release gate for every future change.
+
+## Product narrative
+
+Born as Deckent’s native verification command and layer, Xerify also runs as a standalone
+CLI, library, and MCP server. Its value is bounded evidence, invocation-provider separation,
+consistent verdicts, and inspectable run history across supported verification backends.
+Jev adds typed probabilistic decisions alongside LLM verifiers.
+
+Use “LLM verifiers and typed decision models” when describing 0.3.0. Do not promise automatic
+escalation, ensembles, deterministic proof, independently calibrated accuracy, or speed/cost
+improvements without implementation and measurements. Jev confidence describes a probability
+distribution; it is not the probability that a decision is true. Its adapter supplies no
+generated rationale or evidence citations. The three verdicts and provider separation remain.
+
+## Motion and campaign assets
+
+`npm run assets:flow` renders the existing paper-and-ink visual system with the approved wordmark.
+The 16-second loop shows two separate runs: an LLM review and a Jev typed decision. It never
+represents automatic fallback or two providers called in one run. Jev's illustrative probability
+and confidence are below the default policy, so the displayed result is `unclear`. Values are
+illustrations, not live measurements or accuracy claims.
+
+Use `assets/readme/xerify-verification-flow.gif` for README/social animation,
+`xerify-verification-flow-poster.png` for the static Jev view, and
+`xerify-verification-flow-social.png` for a 1920 × 1080 still. The renderer requires ffmpeg and
+uses the existing paper texture; it does not alter the logo geometry.

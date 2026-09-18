@@ -30,7 +30,7 @@ import {
   type OutputWriter
 } from './output.js';
 
-export const VERSION = '0.2.0';
+export const VERSION = '0.3.0';
 
 export interface CliDependencies {
   cwd: string;
@@ -95,7 +95,13 @@ function optionOverrides(options: { timeout?: number; log?: string }): ConfigOve
 function providerReference(value: string | undefined, name: string) {
   if (!value) throw new XerifyError('INVALID_INPUT', `${name} is required`);
   try {
-    return parseProviderReference(value);
+    const normalized =
+      value.toLowerCase() === 'jev'
+        ? 'typesafe:jev-latest'
+        : value.toLowerCase().startsWith('jev:')
+          ? `typesafe:${value.slice(4)}`
+          : value;
+    return parseProviderReference(normalized);
   } catch (error) {
     throw new XerifyError('INVALID_INPUT', `${name} must use provider:model`, { cause: error });
   }
@@ -195,10 +201,14 @@ export async function runCli(
 
   program
     .name('xerify')
-    .description('Ask another provider. Get a clear second opinion.')
+    .description('Verify before you trust. Model-independent verification for AI systems.')
     .version(VERSION)
     .option('--json', 'write one stable JSON object to stdout')
-    .option('--timeout <milliseconds>', 'provider lifecycle timeout', positiveInteger)
+    .option(
+      '--timeout <milliseconds>',
+      'provider lifecycle timeout; 0 disables the deadline',
+      (value: string) => (value === '0' ? 0 : positiveInteger(value))
+    )
     .option('--log <path>', 'append a secret-safe JSONL audit record')
     .showHelpAfterError()
     .allowExcessArguments(false)
@@ -269,7 +279,10 @@ export async function runCli(
     .command('verify')
     .description('verify a claim with a different provider')
     .requiredOption('--from <provider:model>', 'declared author identity')
-    .requiredOption('--to <provider:model>', 'target provider and verifier model')
+    .requiredOption(
+      '--to <provider:model>',
+      'verifier provider:model, or jev for typesafe:jev-latest'
+    )
     .requiredOption('--claim <claim>', 'claim to evaluate')
     .option('--adapter <id>', 'configured adapter id to use')
     .option('--context-label <label>', 'human-readable label for stdin evidence')

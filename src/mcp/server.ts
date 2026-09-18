@@ -48,7 +48,8 @@ export const CapabilitiesOutputSchema = z
           structuredOutput: z.boolean(),
           reportsUsage: z.boolean(),
           reportsCost: z.boolean(),
-          supportsAbort: z.boolean()
+          supportsAbort: z.boolean(),
+          operations: z.array(z.enum(['ask', 'verify', 'request'])).optional()
         })
         .strict()
     )
@@ -95,7 +96,7 @@ export interface XerifyMcpServerOptions {
 
 export function createXerifyMcpServer(options: XerifyMcpServerOptions): McpServer {
   const server = new McpServer(
-    { name: 'xerify', version: options.version ?? '0.2.0' },
+    { name: 'xerify', version: options.version ?? '0.3.0' },
     { capabilities: { tools: { listChanged: false } } }
   );
 

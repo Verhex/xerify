@@ -80,3 +80,9 @@
 - 公开的请求模式在 author 的来源标识上接受 `declared` 或 `unknown`，但 target 必须是 `declared`；调用方传入的 `observed` 会被拒绝，而 author 为 `unknown` 时又无法通过“不同提供方”的准入规则。
 - 敏感值、原始的 authorization 请求头、令牌片段、凭据路径、prompt/context、回答文本，以及 findings，都不会被 Xerify 放入类型化错误或审计记录。
 - 唯一会把提供方撰写的文本带入类型化错误的字段是 `providerMessage`，它会依照[验证结果](#providermessage)一节所述方式完成脱敏并保持有边界。其中可能出现提供方自己选择打印的路径，但不可能出现凭据。
+
+Jev 已作为默认 `jev` 适配器集成，提供方身份为 `typesafe`。`--to jev` 选择 `typesafe:jev-latest`；`--to jev:MODEL_ID` 选择具体模型。Jev 仅支持 `verify`。概率、confidence、返回的模型和策略保存在可选的 `decision` 字段中。低于配置阈值时，Xerify 返回 `unclear`。Jev 不生成解释或证据引用。
+
+[Jev / 0.3.0](jev.md)
+
+`--timeout 0` 或 `limits.timeoutMs: 0` 显式关闭提供方生命周期时限。取消和字节边界仍有效；默认值保持 120000 ms。

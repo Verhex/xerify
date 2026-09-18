@@ -1,4 +1,4 @@
-import type { RequestLimits, Usage } from '../core/contracts.js';
+import type { RequestLimits, Usage, VerificationDecision } from '../core/contracts.js';
 
 export type AuthKind = 'subscription' | 'api-key' | 'local' | 'unknown';
 export type ProviderTransport = 'command' | 'http';
@@ -16,6 +16,7 @@ export interface ProviderCapabilities {
   // result so the published result schema stays as it is.
   reportsCost: boolean;
   supportsAbort: boolean;
+  operations?: readonly ('ask' | 'verify' | 'request')[];
 }
 
 export interface ProbeInput {
@@ -40,11 +41,13 @@ export interface InvokeInput {
   operation: 'ask' | 'verify' | 'request';
   model: string;
   prompt: string;
+  verification?: { claim: string; context: string };
   limits: RequestLimits;
 }
 
 export interface InvokeResult {
   output: string;
+  decision?: VerificationDecision;
   usage: Usage | null;
   durationMs: number;
   inputTruncated: boolean;

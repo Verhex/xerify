@@ -102,7 +102,7 @@ export async function autoInitializeProject(environment = process.env) {
   await mkdir(path.join(stateDirectory, 'archive'), { recursive: true, mode: 0o700 });
 
   const config = {
-    $schema: 'https://raw.githubusercontent.com/VerhexIO/xerify/main/schemas/config.schema.json',
+    $schema: 'https://raw.githubusercontent.com/Verhex/xerify/main/schemas/config.schema.json',
     providers: {},
     limits: {
       timeoutMs: 120000,

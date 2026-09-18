@@ -76,3 +76,9 @@ esta búsqueda sin necesidad de abrir cada ejecución archivada.
 
 STDIO reserva stdout para los frames del protocolo. El HTTP fuera de loopback exige tanto
 `--allow-public` como un token bearer suministrado mediante una variable de entorno nombrada.
+
+Jev viene como adaptador predeterminado `jev`, con identidad `typesafe`. `--to jev` selecciona `typesafe:jev-latest`; `--to jev:MODEL_ID` selecciona un modelo concreto. Jev solo admite `verify`. Las probabilidades, confidence, el modelo devuelto y la política se conservan en el campo opcional `decision`. Bajo los umbrales, Xerify devuelve `unclear`. Jev no genera explicaciones ni citas.
+
+[Jev / 0.3.0](jev.md)
+
+`--timeout 0` o `limits.timeoutMs: 0` desactiva explícitamente el plazo máximo. Cancelación y límites de bytes siguen activos; predeterminado: 120000 ms.

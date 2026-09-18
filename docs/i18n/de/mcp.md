@@ -52,7 +52,7 @@ Ohne globale Installation kann ein MCP-Host das öffentliche npm-Paket auch dire
   "mcpServers": {
     "xerify": {
       "command": "npx",
-      "args": ["-y", "--package=xverify-cli@0.2.0", "xerify", "mcp", "stdio"]
+      "args": ["-y", "--package=xverify-cli@0.3.0", "xerify", "mcp", "stdio"]
     }
   }
 }
@@ -122,3 +122,7 @@ Details zur Kanalwahl, zum Verhalten von Subscription/API, zum kostenlosen lokal
 evaluierten Cloudflare-Workers-Remote-Pfad stehen unter [Provider und
 Zugangskanäle](channels.md). Dass das Hosting kostenlos ist, macht Provider-Inferenz nicht kostenlos
 und erlaubt keine zentrale Verwahrung lokaler Subscription-Credentials.
+
+Jev ist als Standardadapter `jev` mit Anbieteridentität `typesafe` enthalten. `--to jev` wählt `typesafe:jev-latest`; `--to jev:MODEL_ID` wählt ein bestimmtes Modell. Jev unterstützt nur `verify`. Wahrscheinlichkeiten, Confidence, zurückgegebenes Modell und Richtlinie stehen im optionalen Feld `decision`. Unterhalb der Schwellenwerte liefert Xerify `unclear`. Jev erzeugt keine Erklärungen oder Quellenangaben.
+
+[Jev / 0.3.0](jev.md)

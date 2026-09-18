@@ -13,3 +13,10 @@ design/
 AGENTS.md
 XERIFY.md
 package-lock.json
+
+.env
+.env.*
+**/.env
+**/.env.*
+.env~
+**/.env~

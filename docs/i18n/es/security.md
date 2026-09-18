@@ -8,7 +8,7 @@
 
 No abra un issue público ante una vulnerabilidad sospechada o una credencial expuesta por accidente.
 Use el [reporte privado de vulnerabilidades de
-GitHub](https://github.com/VerhexIO/xerify/security/advisories/new). Incluya la versión afectada, el
+GitHub](https://github.com/Verhex/xerify/security/advisories/new). Incluya la versión afectada, el
 impacto, los pasos de reproducción y cualquier mitigación sugerida; omita credenciales activas y
 payloads sensibles de producción.
 

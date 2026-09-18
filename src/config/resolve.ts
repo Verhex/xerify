@@ -116,10 +116,15 @@ function environmentNumber(
   const raw = env[key];
   if (raw === undefined) return null;
   const value = Number(raw);
-  if (!Number.isSafeInteger(value) || value <= 0) {
-    throw new XerifyError('CONFIG_INVALID', `${key} must be a positive integer`, {
-      details: { field: name, source: 'env' }
-    });
+  const validRange = name === 'timeoutMs' ? value >= 0 : value > 0;
+  if (raw.trim() === '' || !Number.isSafeInteger(value) || !validRange) {
+    throw new XerifyError(
+      'CONFIG_INVALID',
+      `${key} must be a ${name === 'timeoutMs' ? 'nonnegative' : 'positive'} integer`,
+      {
+        details: { field: name, source: 'env' }
+      }
+    );
   }
   return value;
 }

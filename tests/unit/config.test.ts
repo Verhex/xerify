@@ -67,6 +67,22 @@ describe('platform config paths', () => {
 });
 
 describe('config precedence', () => {
+  it('accepts an explicit zero timeout environment override but not blank values or zero byte bounds', async () => {
+    const root = await temporaryDirectory();
+    await expect(
+      resolveConfig({ cwd: root, homeDirectory: root, env: { XERIFY_TIMEOUT_MS: '0' } })
+    ).resolves.toMatchObject({ config: { limits: { timeoutMs: 0 } } });
+    for (const env of [
+      { XERIFY_TIMEOUT_MS: '' },
+      { XERIFY_TIMEOUT_MS: '-1' },
+      { XERIFY_MAX_INPUT_BYTES: '0' },
+      { XERIFY_MAX_OUTPUT_BYTES: '0' }
+    ]) {
+      await expect(resolveConfig({ cwd: root, homeDirectory: root, env })).rejects.toMatchObject({
+        code: 'CONFIG_INVALID'
+      });
+    }
+  });
   it('resolves default < user < project < env < flag and records sources', async () => {
     const root = await temporaryDirectory();
     const project = path.join(root, 'project');

@@ -106,6 +106,28 @@
           {
             "type": "object",
             "properties": {
+              "kind": { "type": "string", "const": "jev" },
+              "provider": { "default": "typesafe", "type": "string", "const": "typesafe" },
+              "endpoint": {
+                "default": "https://api.typesafe.ai/v1/systemone",
+                "type": "string",
+                "format": "uri"
+              },
+              "apiKeyEnvironment": {
+                "default": "TYPESAFE_API_KEY",
+                "type": "string",
+                "pattern": "^[A-Z_][A-Z0-9_]*$"
+              },
+              "apiKey": { "type": "string", "minLength": 1, "maxLength": 16384 },
+              "minProbability": { "default": 0.9, "type": "number", "minimum": 0, "maximum": 1 },
+              "minConfidence": { "default": 0.8, "type": "number", "minimum": 0, "maximum": 1 }
+            },
+            "required": ["kind"],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
               "kind": { "type": "string", "const": "anthropic-api" },
               "provider": { "default": "anthropic", "type": "string", "const": "anthropic" },
               "endpoint": {
@@ -147,7 +169,7 @@
     "limits": {
       "type": "object",
       "properties": {
-        "timeoutMs": { "type": "integer", "exclusiveMinimum": 0, "maximum": 3600000 },
+        "timeoutMs": { "type": "integer", "minimum": 0, "maximum": 3600000 },
         "maxInputBytes": { "type": "integer", "exclusiveMinimum": 0, "maximum": 104857600 },
         "maxOutputBytes": { "type": "integer", "exclusiveMinimum": 0, "maximum": 104857600 }
       },

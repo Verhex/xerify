@@ -113,3 +113,9 @@ Eine Discovery ohne Treffer gilt als erfolgreich. Fehlende Nutzungswerte bleiben
 - Öffentliche Request-Schemas akzeptieren für die Herkunft der Quelle `declared` oder `unknown` und verlangen für das Ziel `declared`. Ein vom Aufrufer angegebenes `observed` wird abgelehnt; bei `unknown` für die Quelle scheitert die Prüfung dann an der Regel für unterschiedliche Provider.
 - Geheimwerte, rohe Autorisierungsheader, Token-Fragmente, Credential-Pfade, Prompt/Kontext, Antworttext und Findings gelangen weder in typisierte Fehler noch in Audit-Einträge.
 - Das einzige Feld, das vom Provider verfassten Text in einen typisierten Fehler bringt, ist `providerMessage`; es wird geschwärzt und begrenzt, wie unter [Verifikationsergebnisse](#providermessage) beschrieben. Ein Pfad, den der Provider selbst ausgegeben hat, kann darin erscheinen; Credentials werden durch die dort aufgeführten Regeln geschwärzt, die Defense in Depth sind, keine Garantie.
+
+Jev ist als Standardadapter `jev` mit Anbieteridentität `typesafe` enthalten. `--to jev` wählt `typesafe:jev-latest`; `--to jev:MODEL_ID` wählt ein bestimmtes Modell. Jev unterstützt nur `verify`. Wahrscheinlichkeiten, Confidence, zurückgegebenes Modell und Richtlinie stehen im optionalen Feld `decision`. Unterhalb der Schwellenwerte liefert Xerify `unclear`. Jev erzeugt keine Erklärungen oder Quellenangaben.
+
+[Jev / 0.3.0](jev.md)
+
+`--timeout 0` oder `limits.timeoutMs: 0` deaktiviert ausdrücklich die Laufzeitgrenze. Abbruch und Bytegrenzen bleiben aktiv; Standard bleibt 120000 ms.

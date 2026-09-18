@@ -71,3 +71,7 @@ STDIO 的 stdout 专门留给 MCP 帧使用。Streamable HTTP 默认只走回环
 命令结果的决策及其理由，记录在
 [ADR 0001](../../decisions/0001-command-outcomes.md) 中。调用提供方身份的判定规则，由
 [ADR 0002](../../decisions/0002-invocation-provider-identity.md) 固定下来。
+
+Jev 已作为默认 `jev` 适配器集成，提供方身份为 `typesafe`。`--to jev` 选择 `typesafe:jev-latest`；`--to jev:MODEL_ID` 选择具体模型。Jev 仅支持 `verify`。概率、confidence、返回的模型和策略保存在可选的 `decision` 字段中。低于配置阈值时，Xerify 返回 `unclear`。Jev 不生成解释或证据引用。
+
+[Jev / 0.3.0](jev.md)

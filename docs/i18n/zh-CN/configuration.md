@@ -40,7 +40,7 @@ npx --yes --package=xverify-cli@latest xerify init
 
 ```json
 {
-  "$schema": "https://raw.githubusercontent.com/VerhexIO/xerify/main/schemas/config.schema.json",
+  "$schema": "https://raw.githubusercontent.com/Verhex/xerify/main/schemas/config.schema.json",
   "providers": {},
   "limits": {
     "timeoutMs": 120000,
@@ -61,11 +61,11 @@ npx --yes --package=xverify-cli@latest xerify init
 
 运行历史路径同样相对发现到的项目根目录解析。`captureInput` 可取 `full`、`metadata` 或 `none`；`captureOutput` 可取 `normalized`、`metadata` 或 `none`。默认的透明模式是为了让本地操作一目了然。在处理客户数据、专有源码或其他不能落盘保留的内容之前，请切换到仅元数据模式。活动目录和归档目录必须互不重叠：不能相同，也不能互相嵌套。改动任一路径都会开启新的序列命名空间。具体文件与生命周期命令见[本地运行历史](run-history.md)。
 
-`providers` 留空时，内置的 `codex` 和 `claude` 适配器仍然可用。只需要按需添加实际会用到的传输方式，例如：
+`providers` 留空时，内置的 `codex`、`claude` 和 `jev` 适配器仍然可用。只需要按需添加实际会用到的传输方式，例如：
 
 ```json
 {
-  "$schema": "https://raw.githubusercontent.com/VerhexIO/xerify/main/schemas/config.schema.json",
+  "$schema": "https://raw.githubusercontent.com/Verhex/xerify/main/schemas/config.schema.json",
   "providers": {
     "cursor": {
       "kind": "cursor",
@@ -94,7 +94,7 @@ npx --yes --package=xverify-cli@latest xerify init
 
 `$schema` 只是给编辑器看的提示，Xerify 本身不会拉取或执行它。项目本地安装可以把它换成 `../node_modules/xverify-cli/schemas/config.schema.json`，以便离线补全。
 
-配置校验很严格：command 或 CLI 类适配器上出现通用的 `token`、`secret`、隐性的 `defaultModel` 等凭据字段，一律会被拒绝。只有直连的 `openai-api`、`anthropic-api`、`openai-compatible` 适配器才接受可选字段 `apiKey`，且字段名必须精确匹配。
+配置校验很严格：command 或 CLI 类适配器上出现通用的 `token`、`secret`、隐性的 `defaultModel` 等凭据字段，一律会被拒绝。只有直连的 `jev`、`openai-api`、`anthropic-api`、`openai-compatible` 适配器才接受可选字段 `apiKey`，且字段名必须精确匹配。
 
 推荐的优先顺序是：
 
@@ -157,3 +157,11 @@ xerify --json health --network
 ## 审计日志约定
 
 JSONL 审计日志记录时间戳、命令、退出结果、提供方/模型来源、裁定、耗时、提供方报告的用量、截断情况，以及分类后的失败类型。它刻意不记录 prompt、主张、上下文、回答、发现、提供方的原始响应、授权数据和凭据路径。POSIX 系统上新建的文件权限固定为 `0600`；符号链接或非常规文件目标会被拒绝。这些日志只是运维元数据，既不是完整记录，也不能证明某个裁定就是正确的。
+
+Jev 已作为默认 `jev` 适配器集成，提供方身份为 `typesafe`。`--to jev` 选择 `typesafe:jev-latest`；`--to jev:MODEL_ID` 选择具体模型。Jev 仅支持 `verify`。概率、confidence、返回的模型和策略保存在可选的 `decision` 字段中。低于配置阈值时，Xerify 返回 `unclear`。Jev 不生成解释或证据引用。
+
+[Jev / 0.3.0](jev.md)
+
+`--timeout 0` 或 `limits.timeoutMs: 0` 显式关闭提供方生命周期时限。取消和字节边界仍有效；默认值保持 120000 ms。
+
+环境变量等价设置为 `XERIFY_TIMEOUT_MS=0`；拒绝空值。字节边界必须为正。

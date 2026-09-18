@@ -28,6 +28,7 @@ tan sólida como lo sea esa configuración.
 | `codex`             | `openai`               | CLI oficial `codex`                  | login existente de la CLI o `CODEX_API_KEY`                                 | `codex exec --output-schema`                                     |
 | `claude`            | `anthropic`            | CLI oficial `claude`                 | login existente de la CLI, `ANTHROPIC_API_KEY`, o `CLAUDE_CODE_OAUTH_TOKEN` | `claude -p --json-schema`                                        |
 | `cursor`            | `cursor`               | CLI oficial `agent` de Cursor        | login existente de Cursor o `CURSOR_API_KEY`                                | contrato en el prompt; validación en el núcleo                   |
+| `jev`               | `typesafe`             | TypeSafe HTTP API                    | `TYPESAFE_API_KEY`                                                          | Choice → `confirmed` / `refuted` / `unclear`                     |
 | `openai-api`        | `openai`               | Responses API                        | primero el entorno; con respaldo literal opcional                           | `text.format.type=json_schema`, estricto                         |
 | `anthropic-api`     | `anthropic`            | Messages API                         | primero el entorno; con respaldo literal opcional                           | `output_config.format.type=json_schema`                          |
 | `openai-compatible` | configurada            | HTTP compatible con chat-completions | entorno opcional o clave literal                                            | `response_format.type=json_schema`                               |
@@ -191,3 +192,17 @@ Las pruebas normales nunca usan una cuenta de proveedor. Una prueba en vivo debe
 forma explícita, y tratarse con claridad como potencialmente facturable. Consulte [los límites de
 compatibilidad y soporte](compatibility.md) para la interpretación de estas comprobaciones de cara
 al usuario.
+
+Jev viene como adaptador predeterminado `jev`, con identidad `typesafe`. `--to jev` selecciona `typesafe:jev-latest`; `--to jev:MODEL_ID` selecciona un modelo concreto. Jev solo admite `verify`. Las probabilidades, confidence, el modelo devuelto y la política se conservan en el campo opcional `decision`. Bajo los umbrales, Xerify devuelve `unclear`. Jev no genera explicaciones ni citas.
+
+[Jev / 0.3.0](jev.md)
+
+## Formato de verificación Cursor
+
+Xerify ejecuta el CLI Cursor Agent `agent`, instalado por separado; no instala Cursor ni llama directamente a una API de modelos Cursor. Usa `-p --mode ask --sandbox enabled --output-format json` en un directorio temporal. JSON describe el contenedor CLI; `result` sigue siendo texto libre, no un veredicto restringido por esquema. Un proceso exitoso con tokens puede producir `INVALID_PROVIDER_RESPONSE`. [Contrato oficial](https://cursor.com/docs/cli/reference/output-format).
+
+El diagnóstico sintético del 2026-09-18 reprodujo un contenedor válido con prosa dentro. La versión CLI `2026.09.15-d2fe57e` difería del benchmark histórico. El adaptador ahora añade un ejemplo JSON concreto y un recordatorio de salida para máquinas solo en `verify`. El prompt completo sigue por stdin; `ask`/`request` no cambian. No extrae veredictos de prosa ni elimina cercas Markdown. Es orientación del prompt, no imposición nativa; `structuredOutput` sigue false. Si hay prompt posicional, el CLI ignora stdin: instrucciones argv genéricas con evidencia en stdin no son una solución.
+
+Cursor queda fuera del comparativo activo OpenAI/Anthropic/Jev. Los pequeños diagnósticos tras cambiar el prompt se documentan aparte de las medidas históricas. Se conservan la validación estricta y los tests de regresión del adaptador.
+
+Tras el cambio pasaron cuatro controles reales mediante el núcleo Xerify y el adaptador Cursor: `indirection` → confirmed (22.452 ms), `sql` → refuted (8.026 ms), `missing` → unclear (14.592 ms), `injection` → refuted (11.183 ms), todos con failure null. Tres diagnósticos previos compararon el prompt anterior (prosa), argv más stdin (faltó evidencia; descartado) y el ejemplo JSON (refutación SQL válida). No entran en el benchmark. Cuatro éxitos confirman los caminos probados, no una garantía universal de formato; sigue sin imposición nativa de esquema.

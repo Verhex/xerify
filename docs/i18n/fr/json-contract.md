@@ -114,3 +114,9 @@ Une découverte sans aucun résultat reste un succès. Les valeurs d'usage absen
 - Les schémas de requête publics acceptent une provenance d'auteur `declared` ou `unknown`, et exigent une cible `declared`. Ils rejettent tout `observed` fourni par l'appelant ; une provenance d'auteur `unknown` échoue alors la règle d'admission « fournisseurs différents ».
 - Les valeurs secrètes, les en-têtes d'autorisation bruts, les fragments de jeton, les chemins d'identifiants, le prompt/contexte, le texte de réponse et les résultats détaillés ne sont jamais placés par Xerify dans les erreurs typées ni dans les journaux d'audit.
 - Le seul champ qui fait entrer du texte rédigé par le fournisseur dans une erreur typée est `providerMessage`, qui est masqué et borné comme décrit dans [Résultats de vérification](#providermessage). Un chemin que le fournisseur a lui-même imprimé peut y apparaître ; les identifiants y sont masqués par les règles qui y sont énumérées, lesquelles relèvent de la défense en profondeur plutôt que d'une garantie.
+
+Jev est inclus comme adaptateur par défaut `jev`, avec l’identité `typesafe`. `--to jev` sélectionne `typesafe:jev-latest` ; `--to jev:MODEL_ID` sélectionne un modèle précis. Jev prend uniquement en charge `verify`. Probabilités, confidence, modèle retourné et politique figurent dans le champ facultatif `decision`. Sous les seuils, Xerify renvoie `unclear`. Jev ne génère ni explications ni citations.
+
+[Jev / 0.3.0](jev.md)
+
+`--timeout 0` ou `limits.timeoutMs: 0` désactive explicitement le délai maximal. Annulation et limites en octets restent actives ; défaut : 120000 ms.

@@ -17,6 +17,7 @@ export * from './providers/contract.js';
 export * from './providers/codex.js';
 export * from './providers/cursor.js';
 export * from './providers/factory.js';
+export * from './providers/jev.js';
 export * from './providers/anthropic-api.js';
 export * from './providers/openai-api.js';
 export * from './providers/openai-compatible.js';

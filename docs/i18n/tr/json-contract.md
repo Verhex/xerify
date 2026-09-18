@@ -99,3 +99,9 @@ Sıfır eşleşmeli bir keşif işlemi de başarılı sayılır. Eksik usage de�
 - Genel istek şemaları, yazar kökeni için `declared` ya da `unknown` değerini kabul eder ve hedef için `declared` değerini zorunlu kılar. Çağıran tarafından gönderilen `observed` değeri reddedilir; yazar kökeni `unknown` olduğunda farklı-sağlayıcı kabul kuralı da başarısız olur.
 - Gizli değerler, ham yetkilendirme başlıkları, token parçaları, kimlik bilgisi yolları, prompt/bağlam, yanıt metni ve findings; Xerify tarafından türü belirlenmiş hatalara veya denetim kayıtlarına asla yerleştirilmez.
 - Türü belirlenmiş bir hataya sağlayıcı tarafından yazılmış metni taşıyan tek alan `providerMessage`'dır; bu alanın nasıl `[REDACTED]` uygulanarak sınırlandırıldığı [Doğrulama sonuçları](#providermessage) başlığı altında anlatılır. Sağlayıcının kendisinin yazdırdığı bir dosya yolu orada görünebilir; bir kimlik bilgisi görünemez.
+
+Jev, varsayılan `jev` adaptörüyle (`typesafe` sağlayıcısı) gelir. `--to jev`, `typesafe:jev-latest` seçer; `--to jev:MODEL_ID` belirli modeli seçer. Jev yalnızca `verify` destekler. Olasılıklar, confidence, dönen model ve politika isteğe bağlı `decision` alanında bulunur. Eşiklerin altında Xerify `unclear` döndürür. Jev açıklama veya kanıt atfı üretmez.
+
+[Jev / 0.3.0](jev.md)
+
+`--timeout 0` veya `limits.timeoutMs: 0` sağlayıcı süre sınırını açıkça kapatır. İptal ve bayt sınırları korunur; varsayılan 120000 ms kalır.

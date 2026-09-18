@@ -19,3 +19,9 @@ assets/logos/review/
 *.log
 AGENTS.md
 XERIFY.md
+
+# Nested dotenv files and editor backups stay local.
+**/.env
+**/.env.*
+.env~
+**/.env~

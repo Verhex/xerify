@@ -21,6 +21,9 @@ const PAGES: ReadonlyArray<readonly [string, string]> = [
   ['json-contract.md', 'docs/json-contract.md'],
   ['run-history.md', 'docs/run-history.md'],
   ['mcp.md', 'docs/mcp.md'],
+  ['jev.md', 'docs/jev.md'],
+  ['jev-testing.md', 'docs/jev-testing.md'],
+  ['benchmark.md', 'docs/benchmark.md'],
   ['compatibility.md', 'docs/compatibility.md'],
   ['architecture.md', 'docs/architecture.md'],
   ['security.md', 'SECURITY.md'],
@@ -67,6 +70,22 @@ function fences(markdown: string): number {
 }
 
 describe('localized documentation', () => {
+  it('keeps new Jev and benchmark commands identical and includes localized campaign assets', () => {
+    for (const language of LANGUAGES) {
+      for (const page of ['jev.md', 'jev-testing.md', 'benchmark.md']) {
+        const blocks = (text: string) => text.match(/```[\s\S]*?```/g) ?? [];
+        expect(blocks(read(`docs/i18n/${language}/${page}`))).toEqual(blocks(read(`docs/${page}`)));
+      }
+      const campaign = read(`docs/i18n/${language}/launch-0.3.0.md`);
+      for (const asset of [
+        'xerify-verification-flow.gif',
+        'xerify-verification-flow-poster.png',
+        'xerify-verification-flow-social.png',
+        'xerify-verification-flow-llm.png'
+      ])
+        expect(campaign).toContain(asset);
+    }
+  });
   it('publishes every consumer page in every supported language', () => {
     for (const language of LANGUAGES) {
       for (const [page] of PAGES) {

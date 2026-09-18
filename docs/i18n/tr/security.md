@@ -6,7 +6,7 @@
 
 ## Bildirim
 
-Şüphelenilen bir güvenlik açığı veya yanlışlıkla açığa çıkmış bir kimlik bilgisi için genel bir issue açmayın. [GitHub özel güvenlik açığı bildirimini](https://github.com/VerhexIO/xerify/security/advisories/new) kullanın. Etkilenen sürümü, etkiyi, yeniden üretim adımlarını ve varsa önerilen bir azaltma önlemini ekleyin; canlı kimlik bilgilerini ve hassas üretim yüklerini dahil etmeyin.
+Şüphelenilen bir güvenlik açığı veya yanlışlıkla açığa çıkmış bir kimlik bilgisi için genel bir issue açmayın. [GitHub özel güvenlik açığı bildirimini](https://github.com/Verhex/xerify/security/advisories/new) kullanın. Etkilenen sürümü, etkiyi, yeniden üretim adımlarını ve varsa önerilen bir azaltma önlemini ekleyin; canlı kimlik bilgilerini ve hassas üretim yüklerini dahil etmeyin.
 
 İlk imzalı sürümden önce hiçbir sürüm genel olarak desteklenmez. Yayından sonra en son küçük sürüm hattı güvenlik düzeltmeleri alacaktır; destek tablosu burada güncellenecektir.
 

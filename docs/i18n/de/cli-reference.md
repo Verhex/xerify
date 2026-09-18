@@ -76,3 +76,9 @@ wahrscheinliche Treffer erkennen können, bevor ein vollständiger Datensatz ge�
 
 STDIO reserviert stdout für Protokoll-Frames. Nicht-Loopback-HTTP verlangt sowohl `--allow-public`
 als auch ein Bearer-Token, das über eine benannte Umgebungsvariable übergeben wird.
+
+Jev ist als Standardadapter `jev` mit Anbieteridentität `typesafe` enthalten. `--to jev` wählt `typesafe:jev-latest`; `--to jev:MODEL_ID` wählt ein bestimmtes Modell. Jev unterstützt nur `verify`. Wahrscheinlichkeiten, Confidence, zurückgegebenes Modell und Richtlinie stehen im optionalen Feld `decision`. Unterhalb der Schwellenwerte liefert Xerify `unclear`. Jev erzeugt keine Erklärungen oder Quellenangaben.
+
+[Jev / 0.3.0](jev.md)
+
+`--timeout 0` oder `limits.timeoutMs: 0` deaktiviert ausdrücklich die Laufzeitgrenze. Abbruch und Bytegrenzen bleiben aktiv; Standard bleibt 120000 ms.

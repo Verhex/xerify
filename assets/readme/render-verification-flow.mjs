@@ -21,7 +21,7 @@ const icon = readFileSync(
 
 const width = 960;
 const height = 540;
-const durationSeconds = 8;
+const durationSeconds = 16;
 const framesPerSecond = 10;
 const frameCount = durationSeconds * framesPerSecond;
 const ink = '#0a0a0a';
@@ -46,6 +46,12 @@ function fadeWindow(time, enterStart, enterEnd, exitStart, exitEnd) {
 }
 
 function createSvg(time) {
+  const jev = time >= 8;
+  time %= 8;
+  const resultColor = jev ? '#595a54' : signalRed;
+  const target = jev ? 'TYPESAFE / JEV' : 'ANTHROPIC';
+  const targetDetail = jev ? 'TYPED DECISION' : 'LLM VERIFIER';
+  const verdict = jev ? 'UNCLEAR' : 'REFUTED';
   const globalOpacity = fadeWindow(time, 0.05, 0.55, 7.5, 7.95);
   const documentOpacity = globalOpacity * smoothstep(0.65, 1.05, time);
   const documentProgress = smoothstep(1.15, 4.35, time);
@@ -76,24 +82,24 @@ function createSvg(time) {
     <g opacity="${globalOpacity.toFixed(3)}" clip-path="url(#canvas)">
       <image href="data:image/svg+xml;base64,${wordmark}" x="42" y="38" width="142" height="62"/>
       <text x="704" y="54" fill="${ink}" font-family="Ubuntu Sans Mono, monospace" font-size="8.5"
-        font-weight="600" letter-spacing="1.35">FIELD NOTE / 001</text>
+        font-weight="600" letter-spacing="1.35">${jev ? 'v0.3.0 / JEV DECISION' : 'v0.3.0 / LLM VERIFIER'}</text>
       <text x="704" y="73" fill="#6d6c65" font-family="Ubuntu Sans Mono, monospace" font-size="8.5"
-        font-weight="500" letter-spacing="0.9">CROSS-PROVIDER VERIFICATION</text>
+        font-weight="500" letter-spacing="0.9">ILLUSTRATIVE VERIFICATION FLOW</text>
       <line x1="42" y1="104" x2="918" y2="104" stroke="${ink}" stroke-width="1"/>
 
       <text x="42" y="137" fill="${emerald}" font-family="Ubuntu Sans Mono, monospace" font-size="9"
-        font-weight="700" letter-spacing="1.65">A DIFFERENT PROVIDER</text>
-      <text x="42" y="199" fill="${ink}" font-family="Ubuntu Sans, Arial, sans-serif" font-size="53"
-        font-weight="750" letter-spacing="-1.7">READS</text>
-      <text x="42" y="253" fill="${ink}" font-family="Ubuntu Sans, Arial, sans-serif" font-size="53"
-        font-weight="750" letter-spacing="-1.7">IT AGAIN.</text>
+        font-weight="700" letter-spacing="1.65">VERIFY BEFORE YOU TRUST</text>
+      <text x="42" y="199" fill="${ink}" font-family="Ubuntu Sans, Arial, sans-serif" font-size="30"
+        font-weight="750" letter-spacing="-0.7">VERIFY BEFORE</text>
+      <text x="42" y="253" fill="${ink}" font-family="Ubuntu Sans, Arial, sans-serif" font-size="41"
+        font-weight="750" letter-spacing="-1.2">YOU TRUST.</text>
       <line x1="42" y1="280" x2="288" y2="280" stroke="${ink}" stroke-width="1"/>
       <text x="42" y="309" fill="#3f403b" font-family="Ubuntu Sans, Arial, sans-serif" font-size="12.5"
         font-weight="500">One bounded claim.</text>
       <text x="42" y="332" fill="#3f403b" font-family="Ubuntu Sans, Arial, sans-serif" font-size="12.5"
-        font-weight="500">One different target.</text>
+        font-weight="500">${jev ? 'Jev: typed probabilities.' : 'LLM: a reasoned review.'}</text>
       <text x="42" y="355" fill="#3f403b" font-family="Ubuntu Sans, Arial, sans-serif" font-size="12.5"
-        font-weight="500">One typed second opinion.</text>
+        font-weight="500">One typed verdict.</text>
       <text x="42" y="399" fill="#77766e" font-family="Ubuntu Sans Mono, monospace" font-size="8.5"
         font-weight="600" letter-spacing="1">POSSIBLE OUTCOMES</text>
       <text x="42" y="423" fill="${emerald}" font-family="Ubuntu Sans Mono, monospace" font-size="9.5"
@@ -121,23 +127,23 @@ function createSvg(time) {
       <text x="672" y="211" fill="${ink}" font-family="Ubuntu Sans, Arial, sans-serif" font-size="76"
         font-weight="700" letter-spacing="-3">B</text>
       <text x="742" y="183" fill="${ink}" font-family="Ubuntu Sans, Arial, sans-serif" font-size="11"
-        font-weight="700" letter-spacing="0.5">ANTHROPIC</text>
+        font-weight="700" letter-spacing="0.5">${target}</text>
       <text x="742" y="203" fill="#77766e" font-family="Ubuntu Sans Mono, monospace" font-size="8"
-        font-weight="600" letter-spacing="0.7">ATTEMPT FALSIFICATION</text>
+        font-weight="600" letter-spacing="0.7">${targetDetail}</text>
 
       <line x1="366" y1="378" x2="896" y2="378" stroke="#a9a79e" stroke-width="1"/>
       <circle cx="378" cy="378" r="4" fill="${ink}"/>
       <circle cx="600" cy="378" r="4" fill="${emerald}"/>
-      <circle cx="884" cy="378" r="4" fill="${reviewProgress > 0.4 ? signalRed : '#a9a79e'}"/>
+      <circle cx="884" cy="378" r="4" fill="${reviewProgress > 0.4 ? resultColor : '#a9a79e'}"/>
       <text x="366" y="401" fill="#77766e" font-family="Ubuntu Sans Mono, monospace" font-size="8"
         font-weight="600" letter-spacing="0.7">EXISTING CLAIM</text>
       <text x="565" y="401" fill="${emerald}" font-family="Ubuntu Sans Mono, monospace" font-size="8"
         font-weight="700" letter-spacing="0.7">XERIFY</text>
       <text x="826" y="401" fill="#77766e" font-family="Ubuntu Sans Mono, monospace" font-size="8"
-        font-weight="600" letter-spacing="0.7">SECOND OPINION</text>
+        font-weight="600" letter-spacing="0.7">TYPED VERDICT</text>
 
       <text x="366" y="477" fill="#77766e" font-family="Ubuntu Sans Mono, monospace" font-size="8"
-        font-weight="600" letter-spacing="1">ONLY PROVIDER B IS INVOKED</text>
+        font-weight="600" letter-spacing="1">ONE TARGET PER RUN / CLI + LIBRARY + MCP</text>
       <text x="819" y="477" fill="${ink}" font-family="Ubuntu Sans Mono, monospace" font-size="8"
         font-weight="700" letter-spacing="0.8">A → XERIFY → B</text>
     </g>
@@ -149,12 +155,12 @@ function createSvg(time) {
       <text x="22" y="24" fill="#77766e" font-family="Ubuntu Sans Mono, monospace" font-size="7.8"
         font-weight="700" letter-spacing="1.1">CLAIM / A</text>
       <text x="22" y="55" fill="${ink}" font-family="Ubuntu Sans, Arial, sans-serif" font-size="17"
-        font-weight="650">“This change</text>
+        font-weight="650">“Email stays</text>
       <text x="22" y="79" fill="${ink}" font-family="Ubuntu Sans, Arial, sans-serif" font-size="17"
-        font-weight="650">is safe.”</text>
+        font-weight="650">nullable.”</text>
       <text x="22" y="99" fill="#8a8981" font-family="Ubuntu Sans Mono, monospace" font-size="7.2"
         font-weight="600" letter-spacing="0.6">BOUNDED EVIDENCE</text>
-      <path d="M69 83 C87 78 111 86 146 80" fill="none" stroke="${signalRed}" stroke-width="2.2"
+      <path d="M69 83 C87 78 111 86 146 80" fill="none" stroke="${resultColor}" stroke-width="2.2"
         stroke-linecap="round" stroke-dasharray="77" stroke-dashoffset="${(77 - proofLength).toFixed(2)}"
         opacity="${reviewProgress.toFixed(3)}"/>
     </g>
@@ -168,7 +174,7 @@ function createSvg(time) {
         font-weight="700" letter-spacing="0.65">BOUND</text>
       <rect x="571" y="251" width="5" height="5" fill="${gateProgress > 0.52 ? '#10b981' : '#555650'}"/>
       <text x="585" y="257" fill="#ffffff" font-family="Ubuntu Sans Mono, monospace" font-size="7.7"
-        font-weight="700" letter-spacing="0.65">ROUTE</text>
+        font-weight="700" letter-spacing="0.65">CHECK</text>
       <rect x="571" y="280" width="5" height="5" fill="${returnProgress > 0.2 ? '#10b981' : '#555650'}"/>
       <text x="585" y="286" fill="#ffffff" font-family="Ubuntu Sans Mono, monospace" font-size="7.7"
         font-weight="700" letter-spacing="0.65">RETURN</text>
@@ -182,14 +188,14 @@ function createSvg(time) {
     <g opacity="${(globalOpacity * resultProgress).toFixed(3)}"
       transform="translate(744 438) rotate(-2) scale(${stampScale.toFixed(3)}) translate(-744 -438)">
       <rect x="682" y="414" width="124" height="48" fill="${paperWhite}" fill-opacity="0.94"
-        stroke="${signalRed}" stroke-width="2"/>
-      <rect x="687" y="419" width="114" height="38" fill="none" stroke="${signalRed}" stroke-width="0.8"/>
-      <text x="698" y="446" fill="${signalRed}" font-family="Ubuntu Sans Mono, monospace" font-size="17"
-        font-weight="700" letter-spacing="1.3">REFUTED</text>
+        stroke="${resultColor}" stroke-width="2"/>
+      <rect x="687" y="419" width="114" height="38" fill="none" stroke="${resultColor}" stroke-width="0.8"/>
+      <text x="698" y="446" fill="${resultColor}" font-family="Ubuntu Sans Mono, monospace" font-size="17"
+        font-weight="700" letter-spacing="1.3">${verdict}</text>
       <text x="820" y="430" fill="${ink}" font-family="Ubuntu Sans Mono, monospace" font-size="7.4"
-        font-weight="700" letter-spacing="0.5">COUNTEREXAMPLE</text>
+        font-weight="700" letter-spacing="0.5">${jev ? 'P(refuted) 0.78' : 'COUNTEREXAMPLE'}</text>
       <text x="820" y="443" fill="${ink}" font-family="Ubuntu Sans Mono, monospace" font-size="7.4"
-        font-weight="700" letter-spacing="0.5">FOUND</text>
+        font-weight="700" letter-spacing="0.5">${jev ? 'confidence 0.62' : 'FOUND'}</text>
     </g>
   </svg>`;
 }
@@ -254,7 +260,9 @@ try {
     { stdio: 'inherit' }
   );
 
-  renderPng(createSvg(6.25), resolve(assetDirectory, 'xerify-verification-flow-poster.png'), 1200);
+  renderPng(createSvg(14.25), resolve(assetDirectory, 'xerify-verification-flow-poster.png'), 1200);
+  renderPng(createSvg(6.25), resolve(assetDirectory, 'xerify-verification-flow-llm.png'), 1200);
+  renderPng(createSvg(14.25), resolve(assetDirectory, 'xerify-verification-flow-social.png'), 1920);
 } finally {
   rmSync(temporaryDirectory, { recursive: true, force: true });
 }

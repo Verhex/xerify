@@ -58,11 +58,14 @@ export async function runProcess(input: ProcessInput, signal: AbortSignal): Prom
       );
     };
 
-    const timeout = setTimeout(() => {
-      timedOut = true;
-      terminate();
-    }, input.timeoutMs);
-    timeout.unref();
+    const timeout =
+      input.timeoutMs === 0
+        ? undefined
+        : setTimeout(() => {
+            timedOut = true;
+            terminate();
+          }, input.timeoutMs);
+    timeout?.unref();
 
     const abort = (): void => {
       cancelled = true;

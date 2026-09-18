@@ -7,6 +7,7 @@ on:
       - 'site/**'
       - 'assets/readme/xerify-verification-flow.gif'
       - '.github/workflows/pages.yml'
+      - 'scripts/check-env-boundaries.mjs'
   workflow_dispatch:
 
 permissions:
@@ -36,6 +37,8 @@ jobs:
           cp assets/logos/icon-only/xerify-icon-32.svg _site/favicon.svg
           test -f _site/index.html
           test -f _site/xerify-verification-flow.gif
+      - name: Reject credentials in site output
+        run: node scripts/check-env-boundaries.mjs --site _site
       - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
       - uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4.0.0
         with:

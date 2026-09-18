@@ -8,13 +8,13 @@
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/VerhexIO/xerify/main/assets/logos/full-horizontal/xerify-horizontal-light.svg" alt="Xerify" width="360">
+  <img src="https://raw.githubusercontent.com/Verhex/xerify/main/assets/logos/full-horizontal/xerify-horizontal-light.svg" alt="Xerify" width="360">
 </p>
 
-<p align="center"><strong>Frage einen anderen Provider. Erhalte eine klare Zweitmeinung.</strong></p>
+<p align="center"><strong>Prüfen, bevor du vertraust.</strong></p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/VerhexIO/xerify/main/assets/readme/xerify-verification-flow.gif" alt="Xerify-Ablauf: Eine bestehende Behauptung von Provider A durchläuft begrenzte Evidenz und das Andere-Provider-Gate, Provider B versucht die Falsifikation, und Xerify liefert confirmed, refuted oder unclear" width="960">
+  <img src="https://raw.githubusercontent.com/Verhex/xerify/main/assets/readme/xerify-verification-flow.gif?v=0.3.0" alt="Xerify 0.3.0: LLM-Verifikation oder typisierte Jev-Entscheidungen. Ein Ziel pro Lauf; illustrative Werte." width="960">
 </p>
 
 Xerify ist ein Shell-orientiertes Open-Source-Werkzeug für begrenzte, providerübergreifende Fragen
@@ -29,15 +29,13 @@ läuft für sich allein und hat keine Abhängigkeit von Deckent. Das Ergebnis is
 kein formaler Beweis, kein Sicherheitszertifikat und keine Wahrheitsgarantie. Provider-Ausgaben
 sind nicht vertrauenswürdige Daten und werden niemals ausgeführt.
 
-> **Release-Status:** `0.2.0` ist ein früher öffentlicher Release, auf npm als `xverify-cli`
-> verteilt. Die öffentliche CI ist unter Ubuntu, macOS und Windows mit Node 20/24 grün,
-> einschließlich externem Install- und MCP-Inspector-Smoke-Test; derselbe Check, der
-> Clean-Install-Smoke-Test und das Release-Audit bestehen auch unter WSL2 mit Node 24. Der
-> Vertrag zur Aufruf-Provider-Identität ist live in beide Richtungen mit Cursor/OpenAI belegt.
-> Der veröffentlichte `0.1.0`-Tarball erreichte die Registry außerhalb des Release-Workflows und
-> trägt deshalb keine npm-Provenance-Attestierung; `0.1.1` und spätere Versionen werden vom
-> Workflow veröffentlicht, der eine solche anfordert. Öffentliche Schemas, JSON-Envelopes und Exit-Codes sind stabil; die
-> Provider-Oberfläche ist noch klein, und die API kann wachsen.
+> Xerify 0.3.0 ergänzt LLM-Verifikation um typisierte Jev-Entscheidungen. Eine freigegebene Kampagnenprüfung und zehn weitere Live-Jev-Szenarien entsprachen den Erwartungen. Siehe [Testergebnisse](docs/i18n/de/jev-testing.md). Dies belegt die Integration, nicht die allgemeine Modellgenauigkeit.
+
+Xerify ist eine modellunabhängige Verifikationsschicht für KI-Systeme: begrenzte Belege, ein anderer Aufrufanbieter und ein typisiertes Ergebnis. LLM-Prüfer und Jev-Entscheidungen nutzen dieselben CLI-, Bibliotheks- und MCP-Verträge.
+
+Jev ist als Standardadapter `jev` mit Anbieteridentität `typesafe` enthalten. `--to jev` wählt `typesafe:jev-latest`; `--to jev:MODEL_ID` wählt ein bestimmtes Modell. Jev unterstützt nur `verify`. Wahrscheinlichkeiten, Confidence, zurückgegebenes Modell und Richtlinie stehen im optionalen Feld `decision`. Unterhalb der Schwellenwerte liefert Xerify `unclear`. Jev erzeugt keine Erklärungen oder Quellenangaben.
+
+[Jev setup / 0.3.0](docs/i18n/de/jev.md)
 
 ## Installation
 
@@ -53,7 +51,7 @@ xerify init
 Als festgelegte Entwicklungsabhängigkeit:
 
 ```sh
-npm install --save-dev --save-exact xverify-cli@0.2.0
+npm install --save-dev --save-exact xverify-cli@0.3.0
 npx xerify --version
 ```
 
@@ -158,7 +156,7 @@ Lokales STDIO-MCP:
   "mcpServers": {
     "xerify": {
       "command": "npx",
-      "args": ["-y", "--package=xverify-cli@0.2.0", "xerify", "mcp", "stdio"]
+      "args": ["-y", "--package=xverify-cli@0.3.0", "xerify", "mcp", "stdio"]
     }
   }
 }
@@ -187,7 +185,7 @@ Bearer-Token aus einer benannten Umgebungsvariable.
 
 ## Wer Xerify entwickelt
 
-Xerify wird von **[Verhex](https://github.com/VerhexIO)** entworfen, gebaut und gepflegt.
+Xerify wird von **[Verhex](https://github.com/Verhex)** entworfen, gebaut und gepflegt.
 
 Es stammt aus **Deckent**, dem agentischen Betriebssystem von Verhex, wo das Einholen einer
 Zweitmeinung von einem weiteren Provider zu den Fähigkeiten gehört, auf die der Orchestrator
@@ -207,3 +205,5 @@ ein eigenständiges Verhex-Produkt und wird hier nicht lizenziert.
 
 Bei einem Widerspruch zwischen Übersetzung und Vertrag gelten die getesteten englischen Schemas und
 Dokumente.
+
+[Benchmark](docs/i18n/de/benchmark.md) · [0.3.0](docs/i18n/de/launch-0.3.0.md)

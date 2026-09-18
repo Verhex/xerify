@@ -111,3 +111,9 @@ Un descubrimiento con cero coincidencias es un caso exitoso. Los valores de uso 
 - Los esquemas públicos de solicitud aceptan procedencia de autor `declared` o `unknown`, y exigen un destino `declared`. Rechazan un `observed` provisto por quien llama; con autor `unknown`, la solicitud falla la regla de admisión de proveedores distintos.
 - Xerify nunca coloca valores secretos, encabezados de autorización crudos, fragmentos de token, rutas de credenciales, el prompt/contexto, el texto de la respuesta ni los findings en los errores tipificados ni en los registros de auditoría.
 - El único campo que lleva texto escrito por el proveedor hacia un error tipificado es `providerMessage`, que se redacta y se acota tal como se describe en [Resultados de verificación](#providermessage). Ahí puede aparecer una ruta que el propio proveedor haya impreso; las credenciales se redactan según las reglas descritas allí, que son defensa en profundidad y no una garantía.
+
+Jev viene como adaptador predeterminado `jev`, con identidad `typesafe`. `--to jev` selecciona `typesafe:jev-latest`; `--to jev:MODEL_ID` selecciona un modelo concreto. Jev solo admite `verify`. Las probabilidades, confidence, el modelo devuelto y la política se conservan en el campo opcional `decision`. Bajo los umbrales, Xerify devuelve `unclear`. Jev no genera explicaciones ni citas.
+
+[Jev / 0.3.0](jev.md)
+
+`--timeout 0` o `limits.timeoutMs: 0` desactiva explícitamente el plazo máximo. Cancelación y límites de bytes siguen activos; predeterminado: 120000 ms.

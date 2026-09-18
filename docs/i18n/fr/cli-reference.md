@@ -77,3 +77,9 @@ aux agents d'identifier une correspondance probable avant d'ouvrir un enregistre
 
 STDIO réserve stdout aux trames du protocole. Une liaison HTTP non loopback exige à la fois
 `--allow-public` et un jeton porteur fourni via une variable d'environnement nommée.
+
+Jev est inclus comme adaptateur par défaut `jev`, avec l’identité `typesafe`. `--to jev` sélectionne `typesafe:jev-latest` ; `--to jev:MODEL_ID` sélectionne un modèle précis. Jev prend uniquement en charge `verify`. Probabilités, confidence, modèle retourné et politique figurent dans le champ facultatif `decision`. Sous les seuils, Xerify renvoie `unclear`. Jev ne génère ni explications ni citations.
+
+[Jev / 0.3.0](jev.md)
+
+`--timeout 0` ou `limits.timeoutMs: 0` désactive explicitement le délai maximal. Annulation et limites en octets restent actives ; défaut : 120000 ms.

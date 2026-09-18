@@ -2,6 +2,34 @@
 
 All notable changes to Xerify are documented here. The format follows Keep a Changelog and the project uses Semantic Versioning.
 
+## [0.3.0] - 2026-09-18
+
+- Refresh the locked Hono dependency to 4.13.8 to clear the production dependency audit.
+- Update repository, schema, documentation, and media URLs to the renamed Verhex owner.
+
+- Add the TypeSafe Jev verification adapter and `--to jev` / `--to jev:MODEL_ID` shorthand.
+- Preserve typed probability, confidence, returned model, and threshold policy in optional
+  `decision` result metadata. Low-certainty or tied decisions abstain as `unclear`.
+- Keep invocation identity pinned to `typesafe`; Jev supports verification only, with no
+  fabricated rationale or citations. Normal probes do not call the evaluation endpoint.
+- Document explicit `.env` loading, SDK/MCP usage, limitations, and a launch draft.
+- Review the Jev contract against the official TypeSafe skill; clarify named state fields,
+  unsupported versus contradicted claims, and focused judgment guidance.
+- Refresh positioning to “Verify before you trust” across brand, site, and localized READMEs.
+- Reject pre-aborted HTTP invocations before sending a request.
+- Support explicit `--timeout 0` / `limits.timeoutMs: 0` to wait without a lifecycle deadline; cancellation and byte limits remain active.
+- Add an opt-in six-direction, 72-cell OpenAI/Anthropic/Jev benchmark with fixed synthetic inputs and checkpointed results. Publish the explicitly selected three-provider subset of the historical run; keep Cursor integration diagnostics separate.
+- Reinforce Cursor verification formatting with an explicit JSON example on stdin; preserve strict validation, read-only mode, and rejection of prose or fenced responses.
+- Translate Jev usage, test results, benchmark methodology, and campaign drafts into all five supported documentation languages; add consumer guides to localization checks.
+- Preserve HTTP output truncation in the final verification result even when the bounded
+  response cannot be parsed as JSON.
+- Expand Jev threshold, malformed-response, transport, CLI, and MCP coverage; add an opt-in,
+  ten-call live scenario runner with private normalized reports and no retries.
+
+One owner-approved live Jev campaign/code consistency check and ten additional synthetic
+scenarios completed on 2026-09-18. All ten scenarios matched their authored expectations;
+see [live results](docs/jev-testing.md). Domain calibration and npm publication remain pending.
+
 ## [Unreleased]
 
 ## [0.2.0] - 2026-08-20

@@ -145,6 +145,41 @@
         },
         { "type": "null" }
       ]
+    },
+    "decision": {
+      "type": "object",
+      "properties": {
+        "kind": { "type": "string", "const": "choice" },
+        "model": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$"
+        },
+        "choice": { "type": "string", "enum": ["confirmed", "refuted", "unclear"] },
+        "probabilities": {
+          "type": "object",
+          "properties": {
+            "confirmed": { "type": "number", "minimum": 0, "maximum": 1 },
+            "refuted": { "type": "number", "minimum": 0, "maximum": 1 },
+            "unclear": { "type": "number", "minimum": 0, "maximum": 1 }
+          },
+          "required": ["confirmed", "refuted", "unclear"],
+          "additionalProperties": false
+        },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "policy": {
+          "type": "object",
+          "properties": {
+            "minProbability": { "type": "number", "minimum": 0, "maximum": 1 },
+            "minConfidence": { "type": "number", "minimum": 0, "maximum": 1 }
+          },
+          "required": ["minProbability", "minConfidence"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["kind", "model", "choice", "probabilities", "confidence", "policy"],
+      "additionalProperties": false
     }
   },
   "required": [
