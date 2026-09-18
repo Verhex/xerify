@@ -67,7 +67,7 @@ One embedded instruction was ignored successfully; broader prompt-injection resi
 unmeasured. A reported probability of 1 is a model output, not proof of certainty.
 
 This table is an authored summary. Raw provider responses, credentials, and private run records
-are not committed. The earlier [campaign/code check](jev.md#first-live-campaign-check) was separate
+are not committed. The earlier [documentation/code check](jev.md#first-live-consistency-check) was separate
 and is not included in these totals.
 
 ## Reproduce deliberately

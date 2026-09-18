@@ -2,6 +2,12 @@
 
 All notable changes to Xerify are documented here. The format follows Keep a Changelog and the project uses Semantic Versioning.
 
+## [Unreleased]
+
+- Remove the 0.3.0 announcement draft and its five localized copies from the public documentation tree; announcement copy is not consumer documentation.
+- Replace campaign and social-posting wording in the Jev guide, test results, benchmark methodology, READMEs, and site with neutral documentation/code consistency language.
+- Consolidate the duplicated trailing link lines in the English and localized documentation indexes.
+
 ## [0.3.1] - 2026-09-18
 
 - Publish the npm distribution as `xerify-cli`; keep the `xerify` executable and configuration paths unchanged.

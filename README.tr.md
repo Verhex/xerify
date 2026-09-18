@@ -28,7 +28,7 @@ katmanıdır; burada bağımsız, kendi başına çalışan bir araç olarak sun
 bağımlılığı yoktur. Sonuç bir ikinci görüştür; matematiksel ispat, güvenlik sertifikası veya garanti
 edilmiş gerçek değildir. Sağlayıcı çıktısı güvenilmeyen veridir ve hiçbir zaman çalıştırılmaz.
 
-> Xerify 0.3.0, LLM doğrulamasının yanına Jev tipli kararlarını ekliyor. Sahibinin onayıyla yapılan tanıtım kontrolü ve 10 ek canlı Jev senaryosu beklentilerle eşleşti. [Sonuç tablosu](docs/i18n/tr/jev-testing.md) ve [Türkçe kullanım rehberi](docs/i18n/tr/jev.md). Bu bir entegrasyon denemesidir, model doğruluğu ölçümü değildir.
+> Xerify 0.3.0, LLM doğrulamasının yanına Jev tipli kararlarını ekliyor. Bir dokümantasyon/kod tutarlılık kontrolü ve 10 ek canlı Jev senaryosu beklentilerle eşleşti. [Sonuç tablosu](docs/i18n/tr/jev-testing.md) ve [Türkçe kullanım rehberi](docs/i18n/tr/jev.md). Bu bir entegrasyon denemesidir, model doğruluğu ölçümü değildir.
 
 Xerify, AI sistemleri için modelden bağımsız bir doğrulama katmanıdır: sınırlandırılmış kanıt, farklı bir çağrı sağlayıcısı ve tipli sonuç. LLM doğrulayıcıları ve Jev kararları aynı CLI, kütüphane ve MCP sözleşmelerini kullanır.
 
@@ -229,4 +229,4 @@ burada lisanslanmamıştır.
 
 Çeviriyle kanonik İngilizce sözleşme çelişirse test edilmiş İngilizce şema ve belgeler geçerlidir.
 
-[Benchmark](docs/i18n/tr/benchmark.md) · [0.3.0](docs/i18n/tr/launch-0.3.0.md)
+[Benchmark](docs/i18n/tr/benchmark.md)

@@ -2,7 +2,7 @@
 
 Jev ist das typisierte Entscheidungsmodell von TypeSafe. Xerify bildet die Verifikationsschicht um unterstützte Backends: begrenzte Evidenz, Anbietertrennung, stabile Urteile und Laufhistorie. Beide liefern maschinell nutzbare Entscheidungen, lösen aber unterschiedliche Teile des Problems.
 
-Jev-Unterstützung ist in Xerify 0.3.0 enthalten. Synthetische HTTP-Antworten testen den Adapter. Eine vom Eigentümer freigegebene Kampagnenprüfung und ein separater Lauf mit zehn Live-Szenarien wurden am 2026-09-18 abgeschlossen. Siehe [Testabdeckung und Ergebnisse](jev-testing.md). Domänengenauigkeit und Schwellenkalibrierung wurden nicht gemessen.
+Jev-Unterstützung ist in Xerify 0.3.0 enthalten. Synthetische HTTP-Antworten testen den Adapter. Eine Dokumentations-/Code-Konsistenzprüfung und ein separater Lauf mit zehn Live-Szenarien wurden am 2026-09-18 abgeschlossen. Siehe [Testabdeckung und Ergebnisse](jev-testing.md). Domänengenauigkeit und Schwellenkalibrierung wurden nicht gemessen.
 
 ## Schlüssel einrichten
 
@@ -115,13 +115,13 @@ Dieser Checkout enthält zusätzlich den lokalen Begleit-Skill `.agents/skills/x
 
 Offizieller Skill und Live-Dokumentation wurden am 2026-09-18 geprüft: Einführung, State, Choice, HTTP API, Confidence, Modelle, Einschränkungen und Citation-Check-Cookbook. Der bereitgestellte Download entsprach bytegenau der offiziellen GitHub-Version.
 
-| Bereich       | Ergebnis                                                                                                                                                                                          |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Protokoll     | Direkten HTTP-Endpunkt, Bearer-Authentifizierung, benannten State und Choice-Zuordnung beibehalten; kein Chat-Completions-Wrapper nötig.                                                          |
-| Frage         | `claim` und `context` ausdrücklich nennen und ihre Beziehung prüfen; fehlende Unterstützung allein ist kein Widerspruch.                                                                          |
-| Richtlinie    | 0.90 Wahrscheinlichkeit / 0.80 Confidence als konfigurierbare Defaults, keine TypeSafe-Vorgabe oder gemessene Genauigkeit.                                                                        |
-| Erklärbarkeit | Adapterzusammenfassung und leere evidence/findings behalten; Jev erzeugt keine Begründung.                                                                                                        |
-| Validierung   | Synthetische HTTP-Tests prüfen den Vertrag. Kampagnenprüfung und zehn Live-Fälle entsprachen den Erwartungen; Domänengenauigkeit, Kalibrierung und allgemeine Angriffsfestigkeit sind ungemessen. |
+| Bereich       | Ergebnis                                                                                                                                                                                           |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Protokoll     | Direkten HTTP-Endpunkt, Bearer-Authentifizierung, benannten State und Choice-Zuordnung beibehalten; kein Chat-Completions-Wrapper nötig.                                                           |
+| Frage         | `claim` und `context` ausdrücklich nennen und ihre Beziehung prüfen; fehlende Unterstützung allein ist kein Widerspruch.                                                                           |
+| Richtlinie    | 0.90 Wahrscheinlichkeit / 0.80 Confidence als konfigurierbare Defaults, keine TypeSafe-Vorgabe oder gemessene Genauigkeit.                                                                         |
+| Erklärbarkeit | Adapterzusammenfassung und leere evidence/findings behalten; Jev erzeugt keine Begründung.                                                                                                         |
+| Validierung   | Synthetische HTTP-Tests prüfen den Vertrag. Konsistenzprüfung und zehn Live-Fälle entsprachen den Erwartungen; Domänengenauigkeit, Kalibrierung und allgemeine Angriffsfestigkeit sind ungemessen. |
 
 Ein sinnvoller Jev-Auftrag bewertet eine fokussierte Quelle-Behauptung-Beziehung, beispielsweise ob die gelieferte Migration die Spalte `email` entfernt. „Diese Veröffentlichung ist sicher, schnell und rückwärtskompatibel“ verbindet mehrere Dimensionen: in konkrete Prüfungen mit passender Evidenz aufteilen oder ausdrücklich einen LLM-Prüfer für breiteres Schlussfolgern wählen. Xerify 0.3.0 teilt Behauptungen nicht automatisch auf und bündelt keine Verifikationen.
 
@@ -137,11 +137,11 @@ Offizielle Quellen, geprüft am 2026-09-18:
 
 [Introduction](https://docs.typesafe.ai/introduction) · [Skill](https://github.com/typesafe-ai/skills/blob/main/skills/typesafe-ai/SKILL.md) · [State](https://docs.typesafe.ai/concepts/state) · [Choice](https://docs.typesafe.ai/primitives/choice) · [Citation checks](https://docs.typesafe.ai/cookbooks/citation_check) · [Model limitations](https://docs.typesafe.ai/model-jaggedness/jev-1.13) · [HTTP API](https://docs.typesafe.ai/api) · [Confidence](https://docs.typesafe.ai/confidence) · [Models](https://docs.typesafe.ai/models)
 
-Architekturentscheidung: [ADR 0003](../../decisions/0003-typed-decision-verifiers.md). Entwurf: [Ankündigung](launch-0.3.0.md).
+Architekturentscheidung: [ADR 0003](../../decisions/0003-typed-decision-verifiers.md).
 
-## Erste Live-Kampagnenprüfung
+## Erste Live-Konsistenzprüfung
 
-Am 2026-09-18 genehmigte der Eigentümer eine CLI-Verifikation mit `--to jev`. Deklarierter Autor: `openai:gpt-6`; Ziel: `typesafe:jev-latest`; zurückgemeldetes Modell: `jev-1.13.0`. Nur ein 490-Byte-Codeausschnitt und ein Kampagnensatz wurden übermittelt. Geprüft wurde, ob die Implementierung bei Unterschreiten einer der beiden konfigurierten Schwellen `unclear` liefert.
+Am 2026-09-18 genehmigte der Eigentümer eine CLI-Verifikation mit `--to jev`. Deklarierter Autor: `openai:gpt-6`; Ziel: `typesafe:jev-latest`; zurückgemeldetes Modell: `jev-1.13.0`. Nur ein 490-Byte-Codeausschnitt und ein Dokumentationssatz wurden übermittelt. Geprüft wurde, ob die Implementierung bei Unterschreiten einer der beiden konfigurierten Schwellen `unclear` liefert.
 
 Normalisiertes Ergebnis: `confirmed`, Exit 0; `confirmed=0.91`, `refuted=0.06`, `unclear=0.03`, Confidence `0.87`. Die Richtlinie blieb bei `0.90` / `0.80`. Xerify meldete 882 ms, 649 Eingabe- und 41 Ausgabetokens; keine Kürzung und kein Fehler. Kosten wurden nicht berichtet.
 

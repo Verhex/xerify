@@ -1,6 +1,6 @@
 # Benchmark entre fournisseurs
 
-Ce **benchmark de vérification de bout en bout dans Xerify** est déclenché explicitement ; ce n’est pas un classement de l’intelligence des modèles. Il compare les canaux installés avec les mêmes affirmations et preuves rédigées. Le propriétaire a autorisé les appels et choisi des entrées fixes, seule la cible étant invoquée. Publication, paquet et réseaux sociaux suivront une revue distincte des résultats.
+Ce **benchmark de vérification de bout en bout dans Xerify** est déclenché explicitement ; ce n’est pas un classement de l’intelligence des modèles. Il compare les canaux installés avec les mêmes affirmations et preuves rédigées. Le propriétaire a autorisé les appels et choisi des entrées fixes, seule la cible étant invoquée. Publication et paquet suivront une revue distincte des résultats.
 
 ## Matrice et entrées immuables
 
@@ -65,7 +65,7 @@ La reprise vérifie suite, cas, modèles, directions, répétitions, limites et 
 
 Les percentiles utilisent nearest-rank sur appels valides. Douze échantillons par direction ne prouvent ni p95 stable ni significativité. Temps total n’est pas délai du premier token. Tokens Jev et tokens d’explication/raisonnement LLM servent des contrats différents. L’entrée Codex inclut déjà le cache ; Claude ajoute les compteurs de création/lecture de cache. Tokenizers, surcoût de prompt et facturation cache diffèrent. Un classement tokens/seconde serait trompeur et n’est pas calculé.
 
-Jev garde probabilité ≥0.90, confidence ≥0.80 et maximum unique ; le choix original reste séparé. Confidence n’est pas un label indépendant de justesse : [définition TypeSafe](https://docs.typesafe.ai/confidence). Pour indirection, distractions et attaques, voir [limites Jev 1.13](https://docs.typesafe.ai/model-jaggedness/jev-1.13). Aucun score humain de justification ou LLM-as-judge n’est inventé. Ces petits cas synthétiques ne représentent pas une production. Examiner les divergences avant marketing ; aucun gagnant ou multiplicateur de vitesse n’est présupposé.
+Jev garde probabilité ≥0.90, confidence ≥0.80 et maximum unique ; le choix original reste séparé. Confidence n’est pas un label indépendant de justesse : [définition TypeSafe](https://docs.typesafe.ai/confidence). Pour indirection, distractions et attaques, voir [limites Jev 1.13](https://docs.typesafe.ai/model-jaggedness/jev-1.13). Aucun score humain de justification ou LLM-as-judge n’est inventé. Ces petits cas synthétiques ne représentent pas une production. Examiner les divergences avant publication ; aucun gagnant ou multiplicateur de vitesse n’est présupposé.
 
 La machine a aussi servi à éditer les documents et exécuter des contrôles locaux. La charge hôte n’était pas isolée ; les latences incluent cette variabilité.
 

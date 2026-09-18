@@ -1,6 +1,6 @@
 # 跨提供方基准测试
 
-这是显式启用的 **Xerify 端到端验证 benchmark**，不是底层模型智能排名。它使用完全相同的预编写主张和证据比较已安装渠道。所有者批准实时调用，并选择固定输入、仅调用目标。提交、包发布和社交发布将在另行审阅结果之后进行。
+这是显式启用的 **Xerify 端到端验证 benchmark**，不是底层模型智能排名。它使用完全相同的预编写主张和证据比较已安装渠道。所有者批准实时调用，并选择固定输入、仅调用目标。发布和包发行将在另行审阅结果之后进行。
 
 ## 矩阵与固定输入
 
@@ -65,7 +65,7 @@ XERIFY_LIVE_CONFIRM_BILLABLE=YES node --env-file=.env scripts/benchmark-provider
 
 有效调用的分位数使用 nearest-rank。每方向十二样本无法证明稳定 p95 或统计显著性。墙钟时间不是首 token 延迟。Jev 输出 token 与 LLM 解释/推理 token 服务于不同契约。Codex 输入已包含缓存 token；Claude 输入加上报告的缓存创建/读取量。分词器、prompt 开销和缓存计费不同，因此不计算误导性的 token/秒排名。
 
-Jev 保持概率 ≥0.90、confidence ≥0.80、最大值唯一；原始选择单独保存。Confidence 不是独立正确性标签，见 [TypeSafe 定义](https://docs.typesafe.ai/confidence)。间接推理、干扰与对抗限制见 [Jev 1.13](https://docs.typesafe.ai/model-jaggedness/jev-1.13)。不编造人工理由质量或 LLM-as-judge 分数。小型合成集合不代表生产数据。用于宣传前应逐条检查不符，不能预设赢家或速度倍数。
+Jev 保持概率 ≥0.90、confidence ≥0.80、最大值唯一；原始选择单独保存。Confidence 不是独立正确性标签，见 [TypeSafe 定义](https://docs.typesafe.ai/confidence)。间接推理、干扰与对抗限制见 [Jev 1.13](https://docs.typesafe.ai/model-jaggedness/jev-1.13)。不编造人工理由质量或 LLM-as-judge 分数。小型合成集合不代表生产数据。公开发布前应逐条检查不符，不能预设赢家或速度倍数。
 
 运行期间同一工作站还用于编辑文档和执行本地检查。主机负载未隔离，延迟观察包含这些环境波动。
 

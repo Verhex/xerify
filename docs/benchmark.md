@@ -3,7 +3,7 @@
 This is an opt-in **Xerify end-to-end verification benchmark**, not a ranking of underlying model
 intelligence. It compares the installed provider channels on exactly the same authored claims and
 evidence. The owner approved live calls and selected fixed inputs with only the target invoked.
-Publication, package release, and social posting follow a separate review of the results.
+Publication and package release follow a separate review of the results.
 
 ## Matrix and immutable inputs
 
@@ -113,8 +113,8 @@ retained separately from the final verdict. Confidence is not an independent cor
 see [TypeSafe's definition](https://docs.typesafe.ai/confidence). Its documented limitations include
 indirection, distracting context and adversarial content; see [Jev 1.13 limitations](https://docs.typesafe.ai/model-jaggedness/jev-1.13).
 No human rationale-quality score or LLM-as-judge score is invented. These small synthetic fixtures
-are not a representative production dataset. Review individual mismatches before using aggregate
-numbers in marketing; no winner or speed multiplier is assumed in advance.
+are not a representative production dataset. Review individual mismatches before citing aggregate
+numbers publicly; no winner or speed multiplier is assumed in advance.
 
 The workstation also performed documentation edits and local checks during the run. Host load was not isolated; latency observations include that environmental noise.
 

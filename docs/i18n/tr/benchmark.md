@@ -1,6 +1,6 @@
 # Sağlayıcılar arası benchmark
 
-Bu, açıkça başlatılan bir **Xerify uçtan uca doğrulama benchmark’ıdır**; temel modellerin zekâ sıralaması değildir. Kurulu sağlayıcı kanallarını tamamen aynı, önceden yazılmış iddia ve kanıtla karşılaştırır. Sahibi canlı çağrıları onayladı ve sabit girdiyle yalnızca hedefin çağrılmasını seçti. Commit, paket yayını ve sosyal paylaşım sonuçların ayrıca değerlendirilmesinden sonraki aşamadır.
+Bu, açıkça başlatılan bir **Xerify uçtan uca doğrulama benchmark’ıdır**; temel modellerin zekâ sıralaması değildir. Kurulu sağlayıcı kanallarını tamamen aynı, önceden yazılmış iddia ve kanıtla karşılaştırır. Sahibi canlı çağrıları onayladı ve sabit girdiyle yalnızca hedefin çağrılmasını seçti. Yayın ve paket sürümü, sonuçların ayrıca değerlendirilmesinden sonraki aşamadır.
 
 ## Matris ve değişmeyen girdiler
 
@@ -65,7 +65,7 @@ Devam işlemi suite, senaryo, model, yön, tekrar, limit ve çekirdek adaptör/p
 
 Yüzdelikler geçerli çağrılarda nearest-rank yöntemini kullanır. Yön başına on iki örnek kararlı p95 veya istatistiksel anlamlılık sağlamaz. Duvar süresi ilk token süresi değildir. Jev çıktı token’ları ile LLM gerekçe/açıklama token’ları farklı sözleşmelere hizmet eder. Codex girdisi cached token’ları zaten içerir; Claude girdisine bildirilen cache creation/read eklenir. Tokenizer, prompt ek yükü ve cache faturası farklıdır. Token/saniye yanıltıcı olacağından puanlanmaz.
 
-Jev politikası olasılık ≥0.90, confidence ≥0.80 ve tek maksimum olarak kalır; ilk seçim nihai karardan ayrı korunur. Confidence bağımsız doğruluk etiketi değildir: [TypeSafe tanımı](https://docs.typesafe.ai/confidence). Dolaylılık, dikkat dağıtan bağlam ve saldırgan içerik için [Jev 1.13 sınırları](https://docs.typesafe.ai/model-jaggedness/jev-1.13) geçerlidir. İnsan gerekçe kalitesi veya LLM-as-judge puanı uydurulmaz. Küçük sentetik set üretim dağılımını temsil etmez. Pazarlamada kullanmadan önce tek tek uyumsuzluklar incelenmeli; önceden kazanan veya hız çarpanı varsayılmaz.
+Jev politikası olasılık ≥0.90, confidence ≥0.80 ve tek maksimum olarak kalır; ilk seçim nihai karardan ayrı korunur. Confidence bağımsız doğruluk etiketi değildir: [TypeSafe tanımı](https://docs.typesafe.ai/confidence). Dolaylılık, dikkat dağıtan bağlam ve saldırgan içerik için [Jev 1.13 sınırları](https://docs.typesafe.ai/model-jaggedness/jev-1.13) geçerlidir. İnsan gerekçe kalitesi veya LLM-as-judge puanı uydurulmaz. Küçük sentetik set üretim dağılımını temsil etmez. Sonuçlar paylaşılmadan önce tek tek uyumsuzluklar incelenmeli; önceden kazanan veya hız çarpanı varsayılmaz.
 
 Çalışma sırasında aynı makinede doküman düzenleme ve yerel kontroller de yapıldı. Makine yükü izole edilmedi; süre gözlemleri bu çevresel değişkenliği içerir.
 

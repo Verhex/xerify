@@ -42,6 +42,4 @@ installé est **`xerify`**.
 
 Jev est inclus comme adaptateur par défaut `jev`, avec l’identité `typesafe`. `--to jev` sélectionne `typesafe:jev-latest` ; `--to jev:MODEL_ID` sélectionne un modèle précis. Jev prend uniquement en charge `verify`. Probabilités, confidence, modèle retourné et politique figurent dans le champ facultatif `decision`. Sous les seuils, Xerify renvoie `unclear`. Jev ne génère ni explications ni citations.
 
-[Jev / 0.3.0](jev.md)
-
-[Jev](jev.md) · [Jev tests](jev-testing.md) · [Benchmark](benchmark.md) · [0.3.0](launch-0.3.0.md)
+[Guide Jev](jev.md) · [Couverture des tests et résultats en direct](jev-testing.md) · [Benchmark multi-fournisseurs](benchmark.md)

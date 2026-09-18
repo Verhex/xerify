@@ -63,7 +63,7 @@ improvements without implementation and measurements. Jev confidence describes a
 distribution; it is not the probability that a decision is true. Its adapter supplies no
 generated rationale or evidence citations. The three verdicts and provider separation remain.
 
-## Motion and campaign assets
+## Motion assets
 
 `npm run assets:flow` renders the existing paper-and-ink visual system with the approved wordmark.
 The 16-second loop shows two separate runs: an LLM review and a Jev typed decision. It never
@@ -71,7 +71,7 @@ represents automatic fallback or two providers called in one run. Jev's illustra
 and confidence are below the default policy, so the displayed result is `unclear`. Values are
 illustrations, not live measurements or accuracy claims.
 
-Use `assets/readme/xerify-verification-flow.gif` for README/social animation,
+Use `assets/readme/xerify-verification-flow.gif` for README animation,
 `xerify-verification-flow-poster.png` for the static Jev view, and
 `xerify-verification-flow-social.png` for a 1920 × 1080 still. The renderer requires ffmpeg and
 uses the existing paper texture; it does not alter the logo geometry.

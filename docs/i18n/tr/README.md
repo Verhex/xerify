@@ -36,8 +36,4 @@
 
 Jev, varsayılan `jev` adaptörüyle (`typesafe` sağlayıcısı) gelir. `--to jev`, `typesafe:jev-latest` seçer; `--to jev:MODEL_ID` belirli modeli seçer. Jev yalnızca `verify` destekler. Olasılıklar, confidence, dönen model ve politika isteğe bağlı `decision` alanında bulunur. Eşiklerin altında Xerify `unclear` döndürür. Jev açıklama veya kanıt atfı üretmez.
 
-[Jev / 0.3.0](jev.md)
-
-[Jev Türkçe kullanım rehberi](jev.md) · [Canlı sonuçlar ve test kapsamı](jev-testing.md)
-
-[Jev](jev.md) · [Jev tests](jev-testing.md) · [Benchmark](benchmark.md) · [0.3.0](launch-0.3.0.md)
+[Jev kullanım rehberi](jev.md) · [Test kapsamı ve canlı sonuçlar](jev-testing.md) · [Sağlayıcılar arası benchmark](benchmark.md)

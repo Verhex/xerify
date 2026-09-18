@@ -1,6 +1,6 @@
 # Benchmark entre proveedores
 
-Este es un **benchmark de verificación de extremo a extremo de Xerify**, activado explícitamente, no una clasificación de inteligencia de modelos. Compara los canales instalados con idénticas afirmaciones y evidencias redactadas. El propietario autorizó llamadas y entradas fijas con solo el destino invocado. Publicación, paquete y redes sociales siguen a una revisión separada de resultados.
+Este es un **benchmark de verificación de extremo a extremo de Xerify**, activado explícitamente, no una clasificación de inteligencia de modelos. Compara los canales instalados con idénticas afirmaciones y evidencias redactadas. El propietario autorizó llamadas y entradas fijas con solo el destino invocado. Publicación y paquete siguen a una revisión separada de resultados.
 
 ## Matriz y entradas inmutables
 
@@ -65,7 +65,7 @@ La continuación valida suite, casos, modelos, rutas, repeticiones, límites y h
 
 Percentiles nearest-rank sobre llamadas válidas. Doce muestras por ruta no establecen p95 estable ni significancia estadística. Tiempo total no es tiempo al primer token. Tokens Jev y explicación/razonamiento LLM cumplen contratos distintos. Codex ya incluye tokens cacheados en entrada; Claude añade creación/lectura de caché. Tokenizadores, overhead y cobro de caché difieren. Tokens/segundo resultaría engañoso y no se puntúa.
 
-Jev mantiene probabilidad ≥0.90, confidence ≥0.80 y máximo único; se conserva elección original aparte. Confidence no es etiqueta independiente de corrección: [definición TypeSafe](https://docs.typesafe.ai/confidence). Para indirección, distracción y adversarios, véanse [límites Jev 1.13](https://docs.typesafe.ai/model-jaggedness/jev-1.13). No se inventa nota humana de justificación ni LLM-as-judge. Los pequeños casos sintéticos no representan producción. Revisar discrepancias antes de marketing; no se presupone ganador ni multiplicador de velocidad.
+Jev mantiene probabilidad ≥0.90, confidence ≥0.80 y máximo único; se conserva elección original aparte. Confidence no es etiqueta independiente de corrección: [definición TypeSafe](https://docs.typesafe.ai/confidence). Para indirección, distracción y adversarios, véanse [límites Jev 1.13](https://docs.typesafe.ai/model-jaggedness/jev-1.13). No se inventa nota humana de justificación ni LLM-as-judge. Los pequeños casos sintéticos no representan producción. Revisar discrepancias antes de publicar; no se presupone ganador ni multiplicador de velocidad.
 
 La misma máquina también editó documentación y ejecutó comprobaciones locales. La carga no estaba aislada; las latencias incluyen esa variabilidad.
 

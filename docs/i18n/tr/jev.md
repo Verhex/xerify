@@ -2,7 +2,7 @@
 
 Jev, TypeSafe'ın tipli karar modelidir. Xerify desteklenen arka uçların çevresindeki doğrulama katmanıdır: sınırlandırılmış kanıt, sağlayıcı ayrımı, kararlı sonuçlar ve çalıştırma geçmişi sağlar. İkisi de makinenin kullanabileceği kararlara odaklanır, ancak problemin farklı kısımlarını çözer.
 
-Jev desteği Xerify 0.3.0 sürümüne dahildir. Adaptör sentetik HTTP yanıtlarıyla test edilir. Sahibinin onayladığı tanıtım kontrolü ve ayrı on senaryolu canlı çalıştırma 2026-09-18 tarihinde tamamlandı. [Test kapsamı ve canlı sonuçlar](jev-testing.md) ayrıntıları içerir. Alan doğruluğu ve eşik kalibrasyonu henüz ölçülmedi.
+Jev desteği Xerify 0.3.0 sürümüne dahildir. Adaptör sentetik HTTP yanıtlarıyla test edilir. Bir dokümantasyon/kod tutarlılık kontrolü ve ayrı on senaryolu canlı çalıştırma 2026-09-18 tarihinde tamamlandı. [Test kapsamı ve canlı sonuçlar](jev-testing.md) ayrıntıları içerir. Alan doğruluğu ve eşik kalibrasyonu henüz ölçülmedi.
 
 ## Anahtar kurulumu
 
@@ -115,13 +115,13 @@ Bu checkout'ta ayrıca `.agents/skills/xerify-jev` altında, Claude Code'a bağl
 
 Resmi skil ve canlı dokümanlar 2026-09-18'de incelendi: giriş, State, Choice, HTTP API, confidence, modeller, sınırlamalar ve citation-check cookbook. İndirilen skil inceleme sırasında resmi GitHub sürümüyle bayt bayt aynıydı.
 
-| Alan             | İnceleme sonucu                                                                                                                                                                               |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Protokol         | Doğrudan HTTP uç noktası, bearer auth, adlandırılmış state ve Choice yanıt eşlemesi korunur; chat-completions sarmalayıcısı gerekmez.                                                         |
-| Soru             | `claim` ve `context` açıkça adlandırılır; ilişkileri değerlendirilir. Destek yokluğu tek başına çelişki değildir.                                                                             |
-| Politika         | Yapılandırılabilir 0.90 olasılık / 0.80 confidence korunur; bunlar TypeSafe zorunluluğu veya ölçülmüş doğruluk değildir.                                                                      |
-| Açıklanabilirlik | Adaptör özeti ve boş evidence/findings korunur; Jev gerekçe üretmez.                                                                                                                          |
-| Doğrulama        | Sentetik HTTP testleri entegrasyon sözleşmesini kontrol eder. Tanıtım kontrolü ve on canlı senaryo beklentiyle eşleşti; alan doğruluğu, kalibrasyon ve genel saldırı dayanıklılığı ölçülmedi. |
+| Alan             | İnceleme sonucu                                                                                                                                                                                                    |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Protokol         | Doğrudan HTTP uç noktası, bearer auth, adlandırılmış state ve Choice yanıt eşlemesi korunur; chat-completions sarmalayıcısı gerekmez.                                                                              |
+| Soru             | `claim` ve `context` açıkça adlandırılır; ilişkileri değerlendirilir. Destek yokluğu tek başına çelişki değildir.                                                                                                  |
+| Politika         | Yapılandırılabilir 0.90 olasılık / 0.80 confidence korunur; bunlar TypeSafe zorunluluğu veya ölçülmüş doğruluk değildir.                                                                                           |
+| Açıklanabilirlik | Adaptör özeti ve boş evidence/findings korunur; Jev gerekçe üretmez.                                                                                                                                               |
+| Doğrulama        | Sentetik HTTP testleri entegrasyon sözleşmesini kontrol eder. Dokümantasyon/kod tutarlılık kontrolü ve on canlı senaryo beklentiyle eşleşti; alan doğruluğu, kalibrasyon ve genel saldırı dayanıklılığı ölçülmedi. |
 
 Faydalı Jev görevi, tek odaklı kaynak-iddia değerlendirmesidir. Örneğin verilen migration'a karşı “Bu migration `email` kolonunu kaldırır” iddiasını kontrol edin. “Sürüm güvenli, hızlı ve geriye uyumlu” birden çok boyutu birleştirir; uygun kanıtla ayrı kontrollere bölün veya geniş akıl yürütme için açıkça LLM doğrulayıcısı seçin. Xerify 0.3.0 iddiaları otomatik bölmez, birden çok doğrulamayı toplu yapmaz.
 
@@ -137,11 +137,11 @@ Birleşim şudur: Jev tipli kararı verir; Xerify doğrulama sözleşmesini sağ
 
 [Introduction](https://docs.typesafe.ai/introduction) · [Skill](https://github.com/typesafe-ai/skills/blob/main/skills/typesafe-ai/SKILL.md) · [State](https://docs.typesafe.ai/concepts/state) · [Choice](https://docs.typesafe.ai/primitives/choice) · [Citation checks](https://docs.typesafe.ai/cookbooks/citation_check) · [Model limitations](https://docs.typesafe.ai/model-jaggedness/jev-1.13) · [HTTP API](https://docs.typesafe.ai/api) · [Confidence](https://docs.typesafe.ai/confidence) · [Models](https://docs.typesafe.ai/models)
 
-Mimari karar [ADR 0003](../../decisions/0003-typed-decision-verifiers.md), duyuru taslağı [tanıtım metnindedir](launch-0.3.0.md).
+Mimari karar [ADR 0003](../../decisions/0003-typed-decision-verifiers.md) belgesindedir.
 
-## İlk canlı tanıtım kontrolü
+## İlk canlı tutarlılık kontrolü
 
-2026-09-18'de sahibi Xerify CLI üzerinden `--to jev` ile bir doğrulamayı onayladı. Yazar kimliği `openai:gpt-6`, hedef `typesafe:jev-latest` olarak bildirildi; yanıt `jev-1.13.0` modelini bildirdi. Yalnızca 490 baytlık kod parçası ve tanıtım cümlesi sağlandı. Kontrol, olasılık veya confidence yapılandırılan minimumun altında kalınca `unclear` dönmesi ifadesinin uygulamayla desteklenip desteklenmediğini sordu.
+2026-09-18'de sahibi Xerify CLI üzerinden `--to jev` ile bir doğrulamayı onayladı. Yazar kimliği `openai:gpt-6`, hedef `typesafe:jev-latest` olarak bildirildi; yanıt `jev-1.13.0` modelini bildirdi. Yalnızca 490 baytlık kod parçası ve bir dokümantasyon cümlesi sağlandı. Kontrol, olasılık veya confidence yapılandırılan minimumun altında kalınca `unclear` dönmesi ifadesinin uygulamayla desteklenip desteklenmediğini sordu.
 
 Normalize sonuç `confirmed` (çıkış 0) oldu: `confirmed=0.91`, `refuted=0.06`, `unclear=0.03`, confidence `0.87`. Politika minimum olasılık `0.90`, confidence `0.80` idi. Xerify 882 ms, 649 giriş token'ı ve 41 çıkış token'ı bildirdi; kesilme veya hata yoktu. Maliyet bildirilmedi.
 

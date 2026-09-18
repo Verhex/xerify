@@ -2,7 +2,7 @@
 
 Jev 是 TypeSafe 的类型化决策模型。Xerify 是支持这些后端的验证层，负责限定证据、隔离提供方、保持稳定结论并记录运行历史。两者都关注软件可直接使用的决策，但解决的是不同层面的问题。
 
-Xerify 0.3.0 包含 Jev 支持。适配器通过合成 HTTP 响应测试。经所有者批准的宣传检查与另一组十场景实时运行已于 2026-09-18 完成。详见[测试覆盖和实时结果](jev-testing.md)。领域准确率和阈值校准尚未测量。
+Xerify 0.3.0 包含 Jev 支持。适配器通过合成 HTTP 响应测试。一次文档/代码一致性检查与另一组十场景实时运行已于 2026-09-18 完成。详见[测试覆盖和实时结果](jev-testing.md)。领域准确率和阈值校准尚未测量。
 
 ## 配置密钥
 
@@ -115,13 +115,13 @@ npx skills add typesafe-ai/skills --skill typesafe-ai --agent codex claude-code 
 
 2026-09-18 审阅了官方 skill 与在线文档：介绍、State、Choice、HTTP API、confidence、模型、限制以及 citation-check cookbook。当时提供的下载文件与官方 GitHub 版本逐字节一致。
 
-| 范围     | 审阅结论                                                                                               |
-| -------- | ------------------------------------------------------------------------------------------------------ |
-| 通信协议 | 保留直接 HTTP 端点、bearer 认证、命名 state 和 Choice 映射；无需 chat-completions 包装。               |
-| 问题     | 明确命名 `claim` 和 `context`，判断二者关系；仅缺少支持不等于矛盾。                                    |
-| 策略     | 保留可配置的 0.90 概率 / 0.80 confidence；不是 TypeSafe 强制阈值或已测准确率。                         |
-| 可解释性 | 保留适配器摘要与空 evidence/findings；Jev 不生成理由。                                                 |
-| 验证     | 合成 HTTP 测试检查集成契约；宣传检查和十个实时场景符合预期。领域准确率、校准和普遍抗攻击能力仍未测量。 |
+| 范围     | 审阅结论                                                                                                 |
+| -------- | -------------------------------------------------------------------------------------------------------- |
+| 通信协议 | 保留直接 HTTP 端点、bearer 认证、命名 state 和 Choice 映射；无需 chat-completions 包装。                 |
+| 问题     | 明确命名 `claim` 和 `context`，判断二者关系；仅缺少支持不等于矛盾。                                      |
+| 策略     | 保留可配置的 0.90 概率 / 0.80 confidence；不是 TypeSafe 强制阈值或已测准确率。                           |
+| 可解释性 | 保留适配器摘要与空 evidence/findings；Jev 不生成理由。                                                   |
+| 验证     | 合成 HTTP 测试检查集成契约；一致性检查和十个实时场景符合预期。领域准确率、校准和普遍抗攻击能力仍未测量。 |
 
 合适的 Jev 任务是聚焦的来源到主张判断，例如依据迁移文件判断“该迁移删除 `email` 列”。“版本安全、快速且向后兼容”结合多个维度，应拆成有适当证据的具体检查，或明确选择 LLM 做更广泛推理。Xerify 0.3.0 不自动拆分主张或批量执行多个验证。
 
@@ -137,11 +137,11 @@ npx skills add typesafe-ai/skills --skill typesafe-ai --agent codex claude-code 
 
 [Introduction](https://docs.typesafe.ai/introduction) · [Skill](https://github.com/typesafe-ai/skills/blob/main/skills/typesafe-ai/SKILL.md) · [State](https://docs.typesafe.ai/concepts/state) · [Choice](https://docs.typesafe.ai/primitives/choice) · [Citation checks](https://docs.typesafe.ai/cookbooks/citation_check) · [Model limitations](https://docs.typesafe.ai/model-jaggedness/jev-1.13) · [HTTP API](https://docs.typesafe.ai/api) · [Confidence](https://docs.typesafe.ai/confidence) · [Models](https://docs.typesafe.ai/models)
 
-架构决定见 [ADR 0003](../../decisions/0003-typed-decision-verifiers.md)，宣传草稿见[发布文案](launch-0.3.0.md)。
+架构决定见 [ADR 0003](../../decisions/0003-typed-decision-verifiers.md)。
 
-## 首次实时宣传检查
+## 首次实时一致性检查
 
-2026-09-18 所有者批准通过 Xerify CLI 的 `--to jev` 做一次验证。作者身份声明为 `openai:gpt-6`，目标为 `typesafe:jev-latest`，响应模型为 `jev-1.13.0`。仅提供 490 字节的代码片段和宣传句。检查的问题是：实现是否支持低于任一配置概率或 confidence 阈值时返回 `unclear`。
+2026-09-18 所有者批准通过 Xerify CLI 的 `--to jev` 做一次验证。作者身份声明为 `openai:gpt-6`，目标为 `typesafe:jev-latest`，响应模型为 `jev-1.13.0`。仅提供 490 字节的代码片段和一句文档描述。检查的问题是：实现是否支持低于任一配置概率或 confidence 阈值时返回 `unclear`。
 
 规范化结果为 `confirmed`，退出码 0；概率 `confirmed=0.91`、`refuted=0.06`、`unclear=0.03`，confidence `0.87`。策略为最小概率 `0.90` 和 confidence `0.80`。Xerify 报告 882 ms、649 输入 token、41 输出 token，无截断、无故障；未报告费用。
 

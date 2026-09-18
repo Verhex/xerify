@@ -21,7 +21,7 @@ Xerify 是一个面向 shell 的开源工具，用于有边界的跨提供方提
 
 Xerify 由 **Verhex** 开发和维护，并接受社区贡献，以 MIT 许可证发布。它是 **Deckent**（Verhex 的智能体操作系统）的跨提供方验证层，在本仓库中作为独立工具发布——Xerify 可以独立运行，不依赖 Deckent。它提供的是第二意见，而不是形式化证明、安全认证或真相保证。提供方输出始终被视为不可信数据，绝不会被直接执行。
 
-> Xerify 0.3.0 在 LLM 验证之外新增 Jev 类型化决策。经所有者批准，一次宣传文案检查和另外十个 Jev 实时场景均符合预期。请参阅[测试结果](docs/i18n/zh-CN/jev-testing.md)。这些是集成验证，不是模型通用准确率基准。
+> Xerify 0.3.0 在 LLM 验证之外新增 Jev 类型化决策。一次文档/代码一致性检查和另外十个 Jev 实时场景均符合预期。请参阅[测试结果](docs/i18n/zh-CN/jev-testing.md)。这些是集成验证，不是模型通用准确率基准。
 
 Xerify 是面向 AI 系统、独立于模型的验证层：有界证据、不同的调用提供方以及类型化结果。LLM 验证器和 Jev 决策共用 CLI、库和 MCP 合约。
 
@@ -172,4 +172,4 @@ Xerify 由 **[Verhex](https://github.com/Verhex)** 设计、开发和维护。
 
 若翻译与测试过的英文契约冲突，以规范英文 Schema 和文档为准。
 
-[Benchmark](docs/i18n/zh-CN/benchmark.md) · [0.3.0](docs/i18n/zh-CN/launch-0.3.0.md)
+[Benchmark](docs/i18n/zh-CN/benchmark.md)

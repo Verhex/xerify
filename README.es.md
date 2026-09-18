@@ -29,7 +29,7 @@ sí solo y no depende de Deckent. El resultado es una segunda opinión, no una p
 certificación de seguridad ni una garantía de verdad. La salida del proveedor es un dato no
 confiable y nunca se ejecuta.
 
-> Xerify 0.3.0 añade decisiones tipadas Jev a la verificación LLM. Una comprobación de campaña y diez escenarios adicionales de Jev en vivo, autorizados por el propietario, coincidieron con lo esperado. Véanse los [resultados](docs/i18n/es/jev-testing.md). Son pruebas de integración, no una medida de precisión general.
+> Xerify 0.3.0 añade decisiones tipadas Jev a la verificación LLM. Una comprobación de coherencia documentación/código y diez escenarios adicionales de Jev en vivo coincidieron con lo esperado. Véanse los [resultados](docs/i18n/es/jev-testing.md). Son pruebas de integración, no una medida de precisión general.
 
 Xerify es una capa de verificación independiente del modelo para sistemas de IA: evidencia acotada, otro proveedor de invocación y un resultado tipado. Los verificadores LLM y las decisiones de Jev comparten los contratos de CLI, biblioteca y MCP.
 
@@ -204,4 +204,4 @@ producto distinto de Verhex, y no queda cubierto por ella.
 
 Si una traducción contradice el contrato, prevalecen los esquemas y documentos canónicos en inglés.
 
-[Benchmark](docs/i18n/es/benchmark.md) · [0.3.0](docs/i18n/es/launch-0.3.0.md)
+[Benchmark](docs/i18n/es/benchmark.md)

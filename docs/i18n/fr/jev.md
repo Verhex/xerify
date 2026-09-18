@@ -2,7 +2,7 @@
 
 Jev est le modèle de décision typée de TypeSafe. Xerify fournit la couche de vérification autour des moteurs pris en charge : preuves bornées, séparation des fournisseurs, verdicts stables et historique. Tous deux visent des décisions exploitables par le logiciel, mais résolvent des parties différentes du problème.
 
-La prise en charge de Jev est incluse dans Xerify 0.3.0. L’adaptateur est testé avec des réponses HTTP synthétiques. Une vérification de campagne autorisée par le propriétaire et dix scénarios en direct distincts ont été exécutés le 2026-09-18. Voir [couverture et résultats](jev-testing.md). La précision métier et la calibration des seuils restent non mesurées.
+La prise en charge de Jev est incluse dans Xerify 0.3.0. L’adaptateur est testé avec des réponses HTTP synthétiques. Une vérification de cohérence documentation/code et dix scénarios en direct distincts ont été exécutés le 2026-09-18. Voir [couverture et résultats](jev-testing.md). La précision métier et la calibration des seuils restent non mesurées.
 
 ## Configurer une clé
 
@@ -115,13 +115,13 @@ Ce checkout comporte aussi `.agents/skills/xerify-jev`, un compagnon local lié 
 
 Le skill officiel et la documentation en ligne ont été examinés le 2026-09-18 : introduction, State, Choice, HTTP API, confidence, modèles, limites et cookbook citation-check. Le fichier fourni correspondait octet pour octet à la version GitHub officielle.
 
-| Domaine       | Résultat                                                                                                                                                                                                |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Protocole     | Conserver HTTP direct, bearer auth, state nommé et conversion Choice ; aucun wrapper chat-completions nécessaire.                                                                                       |
-| Question      | Nommer `claim` et `context`, juger leur relation ; le manque de soutien seul n’est pas une contradiction.                                                                                               |
-| Politique     | Garder 0.90 / 0.80 configurables ; aucune obligation TypeSafe ni précision mesurée.                                                                                                                     |
-| Explicabilité | Résumé de l’adaptateur et tableaux evidence/findings vides ; Jev ne génère pas de justification.                                                                                                        |
-| Validation    | Les réponses HTTP synthétiques testent le contrat ; la campagne et dix cas en direct correspondaient aux attentes. Précision métier, calibration et résistance générale aux attaques restent inconnues. |
+| Domaine       | Résultat                                                                                                                                                                                                                 |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Protocole     | Conserver HTTP direct, bearer auth, state nommé et conversion Choice ; aucun wrapper chat-completions nécessaire.                                                                                                        |
+| Question      | Nommer `claim` et `context`, juger leur relation ; le manque de soutien seul n’est pas une contradiction.                                                                                                                |
+| Politique     | Garder 0.90 / 0.80 configurables ; aucune obligation TypeSafe ni précision mesurée.                                                                                                                                      |
+| Explicabilité | Résumé de l’adaptateur et tableaux evidence/findings vides ; Jev ne génère pas de justification.                                                                                                                         |
+| Validation    | Les réponses HTTP synthétiques testent le contrat ; la vérification de cohérence et dix cas en direct correspondaient aux attentes. Précision métier, calibration et résistance générale aux attaques restent inconnues. |
 
 Une bonne tâche Jev est un jugement ciblé entre une source et une affirmation, par exemple « La migration fournie supprime la colonne `email` ». « Cette version est sûre, rapide et rétrocompatible » combine plusieurs dimensions : séparer les vérifications avec des preuves adaptées ou choisir explicitement un LLM pour un raisonnement plus large. Xerify 0.3.0 ne découpe pas automatiquement les affirmations et ne groupe pas plusieurs vérifications.
 
@@ -137,11 +137,11 @@ Sources officielles consultées le 2026-09-18 :
 
 [Introduction](https://docs.typesafe.ai/introduction) · [Skill](https://github.com/typesafe-ai/skills/blob/main/skills/typesafe-ai/SKILL.md) · [State](https://docs.typesafe.ai/concepts/state) · [Choice](https://docs.typesafe.ai/primitives/choice) · [Citation checks](https://docs.typesafe.ai/cookbooks/citation_check) · [Model limitations](https://docs.typesafe.ai/model-jaggedness/jev-1.13) · [HTTP API](https://docs.typesafe.ai/api) · [Confidence](https://docs.typesafe.ai/confidence) · [Models](https://docs.typesafe.ai/models)
 
-Voir [ADR 0003](../../decisions/0003-typed-decision-verifiers.md) et le [brouillon de campagne](launch-0.3.0.md).
+Voir [ADR 0003](../../decisions/0003-typed-decision-verifiers.md).
 
-## Première vérification de campagne en direct
+## Première vérification de cohérence en direct
 
-Le 2026-09-18, le propriétaire a autorisé une vérification CLI avec `--to jev`. Auteur déclaré : `openai:gpt-6` ; cible : `typesafe:jev-latest` ; modèle retourné : `jev-1.13.0`. Seuls un extrait de code et une phrase de campagne, 490 octets au total, ont été fournis. La question vérifiait que passer sous l’un des seuils configurés produit `unclear`.
+Le 2026-09-18, le propriétaire a autorisé une vérification CLI avec `--to jev`. Auteur déclaré : `openai:gpt-6` ; cible : `typesafe:jev-latest` ; modèle retourné : `jev-1.13.0`. Seuls un extrait de code et une phrase de documentation, 490 octets au total, ont été fournis. La question vérifiait que passer sous l’un des seuils configurés produit `unclear`.
 
 Résultat normalisé : `confirmed`, sortie 0 ; probabilités `confirmed=0.91`, `refuted=0.06`, `unclear=0.03`, confidence `0.87`. Politique `0.90` / `0.80`. Xerify a rapporté 882 ms, 649 tokens d’entrée, 41 de sortie, aucune troncature ni erreur. Aucun coût rapporté.
 

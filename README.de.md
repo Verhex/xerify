@@ -29,7 +29,7 @@ läuft für sich allein und hat keine Abhängigkeit von Deckent. Das Ergebnis is
 kein formaler Beweis, kein Sicherheitszertifikat und keine Wahrheitsgarantie. Provider-Ausgaben
 sind nicht vertrauenswürdige Daten und werden niemals ausgeführt.
 
-> Xerify 0.3.0 ergänzt LLM-Verifikation um typisierte Jev-Entscheidungen. Eine freigegebene Kampagnenprüfung und zehn weitere Live-Jev-Szenarien entsprachen den Erwartungen. Siehe [Testergebnisse](docs/i18n/de/jev-testing.md). Dies belegt die Integration, nicht die allgemeine Modellgenauigkeit.
+> Xerify 0.3.0 ergänzt LLM-Verifikation um typisierte Jev-Entscheidungen. Eine Dokumentations-/Code-Konsistenzprüfung und zehn weitere Live-Jev-Szenarien entsprachen den Erwartungen. Siehe [Testergebnisse](docs/i18n/de/jev-testing.md). Dies belegt die Integration, nicht die allgemeine Modellgenauigkeit.
 
 Xerify ist eine modellunabhängige Verifikationsschicht für KI-Systeme: begrenzte Belege, ein anderer Aufrufanbieter und ein typisiertes Ergebnis. LLM-Prüfer und Jev-Entscheidungen nutzen dieselben CLI-, Bibliotheks- und MCP-Verträge.
 
@@ -206,4 +206,4 @@ ein eigenständiges Verhex-Produkt und wird hier nicht lizenziert.
 Bei einem Widerspruch zwischen Übersetzung und Vertrag gelten die getesteten englischen Schemas und
 Dokumente.
 
-[Benchmark](docs/i18n/de/benchmark.md) · [0.3.0](docs/i18n/de/launch-0.3.0.md)
+[Benchmark](docs/i18n/de/benchmark.md)

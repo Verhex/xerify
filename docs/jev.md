@@ -5,7 +5,7 @@ backends: bounded evidence, provider separation, stable verdicts, and run histor
 a focus on machine-consumable decisions, but solve different parts of the problem.
 
 Jev support is included in Xerify 0.3.0. The adapter is tested with
-synthetic HTTP fixtures. An owner-approved campaign check and a separate ten-scenario live run
+synthetic HTTP fixtures. A documentation/code consistency check and a separate ten-scenario live run
 completed on 2026-09-18. See the [test coverage and live results](jev-testing.md) and the
 [Turkish usage guide](i18n/tr/jev.md). Domain accuracy and threshold calibration remain unmeasured.
 
@@ -177,13 +177,13 @@ The official skill and live documentation were reviewed on 2026-09-18, including
 State, Choice, HTTP API, confidence, models, model limitations, and citation-check cookbook.
 The supplied downloaded skill matched the official GitHub version byte for byte at review time.
 
-| Area            | Review outcome                                                                                                                                                                                          |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Wire contract   | Keep the existing direct HTTP endpoint, bearer authentication, named state, and Choice response mapping. No chat-completions wrapper is needed.                                                         |
-| Question        | Name `claim` and `context` explicitly. Judge their relationship; unsupported evidence alone must not be classified as a contradiction.                                                                  |
-| Decision policy | Keep 0.90 probability / 0.80 confidence as configurable Xerify defaults. These are not TypeSafe-mandated thresholds or measured accuracy.                                                               |
-| Explainability  | Keep the adapter-authored summary and empty evidence/findings arrays. Jev supplies no generated rationale.                                                                                              |
-| Validation      | Synthetic HTTP tests verify the integration contract. A campaign check and ten live scenarios matched expectations; domain accuracy, calibration, and general adversarial resistance remain unmeasured. |
+| Area            | Review outcome                                                                                                                                                                                                                |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Wire contract   | Keep the existing direct HTTP endpoint, bearer authentication, named state, and Choice response mapping. No chat-completions wrapper is needed.                                                                               |
+| Question        | Name `claim` and `context` explicitly. Judge their relationship; unsupported evidence alone must not be classified as a contradiction.                                                                                        |
+| Decision policy | Keep 0.90 probability / 0.80 confidence as configurable Xerify defaults. These are not TypeSafe-mandated thresholds or measured accuracy.                                                                                     |
+| Explainability  | Keep the adapter-authored summary and empty evidence/findings arrays. Jev supplies no generated rationale.                                                                                                                    |
+| Validation      | Synthetic HTTP tests verify the integration contract. A documentation/code consistency check and ten live scenarios matched expectations; domain accuracy, calibration, and general adversarial resistance remain unmeasured. |
 
 A useful Jev task is one focused source-to-claim judgment. For example, check “The provided migration
 removes the `email` column” against that migration. A claim such as “This release is safe, fast, and
@@ -216,14 +216,13 @@ Checked against TypeSafe's official [introduction](https://docs.typesafe.ai/intr
 [model limitations](https://docs.typesafe.ai/model-jaggedness/jev-1.13), and [HTTP API](https://docs.typesafe.ai/api),
 [confidence semantics](https://docs.typesafe.ai/confidence), and
 [model and alias reference](https://docs.typesafe.ai/models) on 2026-09-18.
-See [ADR 0003](decisions/0003-typed-decision-verifiers.md) for the architecture decision and
-[launch copy](launch-0.3.0.md) for a draft announcement.
+See [ADR 0003](decisions/0003-typed-decision-verifiers.md) for the architecture decision.
 
-## First live campaign check
+## First live consistency check
 
 On 2026-09-18, the owner authorized one verification through the Xerify CLI using `--to jev`.
 The author identity was declared as `openai:gpt-6`; the target was `typesafe:jev-latest`, and the
-response reported `jev-1.13.0`. Only a 490-byte code excerpt and campaign sentence were supplied.
+response reported `jev-1.13.0`. Only a 490-byte code excerpt and one documentation sentence were supplied.
 The check asked whether the implementation supports the statement that falling below either
 configured probability or confidence threshold produces `unclear`.
 

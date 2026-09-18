@@ -32,7 +32,7 @@ Son résultat est un second avis, pas une preuve formelle, une certification de
 sécurité ou une garantie de vérité. La sortie du fournisseur est une donnée non fiable et n'est
 jamais exécutée.
 
-> Xerify 0.3.0 ajoute les décisions typées Jev à la vérification LLM. Une vérification de campagne et dix scénarios Jev supplémentaires, autorisés par le propriétaire, ont donné les résultats attendus. Voir les [résultats](docs/i18n/fr/jev-testing.md). Il s’agit de preuves d’intégration, pas d’une mesure de précision générale.
+> Xerify 0.3.0 ajoute les décisions typées Jev à la vérification LLM. Une vérification de cohérence documentation/code et dix scénarios Jev supplémentaires ont donné les résultats attendus. Voir les [résultats](docs/i18n/fr/jev-testing.md). Il s’agit de preuves d’intégration, pas d’une mesure de précision générale.
 
 Xerify est une couche de vérification indépendante du modèle pour les systèmes d’IA : preuves bornées, autre fournisseur d’invocation et résultat typé. Les vérificateurs LLM et les décisions Jev partagent les contrats CLI, bibliothèque et MCP.
 
@@ -210,4 +210,4 @@ distinct, qui n'est pas concédé sous licence ici.
 
 En cas de contradiction, les schémas et documents canoniques testés en anglais prévalent.
 
-[Benchmark](docs/i18n/fr/benchmark.md) · [0.3.0](docs/i18n/fr/launch-0.3.0.md)
+[Benchmark](docs/i18n/fr/benchmark.md)

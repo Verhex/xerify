@@ -36,6 +36,4 @@ El producto se llama **Xerify**, el paquete de npm es **`xerify-cli`**, y el eje
 
 Jev viene como adaptador predeterminado `jev`, con identidad `typesafe`. `--to jev` selecciona `typesafe:jev-latest`; `--to jev:MODEL_ID` selecciona un modelo concreto. Jev solo admite `verify`. Las probabilidades, confidence, el modelo devuelto y la política se conservan en el campo opcional `decision`. Bajo los umbrales, Xerify devuelve `unclear`. Jev no genera explicaciones ni citas.
 
-[Jev / 0.3.0](jev.md)
-
-[Jev](jev.md) · [Jev tests](jev-testing.md) · [Benchmark](benchmark.md) · [0.3.0](launch-0.3.0.md)
+[Guía de Jev](jev.md) · [Cobertura de pruebas y resultados en vivo](jev-testing.md) · [Benchmark entre proveedores](benchmark.md)

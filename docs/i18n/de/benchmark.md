@@ -1,6 +1,6 @@
 # Anbieterübergreifender Benchmark
 
-Dies ist ein ausdrücklich gestarteter **Xerify-End-to-End-Verifikationsbenchmark**, keine Rangliste der Intelligenz zugrunde liegender Modelle. Verglichen werden installierte Anbieterkanäle mit exakt denselben verfassten Behauptungen und Belegen. Der Eigentümer genehmigte Live-Aufrufe und feste Eingaben, bei denen ausschließlich das Ziel aufgerufen wird. Veröffentlichung, Paketfreigabe und Social Posts folgen einer getrennten Ergebnisprüfung.
+Dies ist ein ausdrücklich gestarteter **Xerify-End-to-End-Verifikationsbenchmark**, keine Rangliste der Intelligenz zugrunde liegender Modelle. Verglichen werden installierte Anbieterkanäle mit exakt denselben verfassten Behauptungen und Belegen. Der Eigentümer genehmigte Live-Aufrufe und feste Eingaben, bei denen ausschließlich das Ziel aufgerufen wird. Veröffentlichung und Paketfreigabe folgen einer getrennten Ergebnisprüfung.
 
 ## Matrix und unveränderte Eingaben
 
@@ -65,7 +65,7 @@ Resume prüft Suite, Fälle, Modelle, Routen, Wiederholungen, Limits und Adapter
 
 Perzentile verwenden nearest-rank für gültige Aufrufe. Zwölf Werte je Route belegen weder stabile p95 noch statistische Signifikanz. Gesamtzeit ist nicht Time-to-first-token. Jevs Ausgabetokens und Erklärung-/Reasoning-Tokens der LLMs erfüllen andere Verträge. Codex-Input enthält Cachetokens bereits; Claude addiert gemeldete Cache-Erstellungs-/Lesewerte. Tokenizer, Prompt-Overhead und Cacheabrechnung unterscheiden sich. Irreführende Tokens-pro-Sekunde-Ranglisten werden nicht erstellt.
 
-Jev bleibt bei Wahrscheinlichkeit ≥0.90, Confidence ≥0.80 und eindeutigem Maximum; Originalauswahl bleibt getrennt. Confidence ist kein unabhängiges Wahrheitslabel: [TypeSafe-Definition](https://docs.typesafe.ai/confidence). Für Indirektion, Ablenkungen und Angriffe siehe [Jev-1.13-Grenzen](https://docs.typesafe.ai/model-jaggedness/jev-1.13). Es wird keine menschliche Begründungsqualität oder LLM-as-judge-Bewertung erfunden. Die kleine synthetische Stichprobe repräsentiert keine Produktion. Einzelabweichungen vor Marketing prüfen; kein Gewinner oder Geschwindigkeitsfaktor wird vorweggenommen.
+Jev bleibt bei Wahrscheinlichkeit ≥0.90, Confidence ≥0.80 und eindeutigem Maximum; Originalauswahl bleibt getrennt. Confidence ist kein unabhängiges Wahrheitslabel: [TypeSafe-Definition](https://docs.typesafe.ai/confidence). Für Indirektion, Ablenkungen und Angriffe siehe [Jev-1.13-Grenzen](https://docs.typesafe.ai/model-jaggedness/jev-1.13). Es wird keine menschliche Begründungsqualität oder LLM-as-judge-Bewertung erfunden. Die kleine synthetische Stichprobe repräsentiert keine Produktion. Einzelabweichungen vor der Veröffentlichung prüfen; kein Gewinner oder Geschwindigkeitsfaktor wird vorweggenommen.
 
 Während des Laufs wurden auf demselben Rechner Dokumente bearbeitet und lokale Prüfungen ausgeführt. Die Hostlast war nicht isoliert; Latenzen enthalten diese Umgebungsvariabilität.
 

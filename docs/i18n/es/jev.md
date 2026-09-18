@@ -2,7 +2,7 @@
 
 Jev es el modelo de decisiones tipadas de TypeSafe. Xerify aporta la capa de verificación: evidencia acotada, separación de proveedores, veredictos estables e historial. Ambos se centran en decisiones utilizables por software, pero resuelven partes diferentes del problema.
 
-Xerify 0.3.0 incluye soporte para Jev. El adaptador se prueba con respuestas HTTP sintéticas. Una comprobación de campaña autorizada y diez escenarios en vivo independientes finalizaron el 2026-09-18. Véanse [cobertura y resultados](jev-testing.md). La precisión del dominio y la calibración de umbrales siguen sin medirse.
+Xerify 0.3.0 incluye soporte para Jev. El adaptador se prueba con respuestas HTTP sintéticas. Una comprobación de coherencia documentación/código y diez escenarios en vivo independientes finalizaron el 2026-09-18. Véanse [cobertura y resultados](jev-testing.md). La precisión del dominio y la calibración de umbrales siguen sin medirse.
 
 ## Configurar la clave
 
@@ -115,13 +115,13 @@ Este checkout incluye un complemento local `.agents/skills/xerify-jev`, enlazado
 
 El skill oficial y la documentación en vivo se revisaron el 2026-09-18: introducción, State, Choice, HTTP API, confidence, modelos, limitaciones y cookbook citation-check. El archivo descargado aportado coincidía byte por byte con GitHub oficial.
 
-| Área           | Resultado                                                                                                                                                                           |
-| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Protocolo      | Conservar HTTP directo, bearer auth, state nombrado y mapeo Choice; no se necesita envoltura chat-completions.                                                                      |
-| Pregunta       | Nombrar `claim` y `context`, evaluar su relación; falta de respaldo no equivale a contradicción.                                                                                    |
-| Política       | 0.90 / 0.80 configurables; no son requisitos TypeSafe ni precisión medida.                                                                                                          |
-| Explicabilidad | Resumen del adaptador y evidence/findings vacíos; Jev no genera justificación.                                                                                                      |
-| Validación     | HTTP sintético comprueba el contrato. Campaña y diez escenarios coincidieron con lo esperado; precisión de dominio, calibración y resistencia general a ataques siguen sin medirse. |
+| Área           | Resultado                                                                                                                                                                                                 |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Protocolo      | Conservar HTTP directo, bearer auth, state nombrado y mapeo Choice; no se necesita envoltura chat-completions.                                                                                            |
+| Pregunta       | Nombrar `claim` y `context`, evaluar su relación; falta de respaldo no equivale a contradicción.                                                                                                          |
+| Política       | 0.90 / 0.80 configurables; no son requisitos TypeSafe ni precisión medida.                                                                                                                                |
+| Explicabilidad | Resumen del adaptador y evidence/findings vacíos; Jev no genera justificación.                                                                                                                            |
+| Validación     | HTTP sintético comprueba el contrato. La comprobación de coherencia y diez escenarios coincidieron con lo esperado; precisión de dominio, calibración y resistencia general a ataques siguen sin medirse. |
 
 Una tarea útil para Jev es un juicio focalizado fuente-afirmación, como comprobar si una migración elimina `email`. «Esta versión es segura, rápida y retrocompatible» mezcla dimensiones: separar verificaciones con evidencia adecuada o elegir explícitamente un LLM para razonamiento amplio. Xerify 0.3.0 no divide afirmaciones ni agrupa verificaciones automáticamente.
 
@@ -137,11 +137,11 @@ Fuentes oficiales revisadas el 2026-09-18:
 
 [Introduction](https://docs.typesafe.ai/introduction) · [Skill](https://github.com/typesafe-ai/skills/blob/main/skills/typesafe-ai/SKILL.md) · [State](https://docs.typesafe.ai/concepts/state) · [Choice](https://docs.typesafe.ai/primitives/choice) · [Citation checks](https://docs.typesafe.ai/cookbooks/citation_check) · [Model limitations](https://docs.typesafe.ai/model-jaggedness/jev-1.13) · [HTTP API](https://docs.typesafe.ai/api) · [Confidence](https://docs.typesafe.ai/confidence) · [Models](https://docs.typesafe.ai/models)
 
-Véanse [ADR 0003](../../decisions/0003-typed-decision-verifiers.md) y el [borrador de anuncio](launch-0.3.0.md).
+Véase [ADR 0003](../../decisions/0003-typed-decision-verifiers.md).
 
-## Primera comprobación de campaña en vivo
+## Primera comprobación de coherencia en vivo
 
-El 2026-09-18 el propietario autorizó una verificación CLI con `--to jev`. Autor declarado: `openai:gpt-6`; destino: `typesafe:jev-latest`; modelo devuelto: `jev-1.13.0`. Solo se suministraron un fragmento de código y frase de campaña de 490 bytes. La comprobación preguntó si la implementación respalda que bajar de cualquiera de los dos mínimos configurados produce `unclear`.
+El 2026-09-18 el propietario autorizó una verificación CLI con `--to jev`. Autor declarado: `openai:gpt-6`; destino: `typesafe:jev-latest`; modelo devuelto: `jev-1.13.0`. Solo se suministraron un fragmento de código y una frase de documentación de 490 bytes. La comprobación preguntó si la implementación respalda que bajar de cualquiera de los dos mínimos configurados produce `unclear`.
 
 Resultado normalizado: `confirmed`, salida 0; `confirmed=0.91`, `refuted=0.06`, `unclear=0.03`, confidence `0.87`. Política `0.90` / `0.80`. Xerify informó 882 ms, 649 tokens de entrada, 41 de salida, sin truncamiento ni fallo. No se informó coste.
 
