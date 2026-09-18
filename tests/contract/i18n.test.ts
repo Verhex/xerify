@@ -51,7 +51,7 @@ const PRESERVED = [
   '`confirmed`',
   '`refuted`',
   '`unclear`',
-  '`xverify-cli`',
+  '`xerify-cli`',
   '`INVALID_PROVIDER_RESPONSE`',
   '`PROVIDER_UNAVAILABLE`',
   '`SAME_PROVIDER`'

@@ -34,7 +34,7 @@ Jev 已作为默认 `jev` 适配器集成，提供方身份为 `typesafe`。`--t
 首次公开发布到 npm 后：
 
 ```sh
-npm install --global xverify-cli@latest
+npm install --global xerify-cli@latest
 xerify --version
 xerify --json health
 xerify init
@@ -43,14 +43,14 @@ xerify init
 固定为项目开发依赖：
 
 ```sh
-npm install --save-dev --save-exact xverify-cli@0.3.0
+npm install --save-dev --save-exact xerify-cli@0.3.1
 npx xerify --version
 ```
 
 不保存依赖直接运行：
 
 ```sh
-npx --yes --package=xverify-cli@latest xerify --json health
+npx --yes --package=xerify-cli@latest xerify --json health
 ```
 
 需要 Node.js 20 或更高版本；Node.js 24 是主要发布环境。请阅读[简体中文用户指南](docs/i18n/zh-CN/README.md)和规范的[英文安装文档](docs/installation.md)。
@@ -133,7 +133,7 @@ command 适配器运行在一个私有的空目录中，而不是在你的项目
   "mcpServers": {
     "xerify": {
       "command": "npx",
-      "args": ["-y", "--package=xverify-cli@0.3.0", "xerify", "mcp", "stdio"]
+      "args": ["-y", "--package=xerify-cli@0.3.1", "xerify", "mcp", "stdio"]
     }
   }
 }
@@ -146,7 +146,7 @@ command 适配器运行在一个私有的空目录中，而不是在你的项目
   "mcpServers": {
     "xerify": {
       "command": "node",
-      "args": ["./node_modules/xverify-cli/dist/cli/entry.js", "mcp", "stdio"]
+      "args": ["./node_modules/xerify-cli/dist/cli/entry.js", "mcp", "stdio"]
     }
   }
 }

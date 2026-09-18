@@ -45,7 +45,7 @@ Jev est inclus comme adaptateur par défaut `jev`, avec l’identité `typesafe`
 Après la première publication publique sur npm :
 
 ```sh
-npm install --global xverify-cli@latest
+npm install --global xerify-cli@latest
 xerify --version
 xerify --json health
 xerify init
@@ -54,14 +54,14 @@ xerify init
 Comme dépendance de développement épinglée :
 
 ```sh
-npm install --save-dev --save-exact xverify-cli@0.3.0
+npm install --save-dev --save-exact xerify-cli@0.3.1
 npx xerify --version
 ```
 
 Sans conserver de dépendance :
 
 ```sh
-npx --yes --package=xverify-cli@latest xerify --json health
+npx --yes --package=xerify-cli@latest xerify --json health
 ```
 
 Node.js 20 ou ultérieur est requis ; Node.js 24 est la voie de publication principale. Consultez
@@ -162,7 +162,7 @@ MCP STDIO local avec version épinglée :
   "mcpServers": {
     "xerify": {
       "command": "npx",
-      "args": ["-y", "--package=xverify-cli@0.3.0", "xerify", "mcp", "stdio"]
+      "args": ["-y", "--package=xerify-cli@0.3.1", "xerify", "mcp", "stdio"]
     }
   }
 }
@@ -176,7 +176,7 @@ le point d'entrée : cela évite aussi l'indirection `npx`, et le serveur dém
   "mcpServers": {
     "xerify": {
       "command": "node",
-      "args": ["./node_modules/xverify-cli/dist/cli/entry.js", "mcp", "stdio"]
+      "args": ["./node_modules/xerify-cli/dist/cli/entry.js", "mcp", "stdio"]
     }
   }
 }

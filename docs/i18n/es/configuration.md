@@ -9,7 +9,7 @@ Xerify como dependencia local directa, este se inicializa automáticamente sin s
 existentes:
 
 ```sh
-npm install --save-dev xverify-cli@latest
+npm install --save-dev xerify-cli@latest
 ```
 
 Las instalaciones globales, las transitivas anidadas, las que no guardan dependencia, las hechas con
@@ -17,7 +17,7 @@ Las instalaciones globales, las transitivas anidadas, las que no guardan depende
 casos, inicialice de forma explícita:
 
 ```sh
-npx --yes --package=xverify-cli@latest xerify init
+npx --yes --package=xerify-cli@latest xerify init
 ```
 
 El comando es idempotente y nunca sobrescribe una configuración o un `.gitignore` existentes:
@@ -35,7 +35,7 @@ El comando es idempotente y nunca sobrescribe una configuración o un `.gitignor
 npm no expone una señal categórica de instalación directa o transitiva antes del primer ciclo de
 vida de la dependencia. Por eso Xerify acepta una declaración existente en el manifiesto o el lock
 de la raíz, o bien la combinación de una marca explícita de guardado junto con la ubicación exacta
-`node_modules/xverify-cli` en la raíz. Un gestor de paquetes podría elevar (hoist) una dependencia
+`node_modules/xerify-cli` en la raíz. Un gestor de paquetes podría elevar (hoist) una dependencia
 transitiva de Xerify hasta esa ubicación; el inicializador sigue sin sobrescribir nada y queda
 ignorado por Git, pero los autores de bibliotecas que integren Xerify deberían definir
 `XERIFY_SKIP_AUTO_INIT=1`.
@@ -121,7 +121,7 @@ los transportes que realmente use. Por ejemplo:
 
 `$schema` es solo una pista para el editor; Xerify no la descarga ni la ejecuta. En una instalación
 local del proyecto, puede reemplazarla por
-`../node_modules/xverify-cli/schemas/config.schema.json` para tener autocompletado sin conexión.
+`../node_modules/xerify-cli/schemas/config.schema.json` para tener autocompletado sin conexión.
 
 La configuración es estricta. Se rechazan los campos genéricos `token`, `secret`, `defaultModel`
 silencioso y cualquier campo de credenciales en los adaptadores `command` o de CLI. Los adaptadores

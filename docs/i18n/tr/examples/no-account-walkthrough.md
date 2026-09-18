@@ -25,10 +25,10 @@ Sahte sağlayıcı `tools/mock-provider.mjs` yolunda bulunur. Tek bir argüman a
 MOCK="$PWD/tools/mock-provider.mjs"
 
 # Genel (global) bir npm kurulumundan
-MOCK="$(npm root -g)/xverify-cli/tools/mock-provider.mjs"
+MOCK="$(npm root -g)/xerify-cli/tools/mock-provider.mjs"
 
 # Projeye özel bir kurulumdan
-MOCK="$PWD/node_modules/xverify-cli/tools/mock-provider.mjs"
+MOCK="$PWD/node_modules/xerify-cli/tools/mock-provider.mjs"
 
 echo "$MOCK"
 ```

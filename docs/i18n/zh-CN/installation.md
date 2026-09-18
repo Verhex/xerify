@@ -4,14 +4,18 @@
 
 > 规范的权威来源是英文文档。如果译文与已测试的约定存在冲突，以已测试的英文约定为准。
 
-Xerify 需要 Node.js 20 或更高版本，官方发布运行时以 Node.js 24 为主。公开的 npm 包名为 `xverify-cli`；产品名称与安装后的 CLI 命令始终是 `xerify`。
+Xerify 需要 Node.js 20 或更高版本，官方发布运行时以 Node.js 24 为主。公开的 npm 包名为 `xerify-cli`；产品名称与安装后的 CLI 命令始终是 `xerify`。
+
+## 从 xverify-cli 迁移
+
+从 0.3.1 开始，npm 包名为 `xerify-cli`。全局安装请先运行 `npm uninstall -g xverify-cli`，再运行 `npm install -g xerify-cli@latest`。项目依赖请先运行 `npm uninstall xverify-cli`，再运行 `npm install --save-dev xerify-cli@latest`。将库导入和 MCP 包路径中的 `xverify-cli` 改为 `xerify-cli`。`xerify` 命令、`.xerify/` 状态目录和 `xverify-config.json` 文件名保持不变。已发布的旧版本仍保留在原包名下。
 
 ## 选择安装方式
 
 当 Xerify 作为跨项目共用的工作站工具时，选择全局安装：
 
 ```sh
-npm install --global xverify-cli@latest
+npm install --global xerify-cli@latest
 xerify --version
 xerify init
 ```
@@ -19,22 +23,22 @@ xerify init
 当需要把 Xerify 锁定在某个仓库中时，将其安装为项目开发依赖：
 
 ```sh
-npm install --save-dev xverify-cli@latest
+npm install --save-dev xerify-cli@latest
 npx xerify --version
 ```
 
 只想快速检查一下能力、又不打算保留依赖时：
 
 ```sh
-npx --yes --package=xverify-cli@latest xerify --json health
+npx --yes --package=xerify-cli@latest xerify --json health
 ```
 
-务必带上 `@`，写成 `xverify-cli@latest`。少了它，`npm install xverify-cli latest` 会被 npm 理解成要安装两个包名，效果完全不同。
+务必带上 `@`，写成 `xerify-cli@latest`。少了它，`npm install xerify-cli latest` 会被 npm 理解成要安装两个包名，效果完全不同。
 
 自动化流程要求可复现结果时，把 `latest` 换成具体版本号：
 
 ```sh
-npm install --save-dev --save-exact xverify-cli@0.3.0
+npm install --save-dev --save-exact xerify-cli@0.3.1
 ```
 
 ## 项目初始化
@@ -63,9 +67,9 @@ xerify --json providers probe --all --timeout 5000
 升级时沿用当初的安装方式：
 
 ```sh
-npm update --global xverify-cli
+npm update --global xerify-cli
 # 或者，在锁定版本的项目里
-npm install --save-dev xverify-cli@latest
+npm install --save-dev xerify-cli@latest
 ```
 
 卸载 npm 包不会删除项目的运行历史或配置。确认运行历史、归档、配置和审计元数据都不再需要之后，再单独检查并删除 `.xerify/`。
@@ -79,7 +83,7 @@ npm install --save-dev xverify-cli@latest
   "mcpServers": {
     "xerify": {
       "command": "npx",
-      "args": ["-y", "--package=xverify-cli@0.3.0", "xerify", "mcp", "stdio"]
+      "args": ["-y", "--package=xerify-cli@0.3.1", "xerify", "mcp", "stdio"]
     }
   }
 }

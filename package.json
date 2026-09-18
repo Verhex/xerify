@@ -1,8 +1,8 @@
 {
-  "name": "xverify-cli",
-  "version": "0.3.0",
+  "name": "xerify-cli",
+  "version": "0.3.1",
   "description": "Verify before you trust. Cross-provider verification with LLMs and Jev. CLI, library, MCP.",
-  "mcpName": "io.github.verhexio/xerify",
+  "mcpName": "io.github.verhex/xerify",
   "author": {
     "name": "Verhex",
     "url": "https://github.com/Verhex"
@@ -96,6 +96,7 @@
     "vitest": "^4.1.10"
   },
   "keywords": [
+    "xerify",
     "verification",
     "jev",
     "typesafe",

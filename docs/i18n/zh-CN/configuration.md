@@ -7,13 +7,13 @@
 Xerify 不会把项目专属状态堆在仓库根目录。把 Xerify 装成项目本地直接依赖时，会自动完成初始化，且不覆盖已有文件：
 
 ```sh
-npm install --save-dev xverify-cli@latest
+npm install --save-dev xerify-cli@latest
 ```
 
 全局安装、嵌套的传递依赖安装、`--no-save` 安装、`npx` 方式，以及设置了 `XERIFY_SKIP_AUTO_INIT=1` 的安装，都不会往当前项目写入任何内容。这些情况下需要显式初始化：
 
 ```sh
-npx --yes --package=xverify-cli@latest xerify init
+npx --yes --package=xerify-cli@latest xerify init
 ```
 
 该命令是幂等的，绝不会覆盖已有的配置或 `.gitignore`：
@@ -28,7 +28,7 @@ npx --yes --package=xverify-cli@latest xerify init
 └── archive/          # archived records plus searchable index.jsonl
 ```
 
-在首次依赖生命周期触发之前，npm 并不能明确标出这是直接依赖还是传递依赖。因此 Xerify 的判断依据是：要么根清单/锁文件里已经声明了它，要么同时满足显式的 save 参数与精确的根级 `node_modules/xverify-cli` 路径。包管理器完全可能把某个传递依赖的 Xerify 提升到这个位置；初始化器本身不会覆盖文件、也已被 git 忽略，但把 Xerify 内嵌进库里的作者，仍应设置 `XERIFY_SKIP_AUTO_INIT=1`。
+在首次依赖生命周期触发之前，npm 并不能明确标出这是直接依赖还是传递依赖。因此 Xerify 的判断依据是：要么根清单/锁文件里已经声明了它，要么同时满足显式的 save 参数与精确的根级 `node_modules/xerify-cli` 路径。包管理器完全可能把某个传递依赖的 Xerify 提升到这个位置；初始化器本身不会覆盖文件、也已被 git 忽略，但把 Xerify 内嵌进库里的作者，仍应设置 `XERIFY_SKIP_AUTO_INIT=1`。
 
 规范的项目文件名是 `.xerify/xverify-config.json`。自动生成的 `.gitignore` 会把运行日志和可能带令牌的配置都排除在 Git 之外。如果确定配置里完全不含密钥，用户可以主动强制添加它，但每次提交前都要重新检查一遍。相对形式的项目级 `logPath` 是相对发现到的项目根目录解析的，不是相对包安装位置。在子目录中执行命令时，会向上逐级查找最近的规范项目配置；项目配置里的相对日志路径始终锚定在该项目根目录。
 
@@ -92,7 +92,7 @@ npx --yes --package=xverify-cli@latest xerify init
 }
 ```
 
-`$schema` 只是给编辑器看的提示，Xerify 本身不会拉取或执行它。项目本地安装可以把它换成 `../node_modules/xverify-cli/schemas/config.schema.json`，以便离线补全。
+`$schema` 只是给编辑器看的提示，Xerify 本身不会拉取或执行它。项目本地安装可以把它换成 `../node_modules/xerify-cli/schemas/config.schema.json`，以便离线补全。
 
 配置校验很严格：command 或 CLI 类适配器上出现通用的 `token`、`secret`、隐性的 `defaultModel` 等凭据字段，一律会被拒绝。只有直连的 `jev`、`openai-api`、`anthropic-api`、`openai-compatible` 适配器才接受可选字段 `apiKey`，且字段名必须精确匹配。
 

@@ -44,7 +44,7 @@ Genel bir kurulum olmadan, bir MCP host'u genel npm paketini doğrudan çözüml
   "mcpServers": {
     "xerify": {
       "command": "npx",
-      "args": ["-y", "--package=xverify-cli@0.3.0", "xerify", "mcp", "stdio"]
+      "args": ["-y", "--package=xerify-cli@0.3.1", "xerify", "mcp", "stdio"]
     }
   }
 }
@@ -64,7 +64,7 @@ Test, `protocolEra`'yı ayrı ayrı `modern` ve `legacy` olarak sabitler ve her 
 
 ## Resmi Registry meta verisi
 
-Xerify'in deposu bir `server.json` içerir ve npm manifestosu buna karşılık gelen `mcpName: "io.github.verhexio/xerify"` alanını taşır. Registry girdisi, `xverify-cli`'yi npm paketi olarak tanımlar, paket/sunucu sürümünü sabitler, STDIO taşımasını beyan eder ve sabit `mcp stdio` argümanlarını sağlar. Bir sözleşme testi bu alanların birbirinden sapmasını engeller.
+Xerify'in deposu bir `server.json` içerir ve npm manifestosu buna karşılık gelen `mcpName: "io.github.verhex/xerify"` alanını taşır. Registry girdisi, `xerify-cli`'yi npm paketi olarak tanımlar, paket/sunucu sürümünü sabitler, STDIO taşımasını beyan eder ve sabit `mcp stdio` argümanlarını sağlar. Bir sözleşme testi bu alanların birbirinden sapmasını engeller.
 
 Resmi MCP Registry, ücretsiz bir keşif meta veri kanalıdır; bir yürütme host'u veya paket yansıması değildir. Önce npm, tam olarak Xerify'in o sürümünü içermelidir; ancak o zaman sürüm sahibi kimliğini doğrulayıp `server.json`'ı `mcp-publisher` ile yayımlayabilir. Registry şu anda önizleme yazılımıdır, bu yüzden istemciler doğrudan sabitlenmiş bir npm yapılandırmasını kararlı yedek olarak tutmalıdır. Resmi [Registry hızlı başlangıç kılavuzuna](https://modelcontextprotocol.io/registry/quickstart) ve [npm paket kurallarına](https://github.com/modelcontextprotocol/registry/blob/main/docs/modelcontextprotocol-io/package-types.mdx) bakın.
 

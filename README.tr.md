@@ -41,7 +41,7 @@ Jev, varsayılan `jev` adaptörüyle (`typesafe` sağlayıcısı) gelir. `--to j
 İlk genel npm yayını sonrasında:
 
 ```sh
-npm install --global xverify-cli@latest
+npm install --global xerify-cli@latest
 xerify --version
 xerify --json health
 xerify init
@@ -50,14 +50,14 @@ xerify init
 Projeye sabitlenmiş geliştirme bağımlılığı:
 
 ```sh
-npm install --save-dev --save-exact xverify-cli@0.3.0
+npm install --save-dev --save-exact xerify-cli@0.3.1
 npx xerify --version
 ```
 
 Bağımlılık kaydetmeden çalıştırma:
 
 ```sh
-npx --yes --package=xverify-cli@latest xerify --json health
+npx --yes --package=xerify-cli@latest xerify --json health
 ```
 
 Node.js 20 veya üstü gerekir; ana yayın hattı Node.js 24'tür. Ayrıntılar için [Türkçe tüketici
@@ -183,7 +183,7 @@ hedefleyin — bu ayrıca `npx` dolaylamasını da atlar, dolayısıyla sunucu d
   "mcpServers": {
     "xerify": {
       "command": "node",
-      "args": ["./node_modules/xverify-cli/dist/cli/entry.js", "mcp", "stdio"]
+      "args": ["./node_modules/xerify-cli/dist/cli/entry.js", "mcp", "stdio"]
     }
   }
 }
@@ -196,7 +196,7 @@ Sabit npm sürümüyle:
   "mcpServers": {
     "xerify": {
       "command": "npx",
-      "args": ["-y", "--package=xverify-cli@0.3.0", "xerify", "mcp", "stdio"]
+      "args": ["-y", "--package=xerify-cli@0.3.1", "xerify", "mcp", "stdio"]
     }
   }
 }

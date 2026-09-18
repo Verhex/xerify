@@ -113,7 +113,7 @@ try {
     }
   );
   if (npmExecVersion.trim() !== sourcePackageJson.version) {
-    throw new Error('npm exec did not resolve the xerify binary from the xverify-cli package');
+    throw new Error('npm exec did not resolve the xerify binary from the xerify-cli package');
   }
 
   runNpm(

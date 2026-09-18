@@ -65,7 +65,7 @@ Yerel STDIO, önerilen sıfır barındırma maliyetli MCP kanalıdır ve yerel C
   "mcpServers": {
     "xerify": {
       "command": "npx",
-      "args": ["-y", "--package=xverify-cli@latest", "xerify", "mcp", "stdio"]
+      "args": ["-y", "--package=xerify-cli@latest", "xerify", "mcp", "stdio"]
     }
   }
 }
@@ -77,7 +77,7 @@ Loopback Streamable HTTP de kullanıcının makinesinde çalıştırmak için ü
 
 ## Ücretsiz MCP dağıtımı ve gelecekteki barındırma
 
-Seçilen sıfır barındırma maliyetli dağıtım yolu, npm artı resmi MCP Registry'sidir. Registry, keşif/başlatma meta verisini saklar ve genel `xverify-cli` npm paketine işaret eder; Xerify'in kodunu barındırmaz. Depodaki `server.json`, paket sürümünü, STDIO taşımasını ve `mcp stdio` başlatma argümanlarını sabitler. Paketin eşleşen `mcpName` alanı npm/Registry ilişkisini kanıtlar. Registry henüz önizleme aşamasında olduğundan, sabitlenmiş bir `npx -y --package=xverify-cli@<version> xerify mcp stdio` host girdisi belirleyici yedek olmayı sürdürür. Resmi [Registry hızlı başlangıç kılavuzuna](https://modelcontextprotocol.io/registry/quickstart) ve [paket türü kurallarına](https://github.com/modelcontextprotocol/registry/blob/main/docs/modelcontextprotocol-io/package-types.mdx) bakın.
+Seçilen sıfır barındırma maliyetli dağıtım yolu, npm artı resmi MCP Registry'sidir. Registry, keşif/başlatma meta verisini saklar ve genel `xerify-cli` npm paketine işaret eder; Xerify'in kodunu barındırmaz. Depodaki `server.json`, paket sürümünü, STDIO taşımasını ve `mcp stdio` başlatma argümanlarını sabitler. Paketin eşleşen `mcpName` alanı npm/Registry ilişkisini kanıtlar. Registry henüz önizleme aşamasında olduğundan, sabitlenmiş bir `npx -y --package=xerify-cli@<version> xerify mcp stdio` host girdisi belirleyici yedek olmayı sürdürür. Resmi [Registry hızlı başlangıç kılavuzuna](https://modelcontextprotocol.io/registry/quickstart) ve [paket türü kurallarına](https://github.com/modelcontextprotocol/registry/blob/main/docs/modelcontextprotocol-io/package-types.mdx) bakın.
 
 Bu dağıtım kanalı yerel yürütmedir: barındırma hesabı yok, genel giriş noktası yok, merkezi kimlik bilgisi deposu yok. Verhex ileride genel bir API destekli MCP'ye ihtiyaç duyarsa, resmi Agents SDK'sı Streamable HTTP MCP'yi desteklediği ve Workers Free planı sınırlı bir ücretsiz katman sunduğu için Cloudflare Workers seçilen değerlendirme hedefi olmayı sürdürüyor. Cloudflare'in resmi [uzak MCP kılavuzuna](https://developers.cloudflare.com/agents/model-context-protocol/guides/remote-mcp-server/) ve [Workers fiyatlandırmasına](https://developers.cloudflare.com/workers/platform/pricing/) bakın. Bu bir dağıtım yol haritası maddesidir, mevcut Node dinleyicisinin değiştirilmeden yüklenebileceği iddiası değildir.
 

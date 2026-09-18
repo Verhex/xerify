@@ -83,7 +83,7 @@ El adaptador predeterminado no necesita configuración de proveedor. Para modifi
 Las credenciales de entorno prevalecen sobre un `apiKey` literal opcional. El enmascaramiento diagnóstico y permisos exclusivos del propietario coinciden con los otros adaptadores API directos. Un `endpoint` opcional admite un proxy fiable o servidor de pruebas local; cambiarlo envía clave y evidencia a esa URL. Si cambia el servicio de invocación, declarar un adaptador gateway separado. Cuerpo y respuesta HTTP tienen límites de bytes; una entrada excesiva se rechaza antes de consumir una llamada pagada. Los límites de tokens del proveedor siguen siendo independientes.
 
 ```ts
-import { executeVerify, JevAdapter, ProviderRegistry, VerifyRequestSchema } from 'xverify-cli';
+import { executeVerify, JevAdapter, ProviderRegistry, VerifyRequestSchema } from 'xerify-cli';
 
 const result = await executeVerify(
   VerifyRequestSchema.parse({

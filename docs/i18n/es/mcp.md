@@ -51,7 +51,7 @@ Sin una instalación global, un host MCP puede resolver directamente el paquete 
   "mcpServers": {
     "xerify": {
       "command": "npx",
-      "args": ["-y", "--package=xverify-cli@0.3.0", "xerify", "mcp", "stdio"]
+      "args": ["-y", "--package=xerify-cli@0.3.1", "xerify", "mcp", "stdio"]
     }
   }
 }
@@ -73,8 +73,8 @@ La prueba fija `protocolEra` a `modern` y a `legacy` por separado, y exige que l
 ## Metadatos del Registry oficial
 
 El repositorio de Xerify contiene `server.json`, y el manifiesto de npm contiene el
-`mcpName: "io.github.verhexio/xerify"` correspondiente. La entrada del registro identifica a
-`xverify-cli` como el paquete de npm, fija la versión de paquete/servidor, declara el transporte
+`mcpName: "io.github.verhex/xerify"` correspondiente. La entrada del registro identifica a
+`xerify-cli` como el paquete de npm, fija la versión de paquete/servidor, declara el transporte
 STDIO y suministra los argumentos fijos de `mcp stdio`. Una prueba de contrato impide que esos campos
 se desalineen.
 

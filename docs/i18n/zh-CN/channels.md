@@ -71,7 +71,7 @@ git diff --cached | xerify --json verify \
   "mcpServers": {
     "xerify": {
       "command": "npx",
-      "args": ["-y", "--package=xverify-cli@latest", "xerify", "mcp", "stdio"]
+      "args": ["-y", "--package=xerify-cli@latest", "xerify", "mcp", "stdio"]
     }
   }
 }
@@ -87,9 +87,9 @@ git diff --cached | xerify --json verify \
 ## 免费 MCP 分发与未来的托管方案
 
 选定的零托管成本分发路径是 npm 加官方 MCP Registry。Registry 保存的是发现/启动用的元数据，指向公开的
-`xverify-cli` npm 包，本身并不托管 Xerify 的代码。仓库里的 `server.json` 固定了包版本、STDIO 传输方式，
+`xerify-cli` npm 包，本身并不托管 Xerify 的代码。仓库里的 `server.json` 固定了包版本、STDIO 传输方式，
 以及 `mcp stdio` 启动参数。包里匹配的 `mcpName` 用来证明 npm 与 Registry 的关联关系。由于 Registry 目前
-还在预览阶段，固定版本的 `npx -y --package=xverify-cli@<version> xerify mcp stdio` host 配置项仍然是
+还在预览阶段，固定版本的 `npx -y --package=xerify-cli@<version> xerify mcp stdio` host 配置项仍然是
 确定性的兜底方案。参见官方的 [Registry 快速上手](https://modelcontextprotocol.io/registry/quickstart) 和
 [包类型规则](https://github.com/modelcontextprotocol/registry/blob/main/docs/modelcontextprotocol-io/package-types.mdx)。
 

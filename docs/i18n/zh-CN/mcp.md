@@ -48,7 +48,7 @@ MCP 的 `ask` 和 `verify` 调用，会经过与 CLI、library 相同的项目�
   "mcpServers": {
     "xerify": {
       "command": "npx",
-      "args": ["-y", "--package=xverify-cli@0.3.0", "xerify", "mcp", "stdio"]
+      "args": ["-y", "--package=xerify-cli@0.3.1", "xerify", "mcp", "stdio"]
     }
   }
 }
@@ -69,7 +69,7 @@ npm run smoke:mcp
 ## 官方注册表元数据
 
 Xerify 的仓库中包含 `server.json`，npm 清单里也有与之对应的
-`mcpName: "io.github.verhexio/xerify"`。这条注册表条目把 `xverify-cli` 标识为 npm 包，
+`mcpName: "io.github.verhex/xerify"`。这条注册表条目把 `xerify-cli` 标识为 npm 包，
 锁定了 package/server 版本，声明了 STDIO 传输方式，并给出了固定的 `mcp stdio`
 参数。有一项契约测试专门防止这些字段出现偏差。
 

@@ -37,10 +37,10 @@ resuelven.
 MOCK="$PWD/tools/mock-provider.mjs"
 
 # Desde una instalación global de npm
-MOCK="$(npm root -g)/xverify-cli/tools/mock-provider.mjs"
+MOCK="$(npm root -g)/xerify-cli/tools/mock-provider.mjs"
 
 # Desde una instalación local del proyecto
-MOCK="$PWD/node_modules/xverify-cli/tools/mock-provider.mjs"
+MOCK="$PWD/node_modules/xerify-cli/tools/mock-provider.mjs"
 
 echo "$MOCK"
 ```

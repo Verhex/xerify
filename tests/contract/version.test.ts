@@ -80,7 +80,7 @@ describe('published version', () => {
     const pinned = new Map<string, string[]>();
     for (const page of instructional) {
       const text = readFileSync(path.join(repositoryRoot, page), 'utf8');
-      for (const match of text.matchAll(/xverify-cli@(\d+\.\d+\.\d+)/g)) {
+      for (const match of text.matchAll(/xerify-cli@(\d+\.\d+\.\d+)/g)) {
         const version = match[1];
         if (version === undefined) continue;
         pinned.set(version, [...(pinned.get(version) ?? []), page]);

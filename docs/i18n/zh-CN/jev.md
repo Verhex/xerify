@@ -83,7 +83,7 @@ Jev 不生成解释或证据引用。Xerify 提供明确标注由模板生成的
 环境凭据优先于可选的字面量 `apiKey`。诊断脱敏和仅所有者可读的配置权限与其他直接 API 适配器一致。可选 `endpoint` 支持可信代理或本地测试服务器；修改它会将密钥与证据发送到新 URL。如果调用服务本身不同，应单独声明 gateway 适配器。请求体和 HTTP 响应都有字节边界；超大输入在计费请求前即拒绝。提供方 token 上限独立于 Xerify 字节上限。
 
 ```ts
-import { executeVerify, JevAdapter, ProviderRegistry, VerifyRequestSchema } from 'xverify-cli';
+import { executeVerify, JevAdapter, ProviderRegistry, VerifyRequestSchema } from 'xerify-cli';
 
 const result = await executeVerify(
   VerifyRequestSchema.parse({

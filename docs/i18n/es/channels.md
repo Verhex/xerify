@@ -77,7 +77,7 @@ herramienta remota que conserva de forma natural las suscripciones locales por C
   "mcpServers": {
     "xerify": {
       "command": "npx",
-      "args": ["-y", "--package=xverify-cli@latest", "xerify", "mcp", "stdio"]
+      "args": ["-y", "--package=xerify-cli@latest", "xerify", "mcp", "stdio"]
     }
   }
 }
@@ -96,10 +96,10 @@ credenciales de suscripción locales.
 
 La vía de distribución elegida, sin costo de hospedaje, es npm más el MCP Registry oficial. El
 Registry guarda metadatos de descubrimiento y arranque, y apunta al paquete público de npm
-`xverify-cli`; no aloja el código de Xerify. El `server.json` del repositorio fija la versión del
+`xerify-cli`; no aloja el código de Xerify. El `server.json` del repositorio fija la versión del
 paquete, el transporte STDIO y los argumentos de arranque de `mcp stdio`. El `mcpName`
 correspondiente en el paquete demuestra la asociación entre npm y el Registry. Como el Registry
-todavía está en vista previa, una entrada de host fijada con `npx -y --package=xverify-cli@<version>
+todavía está en vista previa, una entrada de host fijada con `npx -y --package=xerify-cli@<version>
 xerify mcp stdio` sigue siendo el respaldo determinista. Consulte la [guía rápida oficial del
 Registry](https://modelcontextprotocol.io/registry/quickstart) y las [reglas de tipos de
 paquete](https://github.com/modelcontextprotocol/registry/blob/main/docs/modelcontextprotocol-io/package-types.mdx).

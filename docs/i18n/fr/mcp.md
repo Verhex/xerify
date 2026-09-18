@@ -52,7 +52,7 @@ Sans installation globale, un hôte MCP peut résoudre directement le paquet npm
   "mcpServers": {
     "xerify": {
       "command": "npx",
-      "args": ["-y", "--package=xverify-cli@0.3.0", "xerify", "mcp", "stdio"]
+      "args": ["-y", "--package=xerify-cli@0.3.1", "xerify", "mcp", "stdio"]
     }
   }
 }
@@ -78,7 +78,7 @@ d'outils soient tous découvrables. Les clients modernes négocient `server/disc
 ## Métadonnées officielles du Registry
 
 Le dépôt de Xerify contient un fichier `server.json`, et le manifeste npm contient le
-`mcpName: "io.github.verhexio/xerify"` correspondant. L'entrée du registre identifie `xverify-cli`
+`mcpName: "io.github.verhex/xerify"` correspondant. L'entrée du registre identifie `xerify-cli`
 comme paquet npm, fige la version du paquet/serveur, déclare le transport STDIO, et fournit les
 arguments fixes de `mcp stdio`. Un test de contrat empêche ces champs de diverger.
 

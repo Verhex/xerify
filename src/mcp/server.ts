@@ -96,7 +96,7 @@ export interface XerifyMcpServerOptions {
 
 export function createXerifyMcpServer(options: XerifyMcpServerOptions): McpServer {
   const server = new McpServer(
-    { name: 'xerify', version: options.version ?? '0.3.0' },
+    { name: 'xerify', version: options.version ?? '0.3.1' },
     { capabilities: { tools: { listChanged: false } } }
   );
 

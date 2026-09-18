@@ -7,13 +7,13 @@
 Xerify, projeye özgü durumu depo kök dizininin dışında tutar. Xerify'i doğrudan yerel bir bağımlılık olarak kurmak, var olan dosyaların üzerine yazmadan otomatik başlatma yapar:
 
 ```sh
-npm install --save-dev xverify-cli@latest
+npm install --save-dev xerify-cli@latest
 ```
 
 Genel (global) kurulumlar, iç içe geçişli kurulumlar, kaydetmeyen (no-save) kurulumlar, `npx` ile yapılan kurulumlar ve `XERIFY_SKIP_AUTO_INIT=1` ile yapılan kurulumlar geçerli projeye hiçbir şey yazmaz. Bu durumlarda başlatmayı elle yapın:
 
 ```sh
-npx --yes --package=xverify-cli@latest xerify init
+npx --yes --package=xerify-cli@latest xerify init
 ```
 
 Bu komut idempotenttir ve var olan bir yapılandırmanın veya `.gitignore` dosyasının üzerine asla yazmaz:
@@ -28,7 +28,7 @@ Bu komut idempotenttir ve var olan bir yapılandırmanın veya `.gitignore` dosy
 └── archive/          # archived records plus searchable index.jsonl
 ```
 
-npm, ilk bağımlılık yaşam döngüsünden önce doğrudan/geçişli ayrımını kategorik olarak bildirmez. Bu yüzden Xerify, ya var olan bir kök manifest/lock bildirimini ya da açık bir kaydetme bayrağıyla tam kök `node_modules/xverify-cli` konumunun birlikteliğini kabul eder. Bir paket yöneticisi, geçişli bir Xerify bağımlılığını bu konuma taşıyabilir (hoist); başlatıcı yine de üzerine yazmaz ve git tarafından yok sayılır, ama Xerify'i başka bir paketin içine gömen kütüphane yazarları `XERIFY_SKIP_AUTO_INIT=1` ayarlamalıdır.
+npm, ilk bağımlılık yaşam döngüsünden önce doğrudan/geçişli ayrımını kategorik olarak bildirmez. Bu yüzden Xerify, ya var olan bir kök manifest/lock bildirimini ya da açık bir kaydetme bayrağıyla tam kök `node_modules/xerify-cli` konumunun birlikteliğini kabul eder. Bir paket yöneticisi, geçişli bir Xerify bağımlılığını bu konuma taşıyabilir (hoist); başlatıcı yine de üzerine yazmaz ve git tarafından yok sayılır, ama Xerify'i başka bir paketin içine gömen kütüphane yazarları `XERIFY_SKIP_AUTO_INIT=1` ayarlamalıdır.
 
 Kanonik proje dosya adı `.xerify/xverify-config.json`'dır. Oluşturulan `.gitignore`, hem çalışma zamanı günlüklerini hem de token barındırabilen yapılandırmayı Git dışında tutar. Yapılandırmasını kesinlikle gizli bilgiden arındırılmış tutan kullanıcılar dosyayı bilerek zorla ekleyebilir, ama bunu yaptıklarında her commit öncesinde dosyayı yeniden gözden geçirmelidirler. Göreli bir proje `logPath` değeri, paket kurulumundan değil bulunan proje kökünden çözümlenir. Bir alt dizinde başlatılan komutlar, en yakın kanonik proje yapılandırmasını bulmak için üst dizinleri tarar; projede yapılandırılmış göreli bir günlük yolu o proje köküne bağlı kalır.
 
@@ -92,7 +92,7 @@ Boş bir `providers` alanı, yerleşik `codex`, `claude` ve `jev` adaptörlerini
 }
 ```
 
-`$schema`, yalnızca editör için bir ipucudur; Xerify onu ne indirir ne de çalıştırır. Projeye özel bir kurulumda, çevrimdışı tamamlama için bu değer `../node_modules/xverify-cli/schemas/config.schema.json` ile değiştirilebilir.
+`$schema`, yalnızca editör için bir ipucudur; Xerify onu ne indirir ne de çalıştırır. Projeye özel bir kurulumda, çevrimdışı tamamlama için bu değer `../node_modules/xerify-cli/schemas/config.schema.json` ile değiştirilebilir.
 
 Yapılandırma katıdır. command veya CLI adaptörleri üzerinde genel `token`, `secret`, sessiz `defaultModel` ve kimlik bilgisi alanları reddedilir. Doğrudan `jev`, `openai-api`, `anthropic-api` ve `openai-compatible` adaptörleri yalnızca tam olarak `apiKey` isteğe bağlı alanını kabul eder.
 

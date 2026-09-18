@@ -37,10 +37,10 @@ lösen sich dort nie auf.
 MOCK="$PWD/tools/mock-provider.mjs"
 
 # Aus einer globalen npm-Installation
-MOCK="$(npm root -g)/xverify-cli/tools/mock-provider.mjs"
+MOCK="$(npm root -g)/xerify-cli/tools/mock-provider.mjs"
 
 # Aus einer projektlokalen Installation
-MOCK="$PWD/node_modules/xverify-cli/tools/mock-provider.mjs"
+MOCK="$PWD/node_modules/xerify-cli/tools/mock-provider.mjs"
 
 echo "$MOCK"
 ```

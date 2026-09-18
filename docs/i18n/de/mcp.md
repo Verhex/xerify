@@ -52,7 +52,7 @@ Ohne globale Installation kann ein MCP-Host das öffentliche npm-Paket auch dire
   "mcpServers": {
     "xerify": {
       "command": "npx",
-      "args": ["-y", "--package=xverify-cli@0.3.0", "xerify", "mcp", "stdio"]
+      "args": ["-y", "--package=xerify-cli@0.3.1", "xerify", "mcp", "stdio"]
     }
   }
 }
@@ -78,7 +78,7 @@ Legacy-Clients nutzen den Pfad aus der Initialize-Ära.
 ## Metadaten im offiziellen Registry
 
 Das Repository von Xerify enthält eine `server.json`, und das npm-Manifest trägt den passenden
-`mcpName: "io.github.verhexio/xerify"`. Der Registry-Eintrag identifiziert `xverify-cli` als
+`mcpName: "io.github.verhex/xerify"`. Der Registry-Eintrag identifiziert `xerify-cli` als
 npm-Paket, fixiert die Paket-/Server-Version, deklariert STDIO-Transport und liefert die festen
 `mcp stdio`-Argumente. Ein Contract-Test verhindert, dass diese Felder auseinanderlaufen.
 

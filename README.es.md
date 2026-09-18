@@ -42,7 +42,7 @@ Jev viene como adaptador predeterminado `jev`, con identidad `typesafe`. `--to j
 Después de la primera publicación pública en npm:
 
 ```sh
-npm install --global xverify-cli@latest
+npm install --global xerify-cli@latest
 xerify --version
 xerify --json health
 xerify init
@@ -51,14 +51,14 @@ xerify init
 Como dependencia de desarrollo fijada:
 
 ```sh
-npm install --save-dev --save-exact xverify-cli@0.3.0
+npm install --save-dev --save-exact xerify-cli@0.3.1
 npx xerify --version
 ```
 
 Sin conservar una dependencia:
 
 ```sh
-npx --yes --package=xverify-cli@latest xerify --json health
+npx --yes --package=xerify-cli@latest xerify --json health
 ```
 
 Se requiere Node.js 20 o posterior; Node.js 24 es la vía principal de publicación. Consulta la
@@ -155,7 +155,7 @@ MCP STDIO local con versión fija:
   "mcpServers": {
     "xerify": {
       "command": "npx",
-      "args": ["-y", "--package=xverify-cli@0.3.0", "xerify", "mcp", "stdio"]
+      "args": ["-y", "--package=xerify-cli@0.3.1", "xerify", "mcp", "stdio"]
     }
   }
 }
@@ -170,7 +170,7 @@ arranca más rápido:
   "mcpServers": {
     "xerify": {
       "command": "node",
-      "args": ["./node_modules/xverify-cli/dist/cli/entry.js", "mcp", "stdio"]
+      "args": ["./node_modules/xerify-cli/dist/cli/entry.js", "mcp", "stdio"]
     }
   }
 }

@@ -5,7 +5,7 @@ import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 
 const CONFIG_FILENAME = 'xverify-config.json';
-const PACKAGE_NAME = 'xverify-cli';
+const PACKAGE_NAME = 'xerify-cli';
 const packageRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 function enabledForDirectLocalInstall(environment) {

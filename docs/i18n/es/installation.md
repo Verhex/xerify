@@ -5,8 +5,12 @@
 > La documentación en inglés es la fuente canónica y normativa. Si una traducción discrepa de un contrato ya probado, prevalece el contrato en inglés probado.
 
 Xerify necesita Node.js 20 o una versión posterior. Node.js 24 es el runtime principal sobre el que
-se publica. El paquete público de npm es `xverify-cli`; el producto y el comando de la CLI instalada
+se publica. El paquete público de npm es `xerify-cli`; el producto y el comando de la CLI instalada
 siguen llamándose `xerify`.
+
+## Migración desde xverify-cli
+
+A partir de 0.3.1, el paquete npm se llama `xerify-cli`. Instalación global: ejecuta `npm uninstall -g xverify-cli` y después `npm install -g xerify-cli@latest`. Para una dependencia del proyecto: `npm uninstall xverify-cli` y después `npm install --save-dev xerify-cli@latest`. Cambia los imports de la biblioteca y las rutas del paquete MCP de `xverify-cli` a `xerify-cli`. El comando `xerify`, los datos en `.xerify/` y el nombre `xverify-config.json` no cambian. Las versiones ya publicadas siguen disponibles con el nombre anterior.
 
 ## Elegir un modo de instalación
 
@@ -14,7 +18,7 @@ Instale Xerify de forma global cuando vaya a ser una herramienta de la máquina,
 varios proyectos:
 
 ```sh
-npm install --global xverify-cli@latest
+npm install --global xerify-cli@latest
 xerify --version
 xerify init
 ```
@@ -23,23 +27,23 @@ Instálelo como dependencia de desarrollo del proyecto cuando el repositorio deb
 Xerify:
 
 ```sh
-npm install --save-dev xverify-cli@latest
+npm install --save-dev xerify-cli@latest
 npx xerify --version
 ```
 
 Ejecútelo sin conservar ninguna dependencia, para una verificación rápida de capacidades:
 
 ```sh
-npx --yes --package=xverify-cli@latest xerify --json health
+npx --yes --package=xerify-cli@latest xerify --json health
 ```
 
-Use `xverify-cli@latest`, con el `@` incluido. `npm install xverify-cli latest` le pide a npm que
+Use `xerify-cli@latest`, con el `@` incluido. `npm install xerify-cli latest` le pide a npm que
 instale dos paquetes distintos, y no es lo mismo.
 
 Para automatización reproducible, fije una versión exacta en lugar de `latest`:
 
 ```sh
-npm install --save-dev --save-exact xverify-cli@0.3.0
+npm install --save-dev --save-exact xerify-cli@0.3.1
 ```
 
 ## Inicialización del proyecto
@@ -77,9 +81,9 @@ del endpoint.
 Actualice usando el mismo modo de instalación:
 
 ```sh
-npm update --global xverify-cli
+npm update --global xerify-cli
 # o, dentro de un proyecto con versión fijada
-npm install --save-dev xverify-cli@latest
+npm install --save-dev xerify-cli@latest
 ```
 
 Eliminar el paquete de npm no borra el historial ni la configuración del proyecto. Revise y elimine
@@ -95,7 +99,7 @@ El servidor MCP local por STDIO usa el mismo paquete; no existe una segunda desc
   "mcpServers": {
     "xerify": {
       "command": "npx",
-      "args": ["-y", "--package=xverify-cli@0.3.0", "xerify", "mcp", "stdio"]
+      "args": ["-y", "--package=xerify-cli@0.3.1", "xerify", "mcp", "stdio"]
     }
   }
 }

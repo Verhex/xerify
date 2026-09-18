@@ -4,14 +4,18 @@
 
 > Maßgeblich ist die englische Dokumentation. Weichen Übersetzung und getestetes Verhalten voneinander ab, gilt die englische Fassung.
 
-Xerify benötigt Node.js 20 oder neuer; Node.js 24 ist die primäre Release-Laufzeitumgebung. Das öffentliche npm-Paket heißt `xverify-cli`, Produkt und installierter CLI-Befehl bleiben `xerify`.
+Xerify benötigt Node.js 20 oder neuer; Node.js 24 ist die primäre Release-Laufzeitumgebung. Das öffentliche npm-Paket heißt `xerify-cli`, Produkt und installierter CLI-Befehl bleiben `xerify`.
+
+## Migration von xverify-cli
+
+Ab 0.3.1 heißt das npm-Paket `xerify-cli`. Global: zuerst `npm uninstall -g xverify-cli`, dann `npm install -g xerify-cli@latest`. Für eine Projektabhängigkeit: zuerst `npm uninstall xverify-cli`, dann `npm install --save-dev xerify-cli@latest`. Bibliotheksimporte und MCP-Paketpfade müssen von `xverify-cli` auf `xerify-cli` umgestellt werden. Der Befehl `xerify`, der Zustand unter `.xerify/` und der Dateiname `xverify-config.json` bleiben unverändert. Bereits veröffentlichte Versionen bleiben unter dem bisherigen Paketnamen verfügbar.
 
 ## Installationsart wählen
 
 Global installieren, wenn Xerify als Arbeitsplatz-Tool projektübergreifend genutzt wird:
 
 ```sh
-npm install --global xverify-cli@latest
+npm install --global xerify-cli@latest
 xerify --version
 xerify init
 ```
@@ -19,23 +23,23 @@ xerify init
 Als Dev-Dependency des Projekts installieren, wenn das Repository eine feste Xerify-Version vorgeben soll:
 
 ```sh
-npm install --save-dev xverify-cli@latest
+npm install --save-dev xerify-cli@latest
 npx xerify --version
 ```
 
 Für einen schnellen Funktionscheck ausführen, ohne eine Abhängigkeit zu hinterlassen:
 
 ```sh
-npx --yes --package=xverify-cli@latest xerify --json health
+npx --yes --package=xerify-cli@latest xerify --json health
 ```
 
-`xverify-cli@latest` verwenden, das `@` nicht vergessen: Bei `npm install xverify-cli latest` installiert
+`xerify-cli@latest` verwenden, das `@` nicht vergessen: Bei `npm install xerify-cli latest` installiert
 npm zwei getrennte Paketnamen – das ist nicht dasselbe.
 
 Für reproduzierbare Automatisierung eine feste Version statt `latest` angeben:
 
 ```sh
-npm install --save-dev --save-exact xverify-cli@0.3.0
+npm install --save-dev --save-exact xerify-cli@0.3.1
 ```
 
 ## Projektinitialisierung
@@ -72,9 +76,9 @@ Der `providers probe`-Befehl prüft standardmäßig nur die lokale Verfügbarkei
 Für ein Update dieselbe Installationsart verwenden:
 
 ```sh
-npm update --global xverify-cli
+npm update --global xerify-cli
 # oder innerhalb eines Projekts mit fester Version
-npm install --save-dev xverify-cli@latest
+npm install --save-dev xerify-cli@latest
 ```
 
 Das Entfernen des npm-Pakets löscht weder Projekthistorie noch Konfiguration. `.xerify/` nur gesondert
@@ -90,7 +94,7 @@ Der lokale STDIO-MCP-Server nutzt dasselbe Paket – ein zweiter Server-Download
   "mcpServers": {
     "xerify": {
       "command": "npx",
-      "args": ["-y", "--package=xverify-cli@0.3.0", "xerify", "mcp", "stdio"]
+      "args": ["-y", "--package=xerify-cli@0.3.1", "xerify", "mcp", "stdio"]
     }
   }
 }

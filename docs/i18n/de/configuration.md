@@ -9,7 +9,7 @@ lokale Abhängigkeit installiert, initialisiert es sich automatisch, ohne besteh
 überschreiben:
 
 ```sh
-npm install --save-dev xverify-cli@latest
+npm install --save-dev xerify-cli@latest
 ```
 
 Globale Installationen, verschachtelte transitive Installationen, ungespeicherte Installationen,
@@ -17,7 +17,7 @@ Globale Installationen, verschachtelte transitive Installationen, ungespeicherte
 diesen Fällen explizit initialisieren:
 
 ```sh
-npx --yes --package=xverify-cli@latest xerify init
+npx --yes --package=xerify-cli@latest xerify init
 ```
 
 Der Befehl ist idempotent und überschreibt nie eine bestehende Konfiguration oder `.gitignore`:
@@ -35,7 +35,7 @@ Der Befehl ist idempotent und überschreibt nie eine bestehende Konfiguration od
 npm liefert vor dem ersten Dependency-Lifecycle kein eindeutiges Signal, ob eine Installation direkt
 oder transitiv erfolgt. Xerify akzeptiert deshalb entweder eine bestehende Deklaration im
 Root-Manifest bzw. -Lock oder die Kombination aus einem expliziten Save-Flag und dem exakten Pfad
-`node_modules/xverify-cli` im Projekt-Root. Ein Package-Manager kann eine transitive
+`node_modules/xerify-cli` im Projekt-Root. Ein Package-Manager kann eine transitive
 Xerify-Abhängigkeit an genau diesen Ort hochheben (Hoisting); der Initialisierer bleibt dabei
 nicht-überschreibend und git-ignoriert, aber Bibliotheksautoren sollten beim Einbetten von Xerify
 `XERIFY_SKIP_AUTO_INIT=1` setzen.
@@ -121,7 +121,7 @@ genutzten Transporte ergänzen, zum Beispiel:
 
 `$schema` ist ausschließlich ein Hinweis für den Editor; Xerify ruft ihn weder ab noch führt es ihn
 aus. Eine projektlokale Installation kann ihn für Offline-Autovervollständigung durch
-`../node_modules/xverify-cli/schemas/config.schema.json` ersetzen.
+`../node_modules/xerify-cli/schemas/config.schema.json` ersetzen.
 
 Die Konfiguration ist strikt. Generische Felder wie `token`, `secret`, ein stilles `defaultModel`
 sowie Credential-Felder auf Command- oder CLI-Adaptern werden abgelehnt. Direkte Adapter vom Typ

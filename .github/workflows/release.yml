@@ -59,18 +59,15 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm publish "${{ steps.release.outputs.tarball }}" --access public --provenance
-      - name: Verify the registry recorded a provenance attestation
-        if: steps.registry.outputs.published != 'true'
-        shell: bash
-        run: |
-          attestations=$(npm view \
-            "${{ steps.release.outputs.package }}@${{ steps.release.outputs.version }}" \
-            dist.attestations --json 2>/dev/null || echo 'null')
-          echo "dist.attestations: $attestations"
-          if [ "$attestations" = 'null' ] || [ -z "$attestations" ]; then
-            echo "::error::npm recorded no provenance attestation for this version"
-            exit 1
-          fi
+      - name: Verify published tarball and provenance
+        env:
+          RELEASE_TARBALL: ${{ steps.release.outputs.tarball }}
+        run: node scripts/verify-npm-publication.mjs
+      - name: Point the previous package to xerify-cli
+        if: steps.release.outputs.package == 'xerify-cli' && steps.release.outputs.version == '0.3.1'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm deprecate 'xverify-cli@*' 'Renamed to xerify-cli. Install xerify-cli instead; the command remains xerify. Migration instructions https://github.com/Verhex/xerify/blob/main/docs/installation.md'
       - name: Create GitHub release
         env:
           GH_TOKEN: ${{ github.token }}

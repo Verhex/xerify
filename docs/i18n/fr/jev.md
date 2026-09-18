@@ -83,7 +83,7 @@ Aucune configuration fournisseur n’est nécessaire pour l’adaptateur par dé
 Les identifiants d’environnement priment sur un `apiKey` littéral facultatif. Masquage des diagnostics et permissions réservées au propriétaire suivent les autres adaptateurs API directs. Un `endpoint` facultatif permet un proxy de confiance ou serveur de test local ; changer cette URL y envoie la clé et les preuves. Si le service d’invocation change, déclarer séparément un adaptateur gateway. Les octets du corps et de la réponse sont bornés ; une entrée trop grande est refusée avant tout appel payant. Les limites de tokens du fournisseur restent indépendantes des limites d’octets de Xerify.
 
 ```ts
-import { executeVerify, JevAdapter, ProviderRegistry, VerifyRequestSchema } from 'xverify-cli';
+import { executeVerify, JevAdapter, ProviderRegistry, VerifyRequestSchema } from 'xerify-cli';
 
 const result = await executeVerify(
   VerifyRequestSchema.parse({

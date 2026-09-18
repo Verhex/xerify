@@ -1,14 +1,18 @@
 # Installation and upgrades
 
 Xerify requires Node.js 20 or newer. Node.js 24 is the primary release runtime. The public npm
-package is `xverify-cli`; the product and installed CLI command remain `xerify`.
+package is `xerify-cli`; the product and installed CLI command remain `xerify`.
+
+## Migration from xverify-cli
+
+Starting with 0.3.1, the npm package is `xerify-cli`. For a global installation, run `npm uninstall -g xverify-cli`, then `npm install -g xerify-cli@latest`. For a project dependency, run `npm uninstall xverify-cli`, then `npm install --save-dev xerify-cli@latest`. Update library imports and MCP package paths from `xverify-cli` to `xerify-cli`. The `xerify` command, `.xerify/` state, and `xverify-config.json` filename are unchanged. Existing published versions remain under the old package name.
 
 ## Choose an installation mode
 
 Install globally when Xerify is a workstation tool shared across projects:
 
 ```sh
-npm install --global xverify-cli@latest
+npm install --global xerify-cli@latest
 xerify --version
 xerify init
 ```
@@ -16,23 +20,23 @@ xerify init
 Install as a project development dependency when the repository should pin Xerify:
 
 ```sh
-npm install --save-dev xverify-cli@latest
+npm install --save-dev xerify-cli@latest
 npx xerify --version
 ```
 
 Run without retaining a dependency for a quick capability check:
 
 ```sh
-npx --yes --package=xverify-cli@latest xerify --json health
+npx --yes --package=xerify-cli@latest xerify --json health
 ```
 
-Use `xverify-cli@latest`, including the `@`. `npm install xverify-cli latest` asks npm to install two
+Use `xerify-cli@latest`, including the `@`. `npm install xerify-cli latest` asks npm to install two
 package names and is not equivalent.
 
 For reproducible automation, pin an exact version instead of `latest`:
 
 ```sh
-npm install --save-dev --save-exact xverify-cli@0.3.0
+npm install --save-dev --save-exact xerify-cli@0.3.1
 ```
 
 ## Project initialization
@@ -67,9 +71,9 @@ bounded endpoint reachability is intended.
 Upgrade using the same installation mode:
 
 ```sh
-npm update --global xverify-cli
+npm update --global xerify-cli
 # or, inside a pinned project
-npm install --save-dev xverify-cli@latest
+npm install --save-dev xerify-cli@latest
 ```
 
 Removing the npm package does not delete project history or configuration. Review and remove
@@ -85,7 +89,7 @@ Local STDIO MCP uses the same package; there is no second server download:
   "mcpServers": {
     "xerify": {
       "command": "npx",
-      "args": ["-y", "--package=xverify-cli@0.3.0", "xerify", "mcp", "stdio"]
+      "args": ["-y", "--package=xerify-cli@0.3.1", "xerify", "mcp", "stdio"]
     }
   }
 }

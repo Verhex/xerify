@@ -8,7 +8,7 @@ Xerify garde l'état propre à chaque projet hors de la racine du dépôt. Insta
 dépendance locale directe l'initialise automatiquement, sans écraser les fichiers existants :
 
 ```sh
-npm install --save-dev xverify-cli@latest
+npm install --save-dev xerify-cli@latest
 ```
 
 Les installations globales, les installations transitives imbriquées, les installations sans
@@ -16,7 +16,7 @@ sauvegarde, `npx`, et les installations effectuées avec `XERIFY_SKIP_AUTO_INIT=
 dans le projet courant. Dans ces cas, lancez l'initialisation explicitement :
 
 ```sh
-npx --yes --package=xverify-cli@latest xerify init
+npx --yes --package=xerify-cli@latest xerify init
 ```
 
 La commande est idempotente et ne remplace jamais une configuration ou un `.gitignore` existants :
@@ -34,7 +34,7 @@ La commande est idempotente et ne remplace jamais une configuration ou un `.giti
 Avant le premier cycle de vie de dépendance, npm n'expose aucun indicateur permettant de distinguer
 catégoriquement une installation directe d'une installation transitive. Xerify accepte donc soit une
 déclaration existante dans le manifeste ou le lockfile racine, soit la combinaison d'un indicateur
-de sauvegarde explicite et de l'emplacement exact `node_modules/xverify-cli` à la racine. Un
+de sauvegarde explicite et de l'emplacement exact `node_modules/xerify-cli` à la racine. Un
 gestionnaire de paquets peut hisser une dépendance Xerify transitive vers cet emplacement ;
 l'initialiseur reste non destructif et ignoré par Git, mais les auteurs de bibliothèques doivent
 définir `XERIFY_SKIP_AUTO_INIT=1` lorsqu'ils intègrent Xerify.
@@ -120,7 +120,7 @@ transports que vous utilisez réellement. Par exemple :
 
 `$schema` n'est qu'une indication pour l'éditeur ; Xerify ne le récupère ni ne l'exécute jamais. Une
 installation locale au projet peut le remplacer par
-`../node_modules/xverify-cli/schemas/config.schema.json` pour bénéficier de l'autocomplétion hors
+`../node_modules/xerify-cli/schemas/config.schema.json` pour bénéficier de l'autocomplétion hors
 ligne.
 
 La configuration est stricte. Les champs génériques `token`, `secret`, `defaultModel` silencieux,

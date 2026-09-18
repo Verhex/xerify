@@ -32,7 +32,7 @@ El inglés es el idioma canónico de los esquemas públicos, las ADR, la políti
 - [Evidencia de ejemplo inmutable](../../examples/evidence/) — solo en inglés, anclada por hash
 - [Proveedor simulado determinista](../../../tools/mock-provider.mjs)
 
-El producto se llama **Xerify**, el paquete de npm es **`xverify-cli`**, y el ejecutable instalado es **`xerify`**.
+El producto se llama **Xerify**, el paquete de npm es **`xerify-cli`**, y el ejecutable instalado es **`xerify`**.
 
 Jev viene como adaptador predeterminado `jev`, con identidad `typesafe`. `--to jev` selecciona `typesafe:jev-latest`; `--to jev:MODEL_ID` selecciona un modelo concreto. Jev solo admite `verify`. Las probabilidades, confidence, el modelo devuelto y la política se conservan en el campo opcional `decision`. Bajo los umbrales, Xerify devuelve `unclear`. Jev no genera explicaciones ni citas.
 

@@ -32,7 +32,7 @@ Englisch ist die verbindliche Sprache für öffentliche Schemas, ADRs, die Siche
 - [Unveränderliche Beispielnachweise](../../examples/evidence/) – nur Englisch, hash-verankert
 - [Deterministischer Mock-Provider](../../../tools/mock-provider.mjs)
 
-Das Produkt heißt **Xerify**, die npm-Distribution **`xverify-cli`** und der installierte Befehl **`xerify`**.
+Das Produkt heißt **Xerify**, die npm-Distribution **`xerify-cli`** und der installierte Befehl **`xerify`**.
 
 Jev ist als Standardadapter `jev` mit Anbieteridentität `typesafe` enthalten. `--to jev` wählt `typesafe:jev-latest`; `--to jev:MODEL_ID` wählt ein bestimmtes Modell. Jev unterstützt nur `verify`. Wahrscheinlichkeiten, Confidence, zurückgegebenes Modell und Richtlinie stehen im optionalen Feld `decision`. Unterhalb der Schwellenwerte liefert Xerify `unclear`. Jev erzeugt keine Erklärungen oder Quellenangaben.
 

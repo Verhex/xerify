@@ -2,6 +2,16 @@
 
 All notable changes to Xerify are documented here. The format follows Keep a Changelog and the project uses Semantic Versioning.
 
+## [0.3.1] - 2026-09-18
+
+- Publish the npm distribution as `xerify-cli`; keep the `xerify` executable and configuration paths unchanged.
+- Update current installation, library import, MCP, site, and localized documentation references; preserve historical release evidence.
+- Add migration instructions for existing `xverify-cli` installations.
+- Add the Xerify product name to npm keywords for package discovery.
+- Align the MCP namespace with the renamed GitHub owner: `io.github.verhex/xerify`.
+  Update both manifests, all six MCP guides, and the maintainer release instructions.
+  Publish the matching npm version before registering this MCP identity.
+
 ## [0.3.0] - 2026-09-18
 
 - Refresh the locked Hono dependency to 4.13.8 to clear the production dependency audit.
@@ -29,8 +39,6 @@ All notable changes to Xerify are documented here. The format follows Keep a Cha
 One owner-approved live Jev campaign/code consistency check and ten additional synthetic
 scenarios completed on 2026-09-18. All ten scenarios matched their authored expectations;
 see [live results](docs/jev-testing.md). Domain calibration and npm publication remain pending.
-
-## [Unreleased]
 
 ## [0.2.0] - 2026-08-20
 

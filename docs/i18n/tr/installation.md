@@ -4,14 +4,18 @@
 
 > Belgelerin normatif ve kanonik kaynağı İngilizce dokümantasyondur. Bir çeviri ile test edilmiş sözleşme çelişirse, geçerli olan taraf test edilmiş İngilizce sözleşmedir.
 
-Xerify, Node.js 20 veya daha yenisini gerektirir. Node.js 24 birincil sürüm çalışma zamanıdır. Genel npm paketi `xverify-cli`'dir; ürün ve kurulu CLI komutu ise `xerify` olarak kalır.
+Xerify, Node.js 20 veya daha yenisini gerektirir. Node.js 24 birincil sürüm çalışma zamanıdır. Genel npm paketi `xerify-cli`'dir; ürün ve kurulu CLI komutu ise `xerify` olarak kalır.
+
+## xverify-cli paketinden geçiş
+
+0.3.1 itibarıyla npm paketinin adı `xerify-cli`. Global kurulum için önce `npm uninstall -g xverify-cli`, ardından `npm install -g xerify-cli@latest` çalıştırın. Proje bağımlılığında önce `npm uninstall xverify-cli`, ardından `npm install --save-dev xerify-cli@latest` çalıştırın. Kütüphane importlarını ve MCP paket yollarını `xverify-cli` yerine `xerify-cli` kullanacak şekilde güncelleyin. `xerify` komutu, `.xerify/` durumu ve `xverify-config.json` dosya adı değişmedi. Önceden yayımlanmış sürümler eski paket adı altında kalır.
 
 ## Bir kurulum modu seçin
 
 Xerify, projeler arasında paylaşılan bir workstation aracıysa genel olarak kurun:
 
 ```sh
-npm install --global xverify-cli@latest
+npm install --global xerify-cli@latest
 xerify --version
 xerify init
 ```
@@ -19,22 +23,22 @@ xerify init
 Depo Xerify'i sabitlemesi gerektiğinde, proje geliştirme bağımlılığı olarak kurun:
 
 ```sh
-npm install --save-dev xverify-cli@latest
+npm install --save-dev xerify-cli@latest
 npx xerify --version
 ```
 
 Hızlı bir yetenek kontrolü için bir bağımlılık tutmadan çalıştırın:
 
 ```sh
-npx --yes --package=xverify-cli@latest xerify --json health
+npx --yes --package=xerify-cli@latest xerify --json health
 ```
 
-`@` işareti dahil olmak üzere `xverify-cli@latest` kullanın. `npm install xverify-cli latest`, npm'den iki ayrı paket adı kurmasını ister ve bununla eşdeğer değildir.
+`@` işareti dahil olmak üzere `xerify-cli@latest` kullanın. `npm install xerify-cli latest`, npm'den iki ayrı paket adı kurmasını ister ve bununla eşdeğer değildir.
 
 Yeniden üretilebilir otomasyon için, `latest` yerine tam bir sürümü sabitleyin:
 
 ```sh
-npm install --save-dev --save-exact xverify-cli@0.3.0
+npm install --save-dev --save-exact xerify-cli@0.3.1
 ```
 
 ## Proje başlatma
@@ -63,9 +67,9 @@ xerify --json providers probe --all --timeout 5000
 Aynı kurulum modunu kullanarak yükseltin:
 
 ```sh
-npm update --global xverify-cli
+npm update --global xerify-cli
 # ya da, sabitlenmiş bir proje içinde
-npm install --save-dev xverify-cli@latest
+npm install --save-dev xerify-cli@latest
 ```
 
 npm paketini kaldırmak, proje geçmişini veya yapılandırmasını silmez. `.xerify/`'i yalnızca çalıştırma geçmişi, arşiv, yapılandırma ve denetim meta verisine artık ihtiyaç kalmadığında, ayrıca gözden geçirip kaldırın.
@@ -79,7 +83,7 @@ Yerel STDIO MCP aynı paketi kullanır; ikinci bir sunucu indirmesi yoktur:
   "mcpServers": {
     "xerify": {
       "command": "npx",
-      "args": ["-y", "--package=xverify-cli@0.3.0", "xerify", "mcp", "stdio"]
+      "args": ["-y", "--package=xerify-cli@0.3.1", "xerify", "mcp", "stdio"]
     }
   }
 }

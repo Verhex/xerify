@@ -32,7 +32,7 @@
 - [Değişmez örnek kanıtı](../../examples/evidence/) — yalnızca İngilizce, hash ile sabitlenmiş
 - [Belirleyici sahte sağlayıcı](../../../tools/mock-provider.mjs)
 
-Ürün **Xerify**'dir, npm dağıtımı **`xverify-cli`**'dir ve kurulu çalıştırılabilir dosya **`xerify`**'dir.
+Ürün **Xerify**'dir, npm dağıtımı **`xerify-cli`**'dir ve kurulu çalıştırılabilir dosya **`xerify`**'dir.
 
 Jev, varsayılan `jev` adaptörüyle (`typesafe` sağlayıcısı) gelir. `--to jev`, `typesafe:jev-latest` seçer; `--to jev:MODEL_ID` belirli modeli seçer. Jev yalnızca `verify` destekler. Olasılıklar, confidence, dönen model ve politika isteğe bağlı `decision` alanında bulunur. Eşiklerin altında Xerify `unclear` döndürür. Jev açıklama veya kanıt atfı üretmez.
 

@@ -131,7 +131,7 @@ Input body and HTTP response bytes are bounded; oversized input is refused witho
 Provider token limits still apply independently of Xerify's byte limit.
 
 ```ts
-import { executeVerify, JevAdapter, ProviderRegistry, VerifyRequestSchema } from 'xverify-cli';
+import { executeVerify, JevAdapter, ProviderRegistry, VerifyRequestSchema } from 'xerify-cli';
 
 const result = await executeVerify(
   VerifyRequestSchema.parse({

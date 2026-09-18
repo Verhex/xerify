@@ -30,10 +30,10 @@ adapter runs in a fresh temporary directory, so relative paths never resolve.
 MOCK="$PWD/tools/mock-provider.mjs"
 
 # From a global npm install
-MOCK="$(npm root -g)/xverify-cli/tools/mock-provider.mjs"
+MOCK="$(npm root -g)/xerify-cli/tools/mock-provider.mjs"
 
 # From a project-local install
-MOCK="$PWD/node_modules/xverify-cli/tools/mock-provider.mjs"
+MOCK="$PWD/node_modules/xerify-cli/tools/mock-provider.mjs"
 
 echo "$MOCK"
 ```

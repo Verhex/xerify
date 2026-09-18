@@ -83,7 +83,7 @@ Varsayılan adaptör için sağlayıcı ayarı gerekmez. Politikasını `.xerify
 Ortam anahtarı, isteğe bağlı düz `apiKey` değerinden önceliklidir. Tanılama maskelemesi ve yalnızca sahibine açık config izinleri diğer doğrudan API adaptörleriyle aynıdır. İsteğe bağlı `endpoint`, güvenilen proxy veya yerel test sunucusuna izin verir; değiştirmek anahtarı ve kanıtı o URL'ye gönderir. Çağrı servisi farklıysa ayrıca tanımlanan gateway adaptörü kullanın. İstek gövdesi ve HTTP yanıtı bayt sınırına tabidir; aşırı büyük girdi ücretli çağrı yapılmadan reddedilir. Sağlayıcı token sınırları Xerify'ın bayt sınırından bağımsızdır.
 
 ```ts
-import { executeVerify, JevAdapter, ProviderRegistry, VerifyRequestSchema } from 'xverify-cli';
+import { executeVerify, JevAdapter, ProviderRegistry, VerifyRequestSchema } from 'xerify-cli';
 
 const result = await executeVerify(
   VerifyRequestSchema.parse({

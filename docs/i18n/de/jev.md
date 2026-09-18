@@ -83,7 +83,7 @@ Der Standardadapter benötigt keine Anbieterkonfiguration. Zum Überschreiben se
 Umgebungszugangsdaten haben Vorrang vor einem optionalen wörtlichen `apiKey`. Diagnosemaskierung und nur dem Eigentümer zugängliche Dateirechte entsprechen den anderen direkten API-Adaptern. Ein optionaler `endpoint` erlaubt vertrauenswürdige Proxys oder lokale Testserver; eine Änderung sendet Schlüssel und Evidenz an diese URL. Bei einem anderen Aufrufdienst einen separat deklarierten Gateway-Adapter verwenden. Anfragekörper und HTTP-Antwort sind bytebegrenzt; übergroße Eingaben werden vor kostenpflichtigen Aufrufen abgelehnt. Anbieter-Tokenlimits gelten unabhängig vom Xerify-Bytelimit.
 
 ```ts
-import { executeVerify, JevAdapter, ProviderRegistry, VerifyRequestSchema } from 'xverify-cli';
+import { executeVerify, JevAdapter, ProviderRegistry, VerifyRequestSchema } from 'xerify-cli';
 
 const result = await executeVerify(
   VerifyRequestSchema.parse({

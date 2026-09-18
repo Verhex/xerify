@@ -37,7 +37,7 @@ Jev is included as the default `jev` adapter (`typesafe` provider). `--to jev` s
 Install from npm:
 
 ```sh
-npm install --global xverify-cli@latest
+npm install --global xerify-cli@latest
 xerify --help
 xerify --json health
 xerify init
@@ -54,7 +54,7 @@ xerify init
 ```
 
 Node.js 20 or newer is required. Node.js 24 is the primary development lane.
-For a project-local install, use `npm install --save-dev xverify-cli@latest` and
+For a project-local install, use `npm install --save-dev xerify-cli@latest` and
 invoke its `xerify` binary with `npx xerify`. A guarded `postinstall` initializes `.xerify/` for a declared direct local
 dependency or an explicit root `--save-dev/--save-prod` install. Global, nested transitive, no-save,
 and `npx` installs do not write into the current project; run `xerify init` explicitly in those
@@ -274,7 +274,7 @@ A project-local install does not. Point the host at the entry point directly —
   "mcpServers": {
     "xerify": {
       "command": "node",
-      "args": ["./node_modules/xverify-cli/dist/cli/entry.js", "mcp", "stdio"]
+      "args": ["./node_modules/xerify-cli/dist/cli/entry.js", "mcp", "stdio"]
     }
   }
 }

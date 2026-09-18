@@ -25,10 +25,10 @@ Xerify 的 `command` 适配器可以运行任意可执行文件：把 prompt 写
 MOCK="$PWD/tools/mock-provider.mjs"
 
 # 从全局 npm 安装运行
-MOCK="$(npm root -g)/xverify-cli/tools/mock-provider.mjs"
+MOCK="$(npm root -g)/xerify-cli/tools/mock-provider.mjs"
 
 # 从项目本地安装运行
-MOCK="$PWD/node_modules/xverify-cli/tools/mock-provider.mjs"
+MOCK="$PWD/node_modules/xerify-cli/tools/mock-provider.mjs"
 
 echo "$MOCK"
 ```

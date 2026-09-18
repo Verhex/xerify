@@ -18,22 +18,20 @@ inventory, SPDX SBOM, vulnerability audit, and secret-pattern scan. Live provide
 normal release gate; any such call requires explicit owner approval and a bounded, non-sensitive
 evidence scope.
 
-The unscoped package is `xverify-cli`; the installed executable remains `xerify`. `0.1.0` was
-bootstrapped with an owner-controlled, package-write granular token because npm requires a package
-to exist before a Trusted Publisher can be configured. That tarball reached the registry outside
-this workflow, so the workflow's publish step was skipped by its already-published guard and npm
-recorded no provenance attestation for it. From `0.1.1` on, the publish runs inside the workflow,
-which holds `id-token: write`, passes `--provenance`, and then fails the run if the registry did not
-record an attestation. The token stays in use until Trusted Publishing is configured; it does not
-prevent provenance. Store it only
-as the repository Actions secret `NPM_TOKEN`; the bootstrap release workflow exposes it only as
-`NODE_AUTH_TOKEN` on the `npm publish` step. Never commit or paste npm tokens, OTPs, recovery codes,
-or auth-store contents into issues, prompts, logs, or repository files.
+The unscoped package is `xerify-cli` starting with `0.3.1`; earlier releases used `xverify-cli`.
+The executable remains `xerify`. The `0.3.1` release publishes the new package, verifies the registry
+metadata against the exact tarball and its provenance, and only then adds a migration notice to the
+old package. Existing versions are not unpublished. Keep historical release evidence unchanged.
 
-Immediately after `0.1.0` exists, configure npm Trusted Publishing for repository
-`VerhexIO/xerify`, workflow `release.yml`, environment `npm`, with publish permission. Then remove
-the `NODE_AUTH_TOKEN` mapping from `release.yml`, delete the `NPM_TOKEN` Actions secret, and revoke
-the granular token. Ongoing releases must use the OIDC relationship rather than a long-lived token.
+The release workflow runs with `id-token: write` and publishes with `--provenance`. A new npm
+package must exist before its Trusted Publisher can be configured. For bootstrap, the owner-controlled
+granular token must permit creating/publishing `xerify-cli` and updating `xverify-cli` deprecation
+metadata. Keep it in the GitHub `npm` environment secret `NPM_TOKEN`; it is exposed only as
+`NODE_AUTH_TOKEN` to the publishing/deprecation steps. Never commit or paste credentials.
+
+After the new package exists, configure its Trusted Publisher for repository `Verhex/xerify`,
+workflow `release.yml`, environment `npm`, with publish permission. Once verified, remove the
+bootstrap token mapping and the completed migration step, and revoke the temporary token.
 
 ## Publish
 
@@ -47,8 +45,8 @@ the granular token. Ongoing releases must use the OIDC relationship rather than 
 5. Verify from a clean external directory:
 
 ```sh
-npm view xverify-cli@latest name version dist.integrity --json
-npm install --global xverify-cli@latest
+npm view xerify-cli@latest name version dist.integrity --json
+npm install --global xerify-cli@latest
 xerify --version
 xerify --json health
 xerify --json doctor
